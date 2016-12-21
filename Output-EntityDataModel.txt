@@ -1,0 +1,3 @@
+﻿Generated model file: EFInventoryEntities.edmx.
+Loading metadata from the database took 00:00:02.5621111.
+Generating the model took 00:00:06.1485968.

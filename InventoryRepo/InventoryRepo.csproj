@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{001A9A2B-1368-4712-B551-5B57A5B5B466}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InventoryRepo</RootNamespace>
+    <AssemblyName>InventoryRepo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="InventoryManagement\CustomerRepo.cs" />
+    <Compile Include="InventoryManagement\EmployeeRepo.cs" />
+    <Compile Include="InventoryManagement\ProductBrandRepo.cs" />
+    <Compile Include="InventoryManagement\ProductCategoryRepo.cs" />
+    <Compile Include="InventoryManagement\ProductColorRepo.cs" />
+    <Compile Include="InventoryManagement\ProductRepo.cs" />
+    <Compile Include="InventoryManagement\ProductSizeRepo.cs" />
+    <Compile Include="InventoryManagement\ProductTypeRepo.cs" />
+    <Compile Include="InventoryManagement\SupplierRepo.cs" />
+    <Compile Include="InventoryManagement\UOMRepo.cs" />
+    <Compile Include="InventoryManagement\UserRepo.cs" />
+    <Compile Include="InventoryManagement\ZoneorAreaRepo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryServices\InventoryServices.csproj">
+      <Project>{b491f313-fa92-489e-b39f-71a255bce4fc}</Project>
+      <Name>InventoryServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InventoryViewModel\InventoryViewModel.csproj">
+      <Project>{669222ec-2ebe-44d5-a009-a8fd4522e8fd}</Project>
+      <Name>InventoryViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

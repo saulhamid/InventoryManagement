@@ -1,0 +1,599 @@
+﻿
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../Content/i-fonts/fontawesome-webfont.eot?v=4.1.0');
+    src: url('../Content/i-fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+         url('../Content/i-fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+         url('../Content/i-fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+         url('../Content/i-fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../Content/i-fonts/glyphicons-halflings-regular.eot');
+    src: url('../Content/i-fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+         url('../Content/i-fonts/glyphicons-halflings-regular.woff') format('woff'), 
+        url('../Content/i-fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+         url('../Content/i-fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.i-btn-add
+, .i-btn-add-row
+, .i-btn-remove
+, .i-btn-remove-row
+, .i-btn-remove-row-minus
+, .i-btn-edit
+, .i-btn-edit-row
+, .i-btn-save
+, .i-btn-save-row
+, .i-btn-cancel
+, .i-btn-cancel-row
+, .i-btn-update
+, .i-btn-update-row
+, .i-btn-back
+, .i-btn-add-upload
+, .i-btn-report
+, .i-btn-search
+, .i-btn-Excel-import
+, .i-btn-Excel-Export
+, .i-btn-print
+, .i-btn-clear
+,.i-btn-duplicate
+, .i-btn-file-upload
+, .i-btn-search {
+    font-family: FontAwesome!important;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    transition-duration: .500s;
+}
+
+.i-btn-add
+, .i-btn-back
+, .i-btn-update
+, .i-btn-cancel
+, .i-btn-save
+, .i-btn-edit
+, .i-btn-remove
+, .i-btn-add-upload
+, .i-btn-report
+, .i-btn-search
+, .i-btn-Excel-import
+, .i-btn-Excel-Export
+, .i-btn-print
+, .i-btn-clear
+,.i-btn-duplicate
+,.i-btn-file-upload
+, .i-btn-search {
+    font-size: 1.5em;
+    line-height: 1;
+    padding: 6px 12px;
+}
+
+.i-btn-add-row
+, .i-btn-back-row
+, .i-btn-update-row
+, .i-btn-cancel-row
+, .i-btn-save-row
+, .i-btn-edit-row
+, .i-btn-remove-row
+, .i-btn-remove-row-minus
+ {
+    font-size: 1.3em!important;
+    padding: 5px 10px;
+    line-height: 1.5;
+    font-weight: bold;
+    margin: 2px;
+}
+.tab-content .i-btn-edit-row,
+.tab-content .i-btn-remove-row {
+    float:left!important;
+}
+.i-btn-add:hover
+, .i-btn-add:focus
+, .i-btn-add:active
+, .i-btn-add.active
+, .open > .dropdown-toggle.i-btn-add {
+    background-color: #31b0d5;
+    border-color: #269abc;
+    color: black;
+
+}
+
+.i-x {
+    font-size: 2em;
+}
+
+.i-2x {
+    font-size: 3em;
+}
+
+.i-3x {
+    font-size: 4em;
+}
+
+.i-4x {
+    font-size: 5em;
+}
+
+/*.i-min {
+    width: 1.28571429em;
+    text-align: center;
+}*/
+
+.i-min {
+    font-size: 1.3em!important;
+    padding: 2px 5px!important;
+    line-height: 1.3!important;
+    width: 1.28571429em;
+}
+
+.i-sx {
+    width: 1.28571429em;
+    text-align: center;
+    padding: 1px 5px!important;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.i-btn-add {
+    font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+    .i-btn-add:before {
+        content: "\f067";
+    }
+
+
+    .i-btn-add:hover,
+    .i-btn-add:focus,
+    .i-btn-add:active,
+    .i-btn-add.active,
+    .open > .dropdown-toggle.i-btn-add {
+        background-color: #31b0d5;
+        border-color: #269abc;
+        color: black;
+    }
+
+.i-btn-add-row {
+    font-family: FontAwesome;
+    color: white;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+    .i-btn-add-row:before {
+        content: "\f067";
+    }
+
+    .i-btn-add-row:hover,
+    .i-btn-add-row:focus,
+    .i-btn-add-row:active,
+    .i-btn-add-row.active,
+    .open > .dropdown-toggle.i-btn-add-row {
+        background-color: #3071a9;
+        border-color: #285e8e;
+        color: black;
+    }
+    .i-btn-remove-row-minus {
+         font-family: FontAwesome;
+    color: white;
+    background-color: #428bca;
+    border-color: #357ebd;
+   
+}
+     .i-btn-add-row-minus:before {
+        content: "\f067";
+    }
+
+    .i-btn-add-row-minus:hover,
+    .i-btn-add-row-minus:focus,
+    .i-btn-add-row-minus:active,
+    .i-btn-add-row-minus.active,
+    .open > .dropdown-toggle.i-btn-add-row-minus {
+        background-color: #3071a9;
+        border-color: #285e8e;
+        color: black;
+    }
+.i-btn-remove {
+    font-family: FontAwesome;
+    padding: 6px 16px;
+    color: white;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+    .i-btn-remove:before {
+        content: "\f014";
+    }
+
+    .i-btn-remove:hover,
+    .i-btn-remove:focus,
+    .i-btn-remove:active,
+    .i-btn-remove.active,
+    .open > .dropdown-toggle.i-btn-remove {
+        background-color: #c9302c;
+        border-color: #ac2925;
+        color: black;
+    }
+
+.i-btn-remove-row {
+    font-family: FontAwesome!important;
+    padding: 2px 7px!important;
+    color: white;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+     font-weight:normal!important;
+}
+
+    .i-btn-remove-row:before {
+        content: "\f014";
+    }
+
+    .i-btn-remove-row:hover,
+    .i-btn-remove-row:focus,
+    .i-btn-remove-row:active,
+    .i-btn-remove-row.active,
+    .open > .dropdown-toggle.i-btn-remove-row {
+        background-color: #c9302c;
+        border-color: #ac2925;
+        color: black;
+    }
+
+.i-btn-edit-row {
+    font-family: 'Glyphicons Halflings'!important;
+    padding: 1px 5px!important;
+    color: white!important;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+    .i-btn-edit-row:before {
+        content: "\e065";
+    }
+
+    .i-btn-edit-row:hover,
+    .i-btn-edit-row:focus,
+    .i-btn-edit-row:active,
+    .i-btn-edit-row.active,
+    .open > .dropdown-toggle.i-btn-edit-row {
+        background-color: #ec971f;
+        border-color: #d58512;
+        color: black!important;
+    }
+
+.i-btn-edit {
+    font-family: FontAwesome!important;
+    padding: 6px 12px;
+    color: white;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+
+}
+
+    .i-btn-edit:before {
+        content: "\f044";
+    }
+
+    .i-btn-edit:hover,
+    .i-btn-edit:focus,
+    .i-btn-edit:active,
+    .i-btn-edit-row.active,
+    .open > .dropdown-toggle.i-btn-edit {
+        background-color: #ec971f;
+        border-color: #d58512;
+        color: black;
+    }
+
+.i-btn-save {
+    font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+    .i-btn-save:before {
+        content: "\f0c7";
+    }
+
+    .i-btn-save:hover,
+    .i-btn-save:focus,
+    .i-btn-save:active,
+    .i-btn-save-row.active,
+    .open > .dropdown-toggle .i-btn-save {
+        background-color: #449d44;
+        border-color: #398439;
+        color: black;
+    }
+
+.i-btn-save-row {
+    font-family: FontAwesome;
+    padding: 6px 16px;
+    color: white;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+    .i-btn-save-row:before {
+        content: "\f0c7";
+    }
+
+    .i-btn-save-row:hover,
+    .i-btn-save-row:focus,
+    .i-btn-save-row:active,
+    .i-btn-save-row.active,
+    .open > .dropdown-toggle .i-btn-save-row {
+        background-color: #449d44;
+        border-color: #398439;
+        color: black;
+    }
+
+.i-btn-cancel {
+    font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+    .i-btn-cancel:before {
+       content: "\f00d";
+    }
+
+    .i-btn-cancel:hover,
+    .i-btn-cancel:focus,
+    .i-btn-cancel:active,
+    .i-btn-cancel.active,
+    .open > .dropdown-toggle.i-btn-cancel {
+        background-color: #ec971f;
+        border-color: #d58512;
+        color: black;
+    }
+
+.i-btn-update {
+    font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+    .i-btn-update:before {
+         content: "\f0c7";
+    }
+    .i-btn-update:hover,
+    .i-btn-update:focus,
+    .i-btn-update:active,
+    .i-btn-update.active,
+    .open > .dropdown-toggle.i-btn-update {
+        background-color: #ec971f;
+        border-color: #d58512;
+        color: black;
+    }
+.i-btn-back {
+    font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white!important;
+    background-color: #9D9D9D;
+    border-color: #888888;
+}
+    .i-btn-back:before {
+        content: "\f060";
+    }
+    .i-btn-back:hover,
+    .i-btn-back:focus,
+    .i-btn-back:active,
+    .i-btn-back.active,
+    .open > .dropdown-toggle.i-btn-back {
+     background-color: #888888;
+    border-color: #888888;
+        color: black!important;
+    }
+.i-btn-add-upload {
+     font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+    .i-btn-add-upload:before {
+           content: "\f0c6";
+    }
+    .i-btn-add-upload:hover,
+    .i-btn-add-upload:focus,
+    .i-btn-add-upload:active,
+    .i-btn-add-upload.active,
+    .open > .dropdown-toggle.i-btn-add-upload {
+        background-color: #31b0d5;
+        border-color: #269abc;
+        color: black;
+    }
+.i-btn-print {
+ font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #009587;
+    border-color: #018175;
+}
+    .i-btn-print:before {
+ content: "\f02f";
+    }
+
+    .i-btn-print:hover,
+    .i-btn-print:focus,
+    .i-btn-print:active,
+    .i-btn-print.active,
+    .open > .dropdown-toggle.i-btn-print {
+        background-color: #018175;
+        border-color: #018175;
+        color: black;
+    }
+
+    .i-btn-search {
+  font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #009587;
+    border-color: #018175;
+}
+    .i-btn-search:before {
+           content: "\f002";
+    }
+
+    .i-btn-search:hover,
+    .i-btn-search:focus,
+    .i-btn-search:active,
+    .i-btn-search.active,
+    .open > .dropdown-toggle.i-btn-search {
+        background-color: #018175;
+        border-color: #018175;
+        color: black;
+    }
+
+     .i-btn-report {
+ font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white!important;
+   background-color: #c3352b;
+    border-color: #c3352b;
+  
+}
+    .i-btn-report:before {
+             content: "\f022";
+    }
+
+    .i-btn-report:hover,
+    .i-btn-report:focus,
+    .i-btn-report:active,
+    .i-btn-report.active,
+    .open > .dropdown-toggle.i-btn-report {
+      background-color: #F34235;
+    border-color: #c3352b;
+        color: black!important;
+          text-decoration:none;
+    }
+
+  .i-btn-Excel-Export {
+ font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #785447;
+    border-color: #65463b;
+}
+   .i-btn-Excel-Export:before {
+             content: "\f022";
+    }
+
+   .i-btn-Excel-Export:hover,
+   .i-btn-Excel-Export:focus,
+   .i-btn-Excel-Export:active,
+   .i-btn-Excel-Export.active,
+    .open > .dropdown-toggle.i-btn-Excel-Export {
+      background-color: #65463b;
+    border-color: #65463b;
+        color: black;
+    }
+
+    .i-btn-clear {
+ font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #785447;
+    border-color: #65463b;
+}
+   .i-btn-clear:before {
+            content: "\f021";
+    }
+
+   .i-btn-clear:hover,
+   .i-btn-clear:focus,
+   .i-btn-clear:active,
+   .i-btn-clear.active,
+    .open > .dropdown-toggle.i-btn-clear {
+      background-color: #65463b;
+    border-color: #65463b;
+        color: black;
+          text-decoration:none;
+    }
+    .i-btn-duplicate {
+ font-family: FontAwesome;
+    padding: 6px 12px;
+    color: white;
+    background-color: #785447;
+    border-color: #65463b;
+}
+   .i-btn-duplicate:before {
+               content: "\f24d";
+    }
+
+   .i-btn-duplicate:hover,
+   .i-btn-duplicate:focus,
+   .i-btn-duplicate:active,
+   .i-btn-duplicate.active,
+    .open > .dropdown-toggle.i-btn-duplicate {
+      background-color: #65463b;
+    border-color: #65463b;
+        color: black;
+          text-decoration:none;
+    }
+
+     .i-btn-file-upload {
+ font-family: FontAwesome!important;
+    padding: 6px 12px;
+    color: white;
+      background-color: #3E50B4;
+    border-color: #3949a2;
+}
+   .i-btn-file-upload:before {
+       content: "\f093";
+    }
+
+   .i-btn-file-upload:hover,
+   .i-btn-file-upload:focus,
+   .i-btn-file-upload:active,
+   .i-btn-file-upload.active,
+    .open > .dropdown-toggle.i-btn-file-upload {
+      background-color: #3949a2;
+    border-color: #3949a2;
+        color: black;
+          text-decoration:none;
+    }
+
+    .i-btn-search {
+ font-family: FontAwesome!important;
+    padding: 6px 12px;
+    color: white;
+    background-color: #ec971f;
+        border-color: #d58512;
+}
+   .i-btn-search:before {
+     content: "\f002";
+    }
+
+   .i-btn-search:hover,
+   .i-btn-search:focus,
+   .i-btn-search:active,
+   .i-btn-search.active,
+    .open > .dropdown-toggle.i-btn-search {
+       background-color: #5cb85c;
+    border-color: #4cae4c;
+        color: black;
+          text-decoration:none;
+    }

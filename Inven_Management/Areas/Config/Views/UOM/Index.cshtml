@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/InventoryManagement/Views/Shared/_Layout.cshtml";
+}
+@model InventoryViewModel.Models.UOM
+<div>
+    <style>
+     
+    </style>
+</div>
+<div class="container">
+
+    @Html.Partial("_create", Model);
+    <div class="row">
+        <div class="col-md-12">
+            <!--BOX-->
+            <div class="box">
+                <!--BOX HEADER-->
+                <div class="box-header">
+                    <!--BOX TITLE-->
+                    <div class="box-title pull-left">
+                        <p><i class="fa fa-th-list"></i></p>
+                        <p>Unite List</p>
+                    </div>
+                    <!--end: TITLE-->
+                    <!--ICONS - FUNCTIONAL-->
+                    <div class="box-icon pull-right panel-actions">
+                        <a href="#" class="btn-code" title="Code Snippet" role="button"><i class="fa fa-caret-square-o-left fa-lg"></i></a>
+                        <a href="#" class="btn-information" title="Info" role="button"><i class="fa fa-info-circle fa-lg"></i></a>
+                        <a href="#" class="btn-help panel-fullscreen1" title="Help" id="" role="button"><i class="glyphicon glyphicon-resize-full"></i></a>
+                        <a href="#" class="btn-minimize" title="Expand / Collapse" data-toggle="collapse" data-target="#demo" role="button"><i class="fa fa-chevron-up fa-lg"></i></a>
+                    </div>
+                    <!--end: ICONS-->
+                </div>
+                <!--end: BOX HEADER-->
+                <!--BOX CONTENT-->
+                <div class="box-content">
+                    <div id="container">
+                        <div id="demo">
+                            <table id="myDataTable" class="display">
+
+                                <thead>
+
+                                    <tr>
+                                        <th style="padding-left: 2.5%">
+                                            Actions
+                                        </th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>IsActive</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr class="search">
+                                        <th> <input type="checkbox" class="chkAll" style="margin-top:-8px;" />Select All</th>
+
+                                        <th><input type="text" style="float:left;" name="search_engine" class="search_init" /></th>
+                                        <th><input type="text" name="search_browser" class="search_init" /></th>
+
+                                        <th><input type="text" name="search_platform" class="search_init" /></th>
+                                        <th><input type="text" name="search_platform" class="search_init" /></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody></tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--end: BOX CONTENT-->
+            </div>
+            <!--end: BOX-->
+
+        </div>
+    </div>
+</div>
+@section head{
+
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            //Toggle fullscreen
+            $(".panel-fullscreen1").click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                if ($this.children('i').hasClass('glyphicon-resize-full')) {
+                    $this.children('i').removeClass('glyphicon-resize-full');
+                    $this.children('i').addClass('glyphicon-resize-small');
+                }
+                else if ($this.children('i').hasClass('glyphicon-resize-small')) {
+                    $this.children('i').removeClass('glyphicon-resize-small');
+                    $this.children('i').addClass('glyphicon-resize-full');
+                }
+                $(this).closest('.box').toggleClass('panel-fullscreen');
+            });
+        });
+
+        $(document).ready(function () {
+            "use strict";
+
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/Config/UOM/_index",
+                "bProcessing": true,
+                "bJqueryUI": true,
+                "bAutoWidth": true,
+                "aLengthMenu": tablelength(),
+                //"aLengthMenu": [[5, 10, 25, 50, 100, 150, 200, 500 - 1], [5, 10, 25, 50, 100, 150, 200, 500, "All"]],
+                "oLanguage": {
+                    "sSearch": ""
+                },
+                //"sDom": 'C<"clear">lfrtip',
+                //"oColVis": {
+                //    "aiExclude": [ 0 ]
+                //},
+                "aoColumns": [
+                                {
+                                    "sName": "Id",
+                                    "bSearchable": false,
+                                    "bSortable": false,
+                                    "sWidth": "13%",
+
+                                    "sPaginationType": "full_numbers",
+                                    "fnRender": function (oObj) {
+                                        //return ' <input onclick="CheckAll(this)" type="checkbox" data-Id="' + oObj.aData[0] + '">&nbsp; <a id="lnkEdit1"  title="Click on for Edit" style="text-decoration:none;"   href=\"/Config/UOM/Edit/' + oObj.aData[0] + '\" class=" lnkEdit i-btn-edit-row"></i></a>' +
+                                        return ' <input onclick="CheckAll(this)" type="checkbox" data-Id="' + oObj.aData[0] + '">&nbsp; <a title="Click on for Edit" style="text-decoration:none;" data-url=\"/Config/UOM/Edits/' + oObj.aData[0] + '\" id="edits" onclick="controllerBKE.Editdata(this)"  class=" i-btn-edit-row"></a>' +
+
+                                            '&nbsp; <a title="Click on for Delete" style="text-decoration:none;" data-url="/Config/UOM/Delete" onclick="deletedData(this, myDataTable,\'' + oObj.aData[0] + '\');"  class="i-btn-remove-row"></a>';
+                                    }
+                                }
+                                , { "sName": "Code", "sWidth": "10%" }
+                                , { "sName": "Name", "sWidth": "10%" }
+                                , { "sName": "Name", "sWidth": "10%" }
+                                , { "sName": "Remarks", "sWidth": "20%" }
+                ]
+            });
+            $(".search input").keyup(function () {
+                /* Filter on the column (the index) of this element */
+                oTable.fnFilter(this.value, $(".search input").index(this));
+            });
+            $(".search input").each(function (i) {
+                //asInitVals[i] = this.value;
+            });
+            $(".search input").focus(function () {
+                if (this.className == "search_init") {
+                    this.className = "";
+                    this.value = "";
+                }
+            });
+            $(".search input").blur(function (i) {
+                if (this.value == "") {
+                    this.className = "search_init";
+                    this.value = asInitVals[$(".search input").index(this)];
+                }
+            });
+            $(function () {
+                $("input").val("");
+            });
+            CheckCode();
+            function CheckCode(send) {
+            var a= $(send).val();
+            }
+            $("#Code").keyup(function () {
+
+                $("#Code").parent().find("p").remove();
+                var url = "@Url.Action("check", "UOM", new { area="Config"})"
+                var code = $(this).val();
+                $.get("@Url.Action("check", "UOM", new { area="Config"})", { code: code }, function (data, status) {
+                    $("#Code").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                    //alert("Data: " + data + "\nStatus: " + status
+                });
+            });
+            $("#Name").keyup(function () {
+                $("#Name").parent().find("p").remove();
+                var url = "@Url.Action("check", "UOM", new { area="Config"})"
+                var name = $(this).val();
+                $.get("@Url.Action("check", "UOM", new { area="Config"})", { name: name }, function (data, status) {
+                    $("#Name").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                    //alert("Data: " + data + "\nStatus: " + status
+                });
+            });
+            window.controllerBKE = new ControllerBKE();
+
+            function ControllerBKE() { }
+
+            ControllerBKE.prototype.Editdata = function (sender) {
+               var url = $(sender).attr("data-url");
+               $.get(url, function (data, status) {
+                   $("#Id").val(data.Id);
+                   $("#Name").val(data.Name);
+                   $("#Code").val(data.Code);
+                   $("#Remarks").val(data.Remarks);
+                   $('#toggle-state-switch').bootstrapSwitch('setState', data.IsActive);
+                   $(".create").html("Update");
+
+               });
+            }
+            //$(function () {
+            //    $('#toggle-state-switch').bootstrapSwitch('setState', true);
+            //    $(".switch-left").click(function () {
+            //        $this.children('input.checkSwitch').prop('checked', true);
+
+            //    })
+            //    //instead of $this.children('input.checkSwitch').attr('checked', 'checked'); and
+            //    $(".switch-right").click(function () {
+            //        $this.children('input.checkSwitch').prop('checked', false);
+
+            //    })
+            //    //instead of $this.children('input.checkSwitch').removeAttr('checked');
+
+            //});
+           
+            ControllerBKE.prototype.CancelBlack = function CancelBlack() {
+                for (var i = 0; i < $('input').length; i++) {
+                   $($('input')[i]).val("")
+                    }
+                }
+            
+           });
+
+    </script>
+}

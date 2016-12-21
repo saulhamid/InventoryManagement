@@ -1,0 +1,304 @@
+﻿@model InventoryViewModel.Models.User
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login2</title>
+    @Styles.Render("~/Content/bootstrap/css")
+</head>
+<body>
+        <div class="header_top">
+
+            <div class="main_back css3-shadow">
+
+                <!--     <div class="after_header" style="background-color:#48566A;max-height:50px;width:100%; height:5px;"></div>-->
+                <div class="main_area effect6">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="Absolute-Center is-Responsive  effect6">
+
+                                <h2 style=" text-align:center;"> Admin Panel</h2>
+                                <div class=" col-md-5 col-sm-8 col-xs-10">
+
+                                    <img src="~/Images/locker_pic.png" />
+                                </div>
+                                <div class=" col-md-5 col-sm-8 col-xs-10 col-md-pull-1">
+                                        @using (Html.BeginForm("Login2", "Account", FormMethod.Post)) { 
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+                                            @Html.HiddenFor(model => model.Id)
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            @*<input class="form-control" type="text" name='username' placeholder="username" />*@
+                                            @Html.TextBoxFor(model => model.UserName, new { @placeholder = "username", @class = "required form-control username" })
+                                            @Html.ValidationMessageFor(model=>model.UserName)
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            @*<input class="form-control" type="password" name='password' placeholder="password" />*@
+                                            @Html.PasswordFor(model => model.Password, new { @placeholder = "password", @class = "required form-control password" })
+                                            @Html.ValidationMessageFor(model => model.Password)
+                                         </div>
+                                            <div class="form-group">
+                                             <label class="">Remember</label>
+                                            @Html.CheckBoxFor(model => model.Remember, new { @placeholder = "password", @class = " " })
+                                         </div>
+                                        <div class="form-group" style=" width:240px;">
+                                            <input type="submit" class="btn btn-login btn-block btn css3-shadow" value="Login" />
+                                        </div>
+                                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+<style>
+    body 
+{
+      
+      background-color:rgba(163, 205, 213, 0.73);
+       padding:10px;
+}
+.header_top
+{
+    width:100%;
+	
+	height:100;
+	top:0;
+
+    }
+    .main_back
+    {
+          border-bottom:2px solid #75869D;
+      background-color:  #80C68B !important;
+        
+          border-radius: 5px;
+          border:1px solid #BAB4B4;
+           box-shadow: 0px 0px 10px grey;
+
+        }
+ .header_logo
+{
+
+    height: 90px;
+    padding:10px;
+    padding-left:50px;
+    padding-bottom:10px;
+    margin-bottom:10px;
+    }    
+     .header_logo img 
+     {
+          height:80px;
+          width:300px;
+         }
+
+    .css3-shadow {
+    position:relative;
+    -webkit-box-shadow:0 1px 7px rgba(0, 0, 0, 0.3);
+    box-shadow:0 1px 7px rgba(0, 0, 0, 0.3);
+}
+.css3-shadow:after{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    bottom:0px;
+    left:10%;
+    right:10%;
+    width:80%;
+    height:50%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+}
+.main_area 
+{
+      border-bottom-right-radius:4px;
+      border-bottom-left-radius:4px;
+     background-color:#B0D7B7;
+     height:600px;
+       padding:20px;
+    }
+.effect6
+{
+  	position:relative;       
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect6:before, .effect6:after
+{
+	content:"";
+    position:absolute; 
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:50%;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+} 
+.effect6:after
+{
+	right:10px; 
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg); 
+       -moz-transform:skew(8deg) rotate(3deg);     
+        -ms-transform:skew(8deg) rotate(3deg);     
+         -o-transform:skew(8deg) rotate(3deg); 
+            transform:skew(8deg) rotate(3deg);
+}
+.login_box 
+{
+    
+    min-width:200px;
+     min-height:200px;
+    margin:10px;
+      background-color:#f5f5f7;
+     border-radius: 4px;
+  
+    }
+    
+  .login_box   .image-lock 
+    {
+        float:left;
+         padding:30px;
+        }
+        
+.form-login 
+{
+     float:left;
+    }
+.form-login  h2 
+    {
+         text-align:center;
+        }
+        
+  .form-login input 
+  {
+       border: rgb(92, 184, 233) 2px solid;
+    color: #252D26;
+    box-shadow: -73px -49px 0px -61px rgb(235, 235, 235) inset;
+    border-radius: 4px;
+    width:200px;
+      }
+
+ .Absolute-Center h2:after {
+     border-bottom: 2px solid # 80C68B;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    top: 60px;
+    right:40px;
+    left:30%;
+    width: 200px;
+}
+.Absolute-Center img
+{
+   padding-left:20px;
+    }
+div.well{
+  height: 250px;
+} 
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.Absolute-Center.is-Responsive {
+
+  height: 60%;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 10px;
+  background-color:#f5f5f7;
+  border-radius: 10px;
+   
+}
+.Absolute-Center.is-Responsive .input-group input 
+{
+     width:200px;
+box-shadow:inset 0 0 10px 000000#;
+    -moz-box-shadow:inset 0 0 10px #000000;
+    -webkit-box-shadow:inset 0 0 10px #000000;
+    
+    background: transparent;
+    color: #252D26;
+    box-shadow: -73px -49px 0px -61px rgb(128, 198, 139) inset;
+    border-radius: 4px;
+    transition: width 0.5s;
+    -webkit-transition: width 0.5s;
+    }
+    .Absolute-Center form 
+    {
+       width:270px;
+        }
+.Absolute-Center.is-Responsive input:focus,input-group:focus
+{
+      width:220px;
+       border:1px solid #5cb85c;
+    }
+.btn-login 
+    {
+        color:White;
+        background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+         transition: width 2s;
+    -webkit-transition: width 2s;
+        }
+        
+.btn-login:hover
+ {
+ background-color:  #80C68B !important;
+}
+.effect5
+{
+  position: relative;
+}
+.effect5:before, .effect5:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 35px 20px #777;
+  -moz-box-shadow: 0 35px 20px #777;
+  box-shadow: 0 35px 20px #777;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  -o-transform: rotate(-8deg);
+  -ms-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.effect5:after
+{
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
+
+</style>
