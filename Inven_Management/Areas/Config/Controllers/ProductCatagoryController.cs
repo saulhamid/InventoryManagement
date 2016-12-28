@@ -17,6 +17,7 @@ namespace Inven_Management.Areas.Config.Controllers
         public ActionResult Index()
         {
             ProductCategory vm = new ProductCategory();
+            vm.IsActive = true;
             return View(vm);
         }
 
@@ -37,7 +38,7 @@ namespace Inven_Management.Areas.Config.Controllers
             var isActiveFilter1 = isActiveFilter.ToLower() == "y" ? true.ToString() : false.ToString();
             #endregion Column Search
 
-            var getAllData = _repo.GETAllProductCategory;
+            var getAllData = _repo.GETAllProductCategory.AsEnumerable();
             IEnumerable<ProductCategory> filteredData;
             //Check whether the companies should be filtered by keyword
             if (!string.IsNullOrEmpty(param.sSearch))
@@ -116,11 +117,12 @@ namespace Inven_Management.Areas.Config.Controllers
         //    return PartialView("Create", vm);
         //}
         [HttpPost]
-        public ActionResult Create(ProductCategory vm)
+        public ActionResult Create(ProductCategory vm, bool? IsActive)
         {
             string[] result = new string[3];
             try
             {
+                vm.IsActive = IsActive;
                 result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
