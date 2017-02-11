@@ -23,7 +23,7 @@ namespace Inven_Management.Controllers
         // GET: /Account/Login
         UserRepo _repo = new UserRepo();
         [AllowAnonymous]
-        public ActionResult Login2(string returnUrl)
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -35,7 +35,7 @@ namespace Inven_Management.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login2(User model, string returnUrl)
+        public ActionResult Login(User model, string returnUrl)
         {
             try
             {
@@ -44,20 +44,21 @@ namespace Inven_Management.Controllers
                 {
                         FormsAuthentication.SetAuthCookie(model.UserName, model.Remember);
                         ////return RedirectToAction("Index", "UOM", "Config");
-                        return RedirectToAction("Index", "Home", new { area = "InventoryManagement" });
+                    //return RedirectToAction("Index", "Home", new { area = "Config" });
+                        return RedirectToAction("Index", "Home");
                         //return RedirectToLocal(returnUrl);
                 }
                 else
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-
                 }
             }
             catch(Exception ex){
                 return View(model);
 
             }
-            return RedirectToAction("Index", "Home", new { area = "InventoryManagement" });
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home", new { area = "Config" });
 
             // If we got this far, something failed, redisplay form
         }

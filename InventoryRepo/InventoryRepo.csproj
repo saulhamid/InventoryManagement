@@ -40,18 +40,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="InventoryManagement\CustomerRepo.cs" />
-    <Compile Include="InventoryManagement\EmployeeRepo.cs" />
-    <Compile Include="InventoryManagement\ProductBrandRepo.cs" />
-    <Compile Include="InventoryManagement\ProductCategoryRepo.cs" />
-    <Compile Include="InventoryManagement\ProductColorRepo.cs" />
-    <Compile Include="InventoryManagement\ProductRepo.cs" />
-    <Compile Include="InventoryManagement\ProductSizeRepo.cs" />
-    <Compile Include="InventoryManagement\ProductTypeRepo.cs" />
-    <Compile Include="InventoryManagement\SupplierRepo.cs" />
-    <Compile Include="InventoryManagement\UOMRepo.cs" />
-    <Compile Include="InventoryManagement\UserRepo.cs" />
-    <Compile Include="InventoryManagement\ZoneorAreaRepo.cs" />
+    <Compile Include="Config\CustomerRepo.cs" />
+    <Compile Include="Config\EmployeeRepo.cs" />
+    <Compile Include="Config\ProductBrandRepo.cs" />
+    <Compile Include="Config\ProductCategoryRepo.cs" />
+    <Compile Include="Config\ProductColorRepo.cs" />
+    <Compile Include="Config\ProductRepo.cs" />
+    <Compile Include="Config\ProductSizeRepo.cs" />
+    <Compile Include="Config\ProductTypeRepo.cs" />
+    <Compile Include="Config\SupplierRepo.cs" />
+    <Compile Include="Config\UOMRepo.cs" />
+    <Compile Include="Config\UserRepo.cs" />
+    <Compile Include="Config\ZoneorAreaRepo.cs" />
+    <Compile Include="InventoryManagement\ProductAssaignRepo.cs" />
+    <Compile Include="InventoryManagement\ProductDetailRepo.cs" />
+    <Compile Include="InventoryManagement\PurcheaseRepo.cs" />
+    <Compile Include="InventoryManagement\SalesRepo.cs" />
+    <Compile Include="InventoryManagement\StockRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +69,7 @@
       <Name>InventoryViewModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

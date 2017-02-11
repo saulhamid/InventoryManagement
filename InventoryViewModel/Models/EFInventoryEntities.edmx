@@ -24,12 +24,12 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -52,14 +52,14 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="FAX" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="IsArchive" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="EnumCountry">
           <Key>
@@ -138,6 +138,62 @@
           <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProductAssignDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductAssignId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Slup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Bonus" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Returns" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Replace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="SalesQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductAssigns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InvoiecNo" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ZoneOrAreaId" Type="int" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpeningQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ProductBrands">
           <Key>
             <PropertyRef Name="Id" />
@@ -148,12 +204,12 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductCategorys">
           <Key>
@@ -165,12 +221,12 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductColor">
           <Key>
@@ -182,12 +238,40 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="14" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="14" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="UOMId" Type="int" />
+          <Property Name="ProductBrandId" Type="int" />
+          <Property Name="ProductCatagoriesId" Type="int" />
+          <Property Name="ProductColorId" Type="int" />
+          <Property Name="ProductSizeId" Type="int" />
+          <Property Name="ProductTypeId" Type="int" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OpenQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MinimumStock" Type="int" />
+          <Property Name="OtherCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="14" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="14" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -196,19 +280,35 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="UOMName" Type="nvarchar" MaxLength="100" />
           <Property Name="UOMId" Type="int" />
-          <Property Name="CategoryId" Type="int" />
+          <Property Name="ProductBrandId" Type="int" />
+          <Property Name="ProductBrandName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductCatagoriesName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductCatagoriesId" Type="int" />
+          <Property Name="ProductColorName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductColorId" Type="int" />
+          <Property Name="ProductSizeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductSizeId" Type="int" />
+          <Property Name="ProductTypeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProductTypeId" Type="int" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="MinimumStock" Type="int" />
+          <Property Name="OtherCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UnitePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OpeningQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="14" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="14" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductSizes">
           <Key>
@@ -220,12 +320,12 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductTypes">
           <Key>
@@ -237,70 +337,192 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Purchases">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" />
           <Property Name="InvoiecNo" Type="nvarchar" MaxLength="200" />
           <Property Name="ProductId" Type="int" />
           <Property Name="SupplierId" Type="int" />
           <Property Name="EmployeeId" Type="int" />
-          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Slup" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="UnitePrice" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Quantity" Type="int" />
-          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
           <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Datetimes" Type="nvarchar" MaxLength="50" />
-          <Property Name="OpeningQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PurcheaseDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseId" Type="int" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Slup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Sales">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="nvarchar" MaxLength="20" />
           <Property Name="InvoiecNo" Type="nvarchar" MaxLength="200" />
           <Property Name="ProductId" Type="int" />
           <Property Name="CustomerId" Type="int" />
+          <Property Name="ZoneOrAreaId" Type="int" />
           <Property Name="EmployeeId" Type="int" />
+          <Property Name="DiscountRemarks" Type="nvarchar" MaxLength="200" />
           <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Slup" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="UnitePrice" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantityReceive" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReturn" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReplace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Datetimes" Type="nvarchar" MaxLength="50" />
+          <Property Name="PackUnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PackQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OpeningQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsArchive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SalesDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesId" Type="int" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Slup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Bonus" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReceiveQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Return" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Replace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Datetime" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalSlupPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WithOurDiscountPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StockDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StockId" Type="int" />
+          <Property Name="StockReplace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TransReplace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReplace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StockReturn" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TransReturn" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReturn" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StockDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TransDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TransSlup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StockSlup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StockQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TransQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StockPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TransPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="StockStutes" Type="bit" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Stocks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="InvoiecNo" Type="nvarchar" MaxLength="200" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ZoneOrAreaId" Type="int" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="TotalReplace" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReturn" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StockQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Datetimes" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpeningQuantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="StockStutes" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsArchive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -331,6 +553,16 @@
           <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -373,7 +605,7 @@
           <Property Name="BranchId" Type="int" />
           <Property Name="EmployeeId" Type="nvarchar" MaxLength="50" />
           <Property Name="IsAdmin" Type="bit" />
-          <Property Name="Remember" Type="bit" />
+          <Property Name="Remember" Type="bit" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsVerified" Type="bit" />
           <Property Name="IsArchived" Type="bit" />
@@ -409,15 +641,23 @@
           <EntitySet Name="EnumDistric" EntityType="Self.EnumDistric" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EnumDivision" EntityType="Self.EnumDivision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organizations" EntityType="Self.Organizations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductAssignDetails" EntityType="Self.ProductAssignDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductAssigns" EntityType="Self.ProductAssigns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductBrands" EntityType="Self.ProductBrands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategorys" EntityType="Self.ProductCategorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductColor" EntityType="Self.ProductColor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDetails" EntityType="Self.ProductDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSizes" EntityType="Self.ProductSizes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurcheaseDetails" EntityType="Self.PurcheaseDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesDetails" EntityType="Self.SalesDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockDetails" EntityType="Self.StockDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -434,20 +674,28 @@
           <EntitySet Name="EnumDistrics" EntityType="InventoryModel.EnumDistric" />
           <EntitySet Name="EnumDivisions" EntityType="InventoryModel.EnumDivision" />
           <EntitySet Name="Organizations" EntityType="InventoryModel.Organization" />
+          <EntitySet Name="ProductAssignDetails" EntityType="InventoryModel.ProductAssignDetail" />
+          <EntitySet Name="ProductAssigns" EntityType="InventoryModel.ProductAssign" />
           <EntitySet Name="ProductBrands" EntityType="InventoryModel.ProductBrand" />
           <EntitySet Name="ProductCategorys" EntityType="InventoryModel.ProductCategory" />
           <EntitySet Name="ProductColors" EntityType="InventoryModel.ProductColor" />
+          <EntitySet Name="ProductDetails" EntityType="InventoryModel.ProductDetail" />
           <EntitySet Name="Products" EntityType="InventoryModel.Product" />
           <EntitySet Name="ProductSizes" EntityType="InventoryModel.ProductSize" />
           <EntitySet Name="ProductTypes" EntityType="InventoryModel.ProductType" />
           <EntitySet Name="Purchases" EntityType="InventoryModel.Purchase" />
+          <EntitySet Name="PurcheaseDetails" EntityType="InventoryModel.PurcheaseDetail" />
           <EntitySet Name="Sales" EntityType="InventoryModel.Sale" />
+          <EntitySet Name="SalesDetails" EntityType="InventoryModel.SalesDetail" />
+          <EntitySet Name="StockDetails" EntityType="InventoryModel.StockDetail" />
+          <EntitySet Name="Stocks" EntityType="InventoryModel.Stock" />
           <EntitySet Name="Suppliers" EntityType="InventoryModel.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="InventoryModel.sysdiagram" />
           <EntitySet Name="UOMs" EntityType="InventoryModel.UOM" />
           <EntitySet Name="UserRoles" EntityType="InventoryModel.UserRole" />
           <EntitySet Name="Users" EntityType="InventoryModel.User" />
           <EntitySet Name="ZoneOrAreas" EntityType="InventoryModel.ZoneOrArea" />
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -467,12 +715,12 @@
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -495,14 +743,14 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FAX" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsArchive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EnumCountry">
           <Key>
@@ -581,6 +829,62 @@
           <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ProductAssignDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductAssignId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Slup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Bonus" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Returns" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Replace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalesQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductAssign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InvoiecNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ZoneOrAreaId" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpeningQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
             <PropertyRef Name="Id" />
@@ -591,12 +895,12 @@
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductCategory">
           <Key>
@@ -608,12 +912,12 @@
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductColor">
           <Key>
@@ -625,12 +929,40 @@
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UOMId" Type="Int32" />
+          <Property Name="ProductBrandId" Type="Int32" />
+          <Property Name="ProductCatagoriesId" Type="Int32" />
+          <Property Name="ProductColorId" Type="Int32" />
+          <Property Name="ProductSizeId" Type="Int32" />
+          <Property Name="ProductTypeId" Type="Int32" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OpenQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MinimumStock" Type="Int32" />
+          <Property Name="OtherCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -639,19 +971,35 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UOMName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UOMId" Type="Int32" />
-          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="ProductBrandId" Type="Int32" />
+          <Property Name="ProductBrandName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCatagoriesName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCatagoriesId" Type="Int32" />
+          <Property Name="ProductColorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductColorId" Type="Int32" />
+          <Property Name="ProductSizeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductSizeId" Type="Int32" />
+          <Property Name="ProductTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductTypeId" Type="Int32" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="MinimumStock" Type="Int32" />
+          <Property Name="OtherCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UnitePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OpeningQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -663,12 +1011,12 @@
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -680,70 +1028,192 @@
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Purchase">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InvoiecNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="SupplierId" Type="Int32" />
           <Property Name="EmployeeId" Type="Int32" />
-          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Slup" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="UnitePrice" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Datetimes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OpeningQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PurcheaseDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Slup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InvoiecNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ZoneOrAreaId" Type="Int32" />
           <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="DiscountRemarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Slup" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="UnitePrice" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantityReceive" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReturn" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReplace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Datetimes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackUnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PackQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OpeningQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsArchive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateFrom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalesDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Slup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Bonus" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReceiveQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Return" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Replace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Datetime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSlupPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WithOurDiscountPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StockDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StockId" Type="Int32" />
+          <Property Name="StockReplace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransReplace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReplace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StockReturn" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransReturn" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReturn" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StockDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransSlup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StockSlup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StockQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StockPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StockStutes" Type="Boolean" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiecNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ZoneOrAreaId" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="TotalReplace" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalReturn" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalSlup" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StockQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Datetimes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpeningQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StockStutes" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsArchive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -774,6 +1244,16 @@
           <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UOM">
           <Key>
@@ -816,7 +1296,7 @@
           <Property Name="BranchId" Type="Int32" />
           <Property Name="EmployeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsAdmin" Type="Boolean" />
-          <Property Name="Remember" Type="Boolean" />
+          <Property Name="Remember" Type="Boolean" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsVerified" Type="Boolean" />
           <Property Name="IsArchived" Type="Boolean" />
@@ -849,8 +1329,8 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="InventoryModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -990,6 +1470,64 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductAssignDetails">
+            <EntityTypeMapping TypeName="InventoryModel.ProductAssignDetail">
+              <MappingFragment StoreEntitySet="ProductAssignDetails">
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SalesQuantity" ColumnName="SalesQuantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Replace" ColumnName="Replace" />
+                <ScalarProperty Name="Returns" ColumnName="Returns" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="UnitePrice" ColumnName="UnitePrice" />
+                <ScalarProperty Name="Slup" ColumnName="Slup" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductAssignId" ColumnName="ProductAssignId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductAssigns">
+            <EntityTypeMapping TypeName="InventoryModel.ProductAssign">
+              <MappingFragment StoreEntitySet="ProductAssigns">
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TotalSlup" ColumnName="TotalSlup" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ZoneOrAreaId" ColumnName="ZoneOrAreaId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductBrands">
             <EntityTypeMapping TypeName="InventoryModel.ProductBrand">
               <MappingFragment StoreEntitySet="ProductBrands">
@@ -1044,6 +1582,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetails">
+            <EntityTypeMapping TypeName="InventoryModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetails">
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+                <ScalarProperty Name="MinimumStock" ColumnName="MinimumStock" />
+                <ScalarProperty Name="OpenQuantity" ColumnName="OpenQuantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="ProductSizeId" ColumnName="ProductSizeId" />
+                <ScalarProperty Name="ProductColorId" ColumnName="ProductColorId" />
+                <ScalarProperty Name="ProductCatagoriesId" ColumnName="ProductCatagoriesId" />
+                <ScalarProperty Name="ProductBrandId" ColumnName="ProductBrandId" />
+                <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="InventoryModel.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -1057,9 +1624,25 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="UnitePrice" ColumnName="UnitePrice" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+                <ScalarProperty Name="MinimumStock" ColumnName="MinimumStock" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+                <ScalarProperty Name="ProductTypeName" ColumnName="ProductTypeName" />
+                <ScalarProperty Name="ProductSizeId" ColumnName="ProductSizeId" />
+                <ScalarProperty Name="ProductSizeName" ColumnName="ProductSizeName" />
+                <ScalarProperty Name="ProductColorId" ColumnName="ProductColorId" />
+                <ScalarProperty Name="ProductColorName" ColumnName="ProductColorName" />
+                <ScalarProperty Name="ProductCatagoriesId" ColumnName="ProductCatagoriesId" />
+                <ScalarProperty Name="ProductCatagoriesName" ColumnName="ProductCatagoriesName" />
+                <ScalarProperty Name="ProductBrandName" ColumnName="ProductBrandName" />
+                <ScalarProperty Name="ProductBrandId" ColumnName="ProductBrandId" />
                 <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+                <ScalarProperty Name="UOMName" ColumnName="UOMName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1114,8 +1697,30 @@
                 <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
-                <ScalarProperty Name="Datetimes" ColumnName="Datetimes" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurcheaseDetails">
+            <EntityTypeMapping TypeName="InventoryModel.PurcheaseDetail">
+              <MappingFragment StoreEntitySet="PurcheaseDetails">
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
@@ -1123,11 +1728,10 @@
                 <ScalarProperty Name="UnitePrice" ColumnName="UnitePrice" />
                 <ScalarProperty Name="Slup" ColumnName="Slup" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1145,19 +1749,124 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
+                <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+                <ScalarProperty Name="PackUnitPrice" ColumnName="PackUnitPrice" />
                 <ScalarProperty Name="Datetimes" ColumnName="Datetimes" />
                 <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitePrice" ColumnName="UnitePrice" />
-                <ScalarProperty Name="Slup" ColumnName="Slup" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+                <ScalarProperty Name="TotalReturn" ColumnName="TotalReturn" />
+                <ScalarProperty Name="TotalQuantityReceive" ColumnName="TotalQuantityReceive" />
+                <ScalarProperty Name="TotalSlup" ColumnName="TotalSlup" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="DiscountRemarks" ColumnName="DiscountRemarks" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ZoneOrAreaId" ColumnName="ZoneOrAreaId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesDetails">
+            <EntityTypeMapping TypeName="InventoryModel.SalesDetail">
+              <MappingFragment StoreEntitySet="SalesDetails">
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="WithOurDiscountPrice" ColumnName="WithOurDiscountPrice" />
+                <ScalarProperty Name="TotalSlupPrice" ColumnName="TotalSlupPrice" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Replace" ColumnName="Replace" />
+                <ScalarProperty Name="Return" ColumnName="Return" />
+                <ScalarProperty Name="SalesQuantity" ColumnName="SalesQuantity" />
+                <ScalarProperty Name="ReceiveQuantity" ColumnName="ReceiveQuantity" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="UnitePrice" ColumnName="UnitePrice" />
+                <ScalarProperty Name="Slup" ColumnName="Slup" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockDetails">
+            <EntityTypeMapping TypeName="InventoryModel.StockDetail">
+              <MappingFragment StoreEntitySet="StockDetails">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StockStutes" ColumnName="StockStutes" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="TransPrice" ColumnName="TransPrice" />
+                <ScalarProperty Name="StockPrice" ColumnName="StockPrice" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TransQuantity" ColumnName="TransQuantity" />
+                <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+                <ScalarProperty Name="TotalSlup" ColumnName="TotalSlup" />
+                <ScalarProperty Name="StockSlup" ColumnName="StockSlup" />
+                <ScalarProperty Name="TransSlup" ColumnName="TransSlup" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TransDiscount" ColumnName="TransDiscount" />
+                <ScalarProperty Name="StockDiscount" ColumnName="StockDiscount" />
+                <ScalarProperty Name="TotalReturn" ColumnName="TotalReturn" />
+                <ScalarProperty Name="TransReturn" ColumnName="TransReturn" />
+                <ScalarProperty Name="StockReturn" ColumnName="StockReturn" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+                <ScalarProperty Name="TransReplace" ColumnName="TransReplace" />
+                <ScalarProperty Name="StockReplace" ColumnName="StockReplace" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="InventoryModel.Stock">
+              <MappingFragment StoreEntitySet="Stocks">
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StockStutes" ColumnName="StockStutes" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
+                <ScalarProperty Name="Datetimes" ColumnName="Datetimes" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+                <ScalarProperty Name="TotalSlup" ColumnName="TotalSlup" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TotalReturn" ColumnName="TotalReturn" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ZoneOrAreaId" ColumnName="ZoneOrAreaId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1193,6 +1902,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="InventoryModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UOMs">
             <EntityTypeMapping TypeName="InventoryModel.UOM">
               <MappingFragment StoreEntitySet="UOM">
@@ -1223,9 +1943,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.User)">
+            <EntityTypeMapping TypeName="InventoryModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
                 <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
                 <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
@@ -1245,6 +1964,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1267,9 +1987,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -1283,7 +2002,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

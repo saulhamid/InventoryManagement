@@ -1,0 +1,25 @@
+﻿@model InventoryViewModel.Models.SalesDetail
+@using UIHelper.MVC
+
+<tr class="pa">
+@using (Html.BeginCollectionItem("SalesDetailvms"))
+{
+    @Html.HiddenFor(model=>model.Id);
+                                    @Html.HiddenFor(m => m.ProductId);
+    @Html.HiddenFor(m => m.SalesQuantity);
+    <td style="width:7%"><a class="Edit-row i-btn-edit-row" onclick="EditRow(this)"></a><a class="remove-row i-btn-remove-row" onclick="removerow(this)"></a></td>
+    <td style="width:18%">@Html.TextBoxFor(model => model.Name, new { @placeholder = " Product Name", @class = "pname center form-control", @readonly = "disable" })</td>
+    <td style="width:7%">@Html.TextBoxFor(model => model.UnitePrice, new { @placeholder = " Product UnitePrice", @class = "unit center form-control", @readonly = "disable" })</td>
+    <td style="width:7%">@Html.TextBoxFor(model => model.ReceiveQuantity, new { @placeholder = " Product Quantity", @class = "qty center form-control", @readonly = "disable" })</td>
+    <td style="width:7%">@Html.TextBoxFor(model => model.Return, new { @placeholder = " Product Returns", @class = "retun center form-control" })</td>
+    <td style="width:7%">@Html.TextBoxFor(model => model.Replace, new { @placeholder = " Product Replace", @class = "rep center form-control" })</td>
+    <td style="width:7%">@Html.TextBoxFor(model => model.Slup, new { @placeholder = " Product Slup", @class = "slups center form-control" })</td>
+    <td style="width:7%">@Html.TextBoxFor(model => model.Discount, new { @placeholder = " Product Amount", @class = "diss  center form-control", @readonly = "disable" })</td>
+    <td style="width:11%">@Html.TextBoxFor(model => model.TotalSlupPrice, new { @placeholder = " Product Amount", @class = "totalspp  center form-control", @readonly = "disable" })</td>
+    <td style="width:12%">@Html.TextBoxFor(model => model.WithOurDiscountPrice, new { @placeholder = " Product Amount", @class = "wodisp  center form-control", @readonly = "disable" })</td>
+    <td style="width:12%">@Html.TextBoxFor(model => model.TotalAmount, new { @placeholder = " Product Amount", @class = " totalamount  right form-control", @readonly = "disable" })</td>
+}
+</tr>
+<script>
+    
+</script>

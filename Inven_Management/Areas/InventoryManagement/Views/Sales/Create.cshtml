@@ -1,0 +1,464 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+@model InventoryViewModel.ViewModel.SalesVM
+@using UIHelper.MVC
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 2px !important;
+    }
+
+   table input,table textarea {
+       margin:0px!important;
+    }
+</style>
+@using (Html.BeginForm("Create", "Sales", FormMethod.Post, new { Id = "upform" }))
+{
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Sales List</p>
+        </div>
+        <div class="box-content">
+            <div id="demo1">
+                @Html.ValidationSummary(true)
+               @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Sales.Id)
+                <div class="row" style="">
+                    @*<div class="col-md-1">
+                            <div class="editor-label">
+                                &nbsp;
+                            </div>
+                            <div class="editor-field">
+                            </div>
+                        </div>*@
+                    
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Sales.InvoiecNo)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Sales.InvoiecNo, new { @placeholder = "InvoiecNo", @class = " required form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.InvoiecNo)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Sales.EmployeeId)
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDownFor(model => model.Sales.EmployeeId, "/Config/DropDown/Employee", new { @placeholder = " Product Category Name", @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.EmployeeId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Sales.ZoneOrAreaId)
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDownFor(model => model.Sales.ZoneOrAreaId, "/Config/DropDown/ZoneorArea", new { @placeholder = " Product Category Name", @class = " form-control " })
+                            @Html.ValidationMessageFor(model => model.Sales.ZoneOrAreaId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Sales.CustomerId)
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDownFor(model => model.Sales.CustomerId, "/Config/DropDown/CustomerRepo", new { @placeholder = " Product Category Name", @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.CustomerId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Sales.Datetimes)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Sales.Datetimes, new { @placeholder = "Date", @class = "customDatePicker required form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.Datetimes)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Sales.Remarks)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Sales.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.Remarks)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Sales List</p>
+        </div>
+        <div id="demo1">
+            @Html.ValidationSummary(true)
+            <div class="row" style="">
+                <div class="col-md-3">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Code)
+                    </div>
+                </div>
+                @*<div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Name)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Name, new { @placeholder = "Name", @class = " Name required form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Name)
+                    </div>
+                </div>*@
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().UnitePrice)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().UnitePrice,new { @placeholder = "UnitePrice", @class = "ppunit center required number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().UnitePrice)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        <b>Quantity</b>
+                        @*@Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().ReceiveQuantity)*@
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().ReceiveQuantity, new { @placeholder = "ReceiveQuantity", @class = "prqty center required number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().ReceiveQuantity)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Return)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Return, new { @placeholder = "Return", @class = "prturn center  number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Return)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Replace)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Replace, new { @placeholder = "Replace", @class = "preplace center  number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Replace)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Slup)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Slup, new { @placeholder = "Slup", @class = "pslup  center number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Slup)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Discount)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Discount, new { @placeholder = "Discount", @class = "ppdis center  number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Discount)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Remarks)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <button type="button" title="Save Data" class="i-btn-add AddRowIndent" id="addrow"> Addrow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-responsive display">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>UnitPrice</th>
+                <th>Quantity</th>
+                <th>Return</th>
+                <th>Replace</th>
+                <th>Slup</th>
+                <th>Discount</th>
+                <th>Total Sup Price</th>
+                <th>With Out Discount</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.SalesDetailvms)
+                {
+                    Html.RenderPartial("_SalesDetail", item);
+                }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="text" readonly="readonly" class="totalqty right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="totalrtn right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="totalrepl right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="totalsp right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="totaldis right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="totalspprice right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="wodis right form-control" /></td>
+                <td><input type="text" readonly="readonly" class="totalamounts right result form-control" /> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="2" class="Right"><b>Discount =</b></td>
+                <td>
+                    @Html.TextBoxFor(model => model.Sales.TotalDiscount, new { @placeholder = "Total Discount", @class = "right TotalDiscount form-control" })
+                    @Html.ValidationMessageFor(model => model.Sales.TotalDiscount)
+                </td>
+            </tr>
+            <tr>
+        <td></td>
+        <td></td>
+                <td colspan="2" class="Right"><b>Packet Quantity =</b></td>
+        <td>
+            @Html.TextBoxFor(model => model.Sales.PackQuantity, new { @placeholder = "Pack Quantity", @Onchange = "pack()", @class = "right packqty form-control" })
+            @Html.ValidationMessageFor(model => model.Sales.PackQuantity)
+        </td>
+                <td colspan="2" class="Right"><b>Packet Unit Price =</b></td>
+        <td>
+            @Html.TextBoxFor(model => model.Sales.PackUnitPrice, new { @placeholder = "Pack Unit Price", @Onchange = "pack()", @class = "right packunit form-control" })
+            @Html.ValidationMessageFor(model => model.Sales.PackUnitPrice)
+        </td>
+                <td colspan="2" class="Right"><b>Total Packet Price =</b></td>
+        <td>
+            @Html.TextBoxFor(model => model.TotalPackPrice, new { @placeholder = "Total Pack Price", @readonly = "readonly", @class = "right packtotal form-control" })
+            @Html.ValidationMessageFor(model => model.TotalPackPrice)
+        </td>
+    </tr>
+            <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colspan="2" class="Right"><b>Grand Total =</b></td>
+        <td><input type="text" readonly="readonly" class="grandTotal right form-control" /></td>
+    </tr>
+        </tfoot>
+    </table>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="editor-label">
+                &nbsp;
+            </div>
+            <div class="editor-field">
+                <button type="submit" title="Save Data" id="sub" class="i-btn-save"> Save</button>
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .simpledrop {
+        width:100%;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".simpledrop").select2();
+        calculation();
+        $(".code").autocomplete({
+            source: '@Url.Action("Product", "Autocomplete", new { area = "Config" })', minLength: 1,})
+        $(".TotalDiscount").keyup(function () {
+            calculation();
+        });
+        $(".packunit").keyup(function () {
+            calculation();
+        });
+        //$("table").hide();
+                if($("#Code").val()!= '')
+                {
+                    $("table").show();
+                }
+                $("#addrow").click(function () {
+                    var value = $(".code").val();
+                    var code = value.split('-')[0];
+                    $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
+                    //var code = $(".code").val();
+                    var exit = true;
+                    $(".pa").each(function (i, item) {
+                        var el = $(this);
+                        var tcode = el.closest("tr").find(".pcode").val();
+                        if (code == tcode) {
+                            exit = false;
+                            alert("this Product Already Add in below List");
+                        }
+                    });
+            var UnitePrice =getNum($(".ppunit").val());
+            var reivecqty = getNum($(".prqty").val());
+            var returns =getNum($(".prturn").val());
+            var replace = getNum($(".preplace").val());
+            var slup = getNum($(".pslup").val());
+            var Discount = getNum($(".ppdis").val());
+            var remarks = $("#Productvm_Remarks").val();
+            if (exit == true) {
+                var url = "/InventoryManagement/Sales/ProductDetail?code=" + code + "&UnitePrice="
+                    + UnitePrice + "&reivecqty=" + reivecqty + "&returns=" + returns + "&replace=" + replace + "&slup=" + slup
+                    + "&Discount=" + Discount + "&Remarks=" + remarks;
+                $.get(url, function (data) {
+                    $("table tbody").append(data);
+                    calculation();
+                    $("table").show();
+                    $(".Name").val('');
+                    $(".code").val('');
+                    $(".ppqty").val('');
+                    $(".ppunit").val('');
+                    $(".ppdis").val('');
+                    $("#Remarks").val("");
+                });
+            };
+                });
+        $(".Edit-row").click(function () {
+            calculation();
+        });
+        $("#sub").click(function () {
+            var datas = $("#upform").serialize();
+            var url = $("form").attr("action");
+            $.post(url, datas, function (data, status) {
+                window.location.reload();
+                if (status == "success") {
+                    ShowResult(data);
+                }
+         });
+        });
+        $(".TotalDiscount,.grandTotal").change(function () {
+            calculation();
+        });
+    $(".number").change(function () {
+        if (!$.isNumeric($(this).val())) {
+            $(this).val(" ");
+            showResult("this not be Numeric");
+        }
+        else {
+            var val = parseFloat($(this).val());
+            $(this).val(val)
+        }
+    });
+    });
+    function pack() {
+        var packunit = getNum($(".packunit").val());
+        var packqty = getNum($(".packqty").val());
+        var packtotal = parseFloat(packqty) * parseFloat(packunit);
+        $(".packtotal").val(packtotal);
+        calculation();
+    };
+    $(".TotalDiscount").change(function () {
+        calculation();
+    });
+    function calculation() {
+        var result = 0;
+        var totaldis = 0;
+        var totalqty = 0;
+        var totalrtn = 0;
+        var totalrepl = 0;
+        var totalsp = 0;
+        var totalspprice = 0;
+        var wodis = 0;
+        var totalamounts = 0;
+        var TotalDiscount = getNum($(".TotalDiscount").val());
+        var packunit=getNum($(".packunit").val());
+        var packqty=getNum($(".packqty").val());
+        var packtotal = getNum($(".packtotal").val());
+        var ttotal = 0;
+        var tdis = 0;
+        $(".pa").each(function (i, item) {
+            var el = $(this);
+            var qty, unit, disc, amount = 0;
+            qty = getNum(el.closest("tr").find(".qty").val());
+            unit = getNum(el.closest("tr").find(".unit").val());
+            retun = getNum(el.closest("tr").find(".retun").val());
+            rep = getNum(el.closest("tr").find(".rep").val());
+            slups = getNum(el.closest("tr").find(".slups").val());
+            diss = getNum(el.closest("tr").find(".diss").val());
+            totalspp = getNum(el.closest("tr").find(".totalspp").val());
+            wodisp = getNum(el.closest("tr").find(".wodisp").val());
+            totalamount = getNum(el.closest("tr").find(".totalamount").val());
+            amount = (parseFloat(qty) * parseFloat(unit)) - parseFloat(disc);
+            el.closest("tr").find(".amount").val(amount);
+            totalqty += parseFloat(qty);
+            totalrtn += parseFloat(retun);
+            totalrepl += parseFloat(rep);
+            totalsp += parseFloat(slups);
+            totaldis += parseFloat(diss);
+            totalspprice += parseFloat(totalspp);
+            wodis += parseFloat(wodisp);
+            totalamounts += parseFloat(totalamount);
+            result += totalamounts;
+        });
+        $('.result').val(result);
+        $('.totalqty').val(totalqty);
+        $('.totalrtn').val(totalrtn);
+        $('.totalrepl').val(totalrepl);
+        $('.totalsp').val(totalsp);
+        $('.totaldis').val(totaldis);
+        $('.totalspprice').val(totalspprice);
+        $('.wodis').val(wodis);
+        $('.totalamounts').val(totalamounts);
+        ttotal = result - TotalDiscount - packtotal;
+        ttotal = parseFloat(ttotal);
+        $(".grandTotal").val(getNum(ttotal));
+    }
+    function EditRow(send) {
+        //var a = $(send).parents().parents().children().find(".qty").val();
+        $(".code").val($(send).parents().parents().children().find(".pname").val());
+        $(".prqty").val($(send).parents().parents().children().find(".qty").val());
+        $(".ppunit").val($(send).parents().parents().children().find(".unit").val());
+        $(".prturn").val($(send).parents().parents().children().find(".retun").val());
+        $(".preplace").val($(send).parents().parents().children().find(".rep").val());
+        $(".pslup").val($(send).parents().parents().children().find(".slups").val());
+        $(".ppdis").val($(send).parents().parents().children().find(".diss").val());
+        $(send).closest('.pa').remove();
+        calculation();
+    };
+    function removerow(sender) {
+        Ask("Are you sure to delete this file!", function () {
+            $(sender).parents("tr.pa:first").remove();
+            calculation();
+        }, function () { });
+    }
+    function getNum(val) {
+        if (isNaN(val)) {
+            return 0;
+        }
+        return val;
+    }
+</script>
+
+
+

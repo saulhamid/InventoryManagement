@@ -6,7 +6,7 @@
 	
 	body {
 		/*background: url(../images/texture_green_cup.jpg);*/
-        font-size:16px;
+        font-size:16px!important;
 	}
 	
 	txtd {

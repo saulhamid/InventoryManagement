@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Stock List</p>
+    </div>
+    <p></p>
+    <div class="row">
+        <div id="container">
+            <div id="demo">
+                <table id="myDataTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Invoiec No.</th>
+                            <th>Product Name</th>
+                            <th>Supplier Name</th>
+                            <th>Employee Name</th>
+                            <th>Total Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Replace</th>
+                            <th>Total Return</th>
+                            <th>Total Price</th>
+                        </tr>
+                        <tr>
+                            <th>Invoiec No.</th>
+                            <th>Product Name</th>
+                            <th>Supplier Name</th>
+                            <th>Employee Name</th>
+                            <th>Total Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Replace</th>
+                            <th>Total Return</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section head{
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/InventoryManagement/Stock/_index",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "aoColumns": [
+                                  { "sName": "Invoice", "sWidth": "10%" }
+                                , { "sName": "ProductName", "sWidth": "20%" }
+                                , { "sName": "SupplierName", "sWidth": "10%" }
+                                , { "sName": "EmployeeName", "sWidth": "10%" }
+                                , { "sName": "TotalQuantity", "sWidth": "10%" }
+                                , { "sName": "UnitPrice", "sWidth": "10%" }
+                                , { "sName": "TotalReplace", "sWidth": "10%" }
+                                , { "sName": "TotalReturn", "sWidth": "10%" }
+                                , { "sName": "TotalPrice", "sWidth": "10%" }
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [
+                            { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+            });
+            SelectAllForDelete();
+            $("#Code").keyup(function () {
+                $("#Code").parent().find("p").remove();
+                var url = "@Url.Action("check", "Stock", new { area = "InventoryManagement" })"
+                var code = $(this).val();
+                $.get("@Url.Action("check", "Stock", new { area = "InventoryManagement" })", { code: code }, function (data, status) {
+                    $("#Code").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                });
+            });
+            $("#Name").keyup(function () {
+                $("#Name").parent().find("p").remove();
+                var url = "@Url.Action("check", "Stock", new { area = "InventoryManagement" })"
+                var name = $(this).val();
+                $.get("@Url.Action("check", "Stock", new { area = "InventoryManagement" })", { name: name }, function (data, status) {
+                    $("#Name").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                });
+            });
+        });
+    </script>
+}
+
+

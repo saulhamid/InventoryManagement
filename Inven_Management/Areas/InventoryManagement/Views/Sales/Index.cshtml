@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="headrow">
+    <button type="button" title="Add New Sales" data-url="/InventoryManagement/Sales/Create" id="" onclick="GoTo(this)" class=" i-btn-add "> New</button>
+    <button type="button" title="Delete Sales" data-url="/InventoryManagement/Sales/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="i-btn-remove"> Delete</button>
+</div>
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Sales List</p>
+    </div>
+    <p></p>
+    <div class="row">
+        <div id="container">
+            <div id="demo">
+                <table id="myDataTable" class="display">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="chkAll" />Select All
+                            </th>
+                            <th>Invoiec No.</th>
+                            <th>Product Name</th>
+                            <th>Unite Price</th>
+                            <th>Receive Quantity</th>
+                            <th>Sales Quantity</th>
+                            <th>Return</th>
+                            <th>Replace</th>
+                            <th>Slup</th>
+                            <th>Discount</th>
+                            <th>Date Time</th>
+                            <th>WithOurDiscountPrice</th>
+                            <th>Customer Name</th>
+                            <th>ZoneOr AreaNae</th>
+                        </tr>
+                        <tr>
+                            <th style="padding-left: 2.5%">Actions</th>
+                            <th>Invoiec No.</th>
+                            <th>Product Name</th>
+                            <th>Unite Price</th>
+                            <th>Receive Quantity</th>
+                            <th>Sales Quantity</th>
+                            <th>Return</th>
+                            <th>Replace</th>
+                            <th>Slup</th>
+                            <th>Discount</th>
+                            <th>Date Time</th>
+                            <th>WithOurDiscountPrice</th>
+                            <th>Customer Name</th>
+                            <th>ZoneOr AreaNae</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="headrow">
+    <button type="button" title="Add New Sales" data-url="/InventoryManagement/Sales/Create" id="" class="btnCreate i-btn-add "> New</button>
+    <button type="button" title="Delete Sales" data-url="/InventoryManagement/Sales/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="i-btn-remove"> Delete</button>
+</div>
+@section head{
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/InventoryManagement/Sales/_index",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "sScrollX": '160%',
+                "aoColumns": [
+                                {
+                                    "sName": "Id",
+                                    "bSearchable": false,
+                                    "bSortable": false,
+                                    "sWidth": "8%",
+                                    "fnRender": function (oObj) {
+                                        return ' <input onclick="CheckAll(this)" type="checkbox" data-Id="' + oObj.aData[0] + '">&nbsp; <a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/Sales/Edit/' + oObj.aData[0] + '\"  class=" i-btn-edit-row"></a>' +
+                                        '&nbsp; <a title="Click on for Delete" style="text-decoration:none;"  data-url="/InventoryManagement/Sales/Delete" onclick="deletedData(this, myDataTable,' + oObj.aData[0] + ');"  class="i-btn-remove-row"></a>';
+                                    }
+                                }
+                                , { "sName": "InvoiecNo", "sWidth": "8%" }
+                                , { "sName": "ProductName", "sWidth": "12%" }
+                                , { "sName": "UnitePrice", "sWidth": "5%" }
+                                , { "sName": "ReceiveQuantity", "sWidth": "10%" }
+                                , { "sName": "SalesQuantity", "sWidth": "10%" }
+                                , { "sName": "Return", "sWidth": "5%" }
+                                , { "sName": "Replace", "sWidth": "5%" }
+                                , { "sName": "Slup", "sWidth": "5%" }
+                                , { "sName": "Discount", "sWidth": "5%" }
+                                , { "sName": "Datetime", "sWidth": "7%" }
+                                , { "sName": "WithOurDiscountPrice", "sWidth": "10%" }
+                                , { "sName": "CustomerName", "sWidth": "10%" }
+                                , { "sName": "ZoneOrAreaNae", "sWidth": "12%" }
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [{ type: "checkbox", "sClass": "chkAll" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+            });
+            SelectAllForDelete();
+            $("#Code").keyup(function () {
+                $("#Code").parent().find("p").remove();
+                var url = "@Url.Action("check", "Purchase", new { area = "InventoryManagement" })"
+                var code = $(this).val();
+                $.get("@Url.Action("check", "Purchase", new { area = "InventoryManagement" })", { code: code }, function (data, status) {
+                    $("#Code").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                });
+            });
+            $("#Name").keyup(function () {
+                $("#Name").parent().find("p").remove();
+                var url = "@Url.Action("check", "Purchase", new { area = "InventoryManagement" })"
+                var name = $(this).val();
+                $.get("@Url.Action("check", "Purchase", new { area = "InventoryManagement" })", { name: name }, function (data, status) {
+                    $("#Name").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                });
+            });
+        });
+    </script>
+}

@@ -11,20 +11,14 @@ namespace InventoryViewModel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class User
     {
         public int Id { get; set; }
         public string FullName { get; set; }
-        [Required]
-        [Display(Name = "User name")]
         public string UserName { get; set; }
         public string Email { get; set; }
         public string LogId { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
         public string Password { get; set; }
         public string VerificationCode { get; set; }
         public Nullable<int> BranchId { get; set; }

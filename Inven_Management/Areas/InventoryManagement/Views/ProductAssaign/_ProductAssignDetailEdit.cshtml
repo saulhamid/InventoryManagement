@@ -1,0 +1,18 @@
+﻿@model InventoryViewModel.Models.ProductAssignDetail
+@using UIHelper.MVC
+<tr class="pa">
+@using (Html.BeginCollectionItem("ProductAssignDetail"))
+{
+    @Html.HiddenFor(model=>model.Id);
+    @Html.HiddenFor(m => m.ProductId);
+    <td style="width:10%"><a class="Edit-row i-btn-edit-row"></a><a class="remove-row i-btn-remove-row"></a></td>
+    <td style="width:10%">@Html.TextBoxFor(model => model.Code, new { @placeholder = " Product Code", @class = "pcode form-control",@readonly="disable" })</td>
+    <td style="width:25%">@Html.TextBoxFor(model => model.Name, new { @placeholder = " Product Name", @class = "pname form-control", @readonly = "disable" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.Quantity, new { @placeholder = " Product Quantity", @class = "qty form-control", @readonly = "disable" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.UnitePrice, new { @placeholder = " Product UnitePrice", @class = "unit form-control", @readonly = "disable" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.Returns, new { @placeholder = " Product Returns", @class = "retun form-control"})</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.Replace, new { @placeholder = " Product Replace", @class = "rep form-control" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.Slup, new { @placeholder = " Product Slup", @class = "slups form-control" })</td>
+    <td style="width:20%">@Html.TextBoxFor(model => model.Discount, new { @placeholder = " Product Amount", @class = "amount right form-control", @readonly = "disable" })</td>
+}
+</tr>

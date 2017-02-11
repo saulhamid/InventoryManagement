@@ -31,8 +31,8 @@ namespace InventoryViewModel.Models
         public string Email { get; set; }
         public string FAX { get; set; }
         public string Remarks { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsArchive { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsArchive { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedAt { get; set; }
         public string CreatedFrom { get; set; }

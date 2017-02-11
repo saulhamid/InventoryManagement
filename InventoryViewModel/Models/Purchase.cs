@@ -20,15 +20,9 @@ namespace InventoryViewModel.Models
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> SupplierId { get; set; }
         public Nullable<int> EmployeeId { get; set; }
-        public Nullable<decimal> Discount { get; set; }
-        public Nullable<decimal> Slup { get; set; }
-        public Nullable<decimal> UnitePrice { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> TotalPaid { get; set; }
-        public Nullable<decimal> TotalPrice { get; set; }
+        public string Date { get; set; }
         public Nullable<decimal> GrandTotal { get; set; }
-        public string Datetimes { get; set; }
-        public Nullable<decimal> OpeningQuantity { get; set; }
+        public Nullable<decimal> TotalDiscount { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsArchive { get; set; }

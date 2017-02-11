@@ -1,4 +1,8 @@
-﻿.hrmAdmin {
+﻿body {
+    font-size:16px!important;
+}
+
+.hrmAdmin {
     background: url(/Images/hrm.png) no-repeat center center fixed; 
  
    -webkit-background-size: cover;
@@ -14,7 +18,9 @@
   background-size: cover;
 }
 /* forms */
-
+table {
+    font-size:12px!important;
+}
 
 
 .btnHover {
@@ -45,7 +51,7 @@ input[type='text'], input[type='password'], textarea, select {
     border-radius: 5px;
     /*background-color: #fefede;*/
     color: #333;
-    font-size: 1.3em;
+    font-size: 1.1em;
     padding-left: 4px;
     padding-right: 4px;
     height: 30px;

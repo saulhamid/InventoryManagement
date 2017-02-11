@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -186,10 +188,31 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Config\ConfigAreaRegistration.cs" />
+    <Compile Include="Areas\Config\Controllers\AutoCompleteController.cs" />
+    <Compile Include="Areas\Config\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Config\Controllers\DropDownController.cs" />
+    <Compile Include="Areas\Config\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Config\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Config\Controllers\ProductBrandController.cs" />
     <Compile Include="Areas\Config\Controllers\ProductCatagoryController.cs" />
+    <Compile Include="Areas\Config\Controllers\ProductColorController.cs" />
+    <Compile Include="Areas\Config\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Config\Controllers\ProductSizeController.cs" />
+    <Compile Include="Areas\Config\Controllers\ProductTypeController.cs" />
+    <Compile Include="Areas\Config\Controllers\SupplierController.cs" />
     <Compile Include="Areas\Config\Controllers\UOMController.cs" />
-    <Compile Include="Areas\InventoryManagement\Controllers\HomeController.cs" />
-    <Compile Include="Areas\InventoryManagement\InventoryManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Config\Controllers\ZoneOrAreasController.cs" />
+    <Compile Include="Areas\InventoryManagement\Controllers\HomeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\InventoryManagement\Controllers\ProductAssaignController.cs" />
+    <Compile Include="Areas\InventoryManagement\Controllers\PurchaseController.cs" />
+    <Compile Include="Areas\InventoryManagement\Controllers\SalesController.cs" />
+    <Compile Include="Areas\InventoryManagement\Controllers\StockController.cs" />
+    <Compile Include="Areas\InventoryManagement\InventoryManagementAreaRegistration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\InventoryManagement\Models\PurcheaseVM.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -201,6 +224,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Config\Views\ProductColor\_create.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\InventoryManagement\Views\Home\Index.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Shared\_footer.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Shared\_header.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\InventoryManagement\Views\Shared\_Layout.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\InventoryManagement\Views\Web.config" />
+    <Content Include="Areas\InventoryManagement\Views\_ViewStart.cshtml" />
     <Content Include="assets\css\demo_page.css" />
     <Content Include="assets\css\demo_table.css" />
     <Content Include="assets\css\demo_table_jui.css" />
@@ -331,7 +367,7 @@
     <Content Include="assets\javascripts\commonOld\sorttable.js" />
     <Content Include="assets\javascripts\commonOld\typeahead.bundle.js" />
     <Content Include="assets\javascripts\Copy of jquery.ptTimeSelect.js" />
-    <Content Include="assets\javascripts\custom.js" />
+    <Content Include="assets\javascripts\custom1.js" />
     <Content Include="assets\javascripts\default.js" />
     <Content Include="assets\javascripts\index.js" />
     <Content Include="assets\javascripts\jquery-1.4.4.min.js" />
@@ -3096,7 +3132,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\InventoryManagement\Views\Web.config" />
     <Content Include="assets\css\sym-fonts\clip-font.eot" />
     <Content Include="assets\css\sym-fonts\clip-font.ttf" />
     <Content Include="assets\css\sym-fonts\clip-font.woff" />
@@ -3552,8 +3587,6 @@
     <Content Include="assets\plugins\summernote\summernote.less" />
     <Content Include="assets\plugins\tableExport\README.md" />
     <Content Include="assets\plugins\tableExport\tableExport.jquery.json" />
-    <Content Include="Areas\InventoryManagement\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\InventoryManagement\Views\Shared\_header.cshtml" />
     <Content Include="Content\bootstrap\_backup v3.0.2\css\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\_backup v3.0.2\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap\_backup v3.0.2\fonts\glyphicons-halflings-regular.eot" />
@@ -3574,14 +3607,9 @@
     <Content Include="Content\i-fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\i-fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\i-fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Areas\InventoryManagement\Views\Shared\_footer.cshtml" />
     <Content Include="Areas\Config\Views\Web.config" />
-    <Content Include="Areas\Config\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Config\Views\Shared\_header.cshtml" />
     <Content Include="Areas\Config\Views\Shared\_footer.cshtml" />
-    <Content Include="Areas\Config\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Config\Views\UOM\Index.cshtml" />
-    <Content Include="Areas\Config\Views\UOM\Create.cshtml" />
     <Content Include="Areas\Config\Views\UOM\_create.cshtml" />
     <Content Include="assets\plugins\sweetalert\.bower.json" />
     <Content Include="assets\plugins\sweetalert\.editorconfig" />
@@ -3592,11 +3620,54 @@
     <Content Include="assets\plugins\sweetalert\LICENSE" />
     <Content Include="assets\plugins\sweetalert\README.md" />
     <Content Include="Areas\Config\Views\UOM\_edit.cshtml" />
-    <Content Include="Areas\Config\Views\UOM\Edit.cshtml" />
     <Content Include="Areas\Config\Views\ProductCatagory\Index.cshtml" />
     <Content Include="Areas\Config\Views\ProductCatagory\_create.cshtml" />
-    <Content Include="Areas\InventoryManagement\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\InventoryManagement\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Config\Views\ProductColor\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Config\Views\ProductBrand\Index.cshtml" />
+    <Content Include="Areas\Config\Views\ProductBrand\_create.cshtml" />
+    <Content Include="Areas\Config\Views\ProductSize\Index.cshtml" />
+    <Content Include="Areas\Config\Views\ProductSize\_create.cshtml" />
+    <Content Include="Areas\Config\Views\ProductType\Index.cshtml" />
+    <Content Include="Areas\Config\Views\ProductType\_create.cshtml" />
+    <Content Include="Areas\Config\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Product\_create.cshtml" />
+    <Content Include="Areas\Config\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Customer\_create.cshtml" />
+    <Content Include="Areas\Config\Views\Supplier\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Supplier\_create.cshtml" />
+    <Content Include="Areas\Config\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Employee\_create1.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Purchase\Index.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Purchase\_create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Purchase\_purcheaseDetail.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Purchase\Create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Shared\_leftnav.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Shared\_navbar.cshtml" />
+    <Content Include="Areas\Config\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Config\Views\Shared\_navbar.cshtml" />
+    <Content Include="Areas\Config\Views\Shared\_leftnav.cshtml" />
+    <Content Include="Areas\Config\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Config\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Config\Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Config\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Config\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\Config\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\Config\Views\ProductBrand\Create.cshtml" />
+    <Content Include="Areas\Config\Views\ProductBrand\Edit.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\ProductAssaign\Index.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\ProductAssaign\Create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\ProductAssaign\_ProductAssignDetail.cshtml" />
+    <Content Include="Areas\Config\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Config\Views\ZoneOrAreas\Index.cshtml" />
+    <Content Include="Areas\Config\Views\ZoneOrAreas\_create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\ProductAssaign\_ProductAssignDetailEdit.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\ProductAssaign\Edit.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Sales\Index.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Sales\Create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Sales\_SalesDetail.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Stock\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\locker_pic.png" />
     <Content Include="Scripts\customs.js" />
@@ -3641,7 +3712,6 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -3653,18 +3723,28 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Account\Login2.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Purchase\_create.cshtml" />
+    <Content Include="Views\Purchase\_purcheaseDetail.cshtml" />
+    <Content Include="Views\Purchase\Create.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
+    <Content Include="Views\Shared\_HomeLayoutPage.cshtml" />
+    <Content Include="Views\Shared\_leftnav.cshtml" />
+    <Content Include="Views\Shared\_navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Config\Models\" />
-    <Folder Include="Areas\InventoryManagement\Models\" />
     <Folder Include="assets\Images\EmployeePhoto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Office_Sym\SymERP_Web 11-12-16\SymERP_Web\UIHelper.MVC\UIHelper.MVC.csproj">
+      <Project>{dc4a37f2-4a7c-43fc-a2b8-7fd3fe692e19}</Project>
+      <Name>UIHelper.MVC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Commons\Commons.csproj">
       <Project>{d21306c2-3a45-4567-b6fa-f596cec22cdd}</Project>
       <Name>Commons</Name>
@@ -3710,6 +3790,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

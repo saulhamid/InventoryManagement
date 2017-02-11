@@ -1,11 +1,47 @@
 ﻿/// <reference path="jquery-1.8.2.js" />
-
+$(document).on("click", "[type='checkbox']", function (e) {
+    if (this.checked) {
+        $(this).attr("value", "true");
+    } else {
+        $(this).attr("value", "false");
+    }
+});
 
 $(function () {
     //popupvalidation("upfrom");
     //pageSubmit('upfrom');
+    InitDropDowns();
 })
-
+function InitDropDowns() {
+    var dropdownElements = $('select.Dropdown:not(.DropdownInited)');
+    $.each(dropdownElements, function (index, element) {
+        var dropdownEl = $(element);
+        var url = dropdownEl.attr('data-url');
+        if (!url) {
+            alert("no url");
+            return;
+        }
+        var selected = dropdownEl.attr('data-selected');
+        var dataCache = dropdownEl.attr('data-cache') ? true : false;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: dataCache,
+            success: function (jsonData, textStatus, XMLHttpRequest) {
+                var Listitems = '<option value="">Select</option>';
+                $.each(jsonData, function (i, item) {
+                    if (selected && selected == item.Value) {
+                        Listitems += "<option selected='selected' value='" + item.Value + "'>" + item.Text + "</option>";
+                    }
+                    else {
+                        Listitems += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+                    }
+                });
+                dropdownEl.html(Listitems).addClass("DropdownInited");
+            }
+        });
+    });
+}
 function deletedData(sender, checkboxId, id) {
     var deletedIds = "";
     if (typeof id === 'undefined') {

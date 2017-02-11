@@ -17,9 +17,25 @@ namespace InventoryViewModel.Models
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public string UOMName { get; set; }
         public Nullable<int> UOMId { get; set; }
-        public Nullable<int> CategoryId { get; set; }
+        public Nullable<int> ProductBrandId { get; set; }
+        public string ProductBrandName { get; set; }
+        public string ProductCatagoriesName { get; set; }
+        public Nullable<int> ProductCatagoriesId { get; set; }
+        public string ProductColorName { get; set; }
+        public Nullable<int> ProductColorId { get; set; }
+        public string ProductSizeName { get; set; }
+        public Nullable<int> ProductSizeId { get; set; }
+        public string ProductTypeName { get; set; }
+        public Nullable<int> ProductTypeId { get; set; }
+        public string SupplierName { get; set; }
+        public Nullable<int> SupplierId { get; set; }
+        public Nullable<int> MinimumStock { get; set; }
+        public Nullable<decimal> OtherCost { get; set; }
+        public Nullable<decimal> Discount { get; set; }
         public Nullable<decimal> UnitePrice { get; set; }
+        public Nullable<decimal> Quantity { get; set; }
         public Nullable<decimal> OpeningQuantity { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }

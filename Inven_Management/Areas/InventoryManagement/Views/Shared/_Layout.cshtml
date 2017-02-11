@@ -4,7 +4,6 @@
 <head>
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width" />
-    @Scripts.Render("~/bundles/jquery")
     <script src="~/assets/javascripts/jQuery2.1.4.js"></script>
 
     @Styles.Render("~/Content/css")
@@ -16,6 +15,11 @@
     <link href="~/assets/css/demo_table_jui.css" rel="stylesheet" />
 
     <link href="~/assets/plugins/DataTables/media/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/assets/plugins/DataTables/media/css/DT_bootstrap.css" rel="stylesheet" />
+    <link href="http://cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css" rel="stylesheet">
+
+
+
     <link href="~/assets/plugins/sweetalert/lib/sweet-alert.css" rel="stylesheet" />
 
     <link href="~/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -71,7 +75,7 @@
             var msg = '@TempData["msg"]';
             msg = msg.split("~");
 
-            ShowResult(msg[0], msg[1]);
+            ////ShowResult(msg[0], msg[1]);
         } else {
             var msg = '@TempData["msg"]';
             msg = msg.split("~");
@@ -155,69 +159,16 @@
             }
         });
 
-        $(".dialog-detail").dialog({
-            title: 'View User',
-            autoOpen: false,
-            resizable: false,
-            width: 400,
-            show: {
-                effect: 'drop', direction: "up", effect: "blind",
-                duration: 300
-            },
-            hide: {
-                effect: "explode",
-                duration: 300
-            },
-            modal: true,
-            draggable: true,
-            open: function (event, ui) {
-                $(".ui-dialog-titlebar-close").hide();
-                $(this).load(url);
-            },
-            buttons: {
-                "Close": function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
+       
 
-        $(".lnkCreate").live("click", function (e) {
-            url = $(this).attr('href');
-            $(".dialog-create").dialog('open');
+        
+       
+        
 
-            return false;
-        });
-        $(".btnCreate").live("click", function (e) {
-            url = $(this).attr('data-url');
-            $(".dialog-create").dialog('open');
-            return false;
-        });
-        $(".lnkEdit").live("click", function (e) {
-            url = $(this).attr('href');
-            $(".dialog-edit").dialog('open');
+       
 
-            return false;
-        });
-
-        $(".lnkDelete").live("click", function (e) {
-            url = $(this).attr('href');
-            //url = $(this).attr('data-url');
-            $(".dialog-confirm").dialog('open');
-
-            return false;
-        });
-
-        $(".lnkDetail").live("click", function (e) {
-            url = $(this).attr('href');
-            $(".dialog-detail").dialog('open');
-
-            return false;
-        });
-        $(".btncancel").live("click", function (e) {
-            $(".dialog-edit").dialog("close");
-            $(".dialog-create").dialog("close");
-            return false;
-        });
+      
+       
 
     });
     </script>
@@ -260,10 +211,11 @@
 
     </div>
         <div id="body">
+
             @RenderSection("featured", required: false)
             <section class="main-content clear-fix" style="min-height:400px">
-                @RenderBody()
-            </section>
+                    @RenderBody()
+                        </section>
         </div>
         @Html.Partial("_footer")
 
@@ -277,7 +229,7 @@
     @*<script src="~/assets/plugins/DataTables/media/js/DT_bootstrap.js"></script>*@
     @*<script src="~/assets/plugins/DataTables/extras/ColVis/media/js/ColVis.js"></script>*@
     <script src="~/assets/plugins/bootstrap-switch/static/js/bootstrap-switch.js"></script>
-
+    <script src="~/assets/javascripts/custom1.js"></script>
     <script src="~/Scripts/customs.js"></script>
     <script>
     $(function () {

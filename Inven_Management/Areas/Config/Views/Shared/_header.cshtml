@@ -11,46 +11,24 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active">@Html.ActionLink("Home", "Home", new { area = "InventoryManagement" })</li>
+                            <li class="active">@Html.ActionLink("Home", "Home", new { area = "InventoryManagement" }, new { hidefocus = "hidefocus" })</li>
                             <li class=" dropdown">
                                 <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Confiuration <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    @*<li class=" dropdown">
-        <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">UOM</a>
-    </li>*@
-                                    <li class="">@Html.ActionLink("UOM","Index", "UOM", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product Category","Index", "ProductCatagory", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product", "Index", "Product", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product", "Index", "Product", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product", "Index", "Product", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product", "Index", "Product", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product", "Index", "Product", new { area = "Config" })</li>
-                                    <li class="">@Html.ActionLink("Product","Index", "Product", new { area = "Config" })</li>
+                                    <li class="">@Html.ActionLink("UOM", "Index", "UOM", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Product Category", "Index", "ProductCatagory", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Product Color", "Index", "ProductColor", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Product Brand", "Index", "ProductBrand", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Product Size", "Index", "ProductSize", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("ProductType", "Index", "ProductType", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Product", "Index", "Product", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Customer", "Index", "Customer", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Employee", "Index", "Employee", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
+                                    <li class="">@Html.ActionLink("Supplier", "Index", "Supplier", new { Area = "Config" }, new { hidefocus = "hidefocus" })</li>
                                 </ul>
                             </li>
-                            <li><a href="addnew.html">Add New</a></li>
-                            <li class=" dropdown">
-                                <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Managers <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">View Managers</a></li>
-                                    <li><a href="#">Add New</a></li>
-                                </ul>
-                            </li>
-                            <li class=" dropdown">
-                                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Staff <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">View Staff</a></li>
-                                    <li><a href="#">Add New</a></li>
-                                    <li><a href="#">Bulk Upload</a></li>
-                                </ul>
-                            </li>
-                            <li class=" down">
-                                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HR <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Change Time Entry</a></li>
-                                    <li><a href="#">Report</a></li>
-                                </ul>
-                            </li>
+                            <li class="">@Html.ActionLink("Purchase", "Index", "Purchase", new { Area = "InventoryManagement" }, new { hidefocus = "hidefocus" })</li>
+
                         </ul>
 
                     </div>

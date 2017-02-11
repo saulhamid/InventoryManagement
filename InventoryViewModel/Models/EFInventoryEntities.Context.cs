@@ -31,15 +31,23 @@ namespace InventoryViewModel.Models
         public virtual DbSet<EnumDistric> EnumDistrics { get; set; }
         public virtual DbSet<EnumDivision> EnumDivisions { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
+        public virtual DbSet<ProductAssignDetail> ProductAssignDetails { get; set; }
+        public virtual DbSet<ProductAssign> ProductAssigns { get; set; }
         public virtual DbSet<ProductBrand> ProductBrands { get; set; }
         public virtual DbSet<ProductCategory> ProductCategorys { get; set; }
         public virtual DbSet<ProductColor> ProductColors { get; set; }
+        public virtual DbSet<ProductDetail> ProductDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductSize> ProductSizes { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
+        public virtual DbSet<PurcheaseDetail> PurcheaseDetails { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<SalesDetail> SalesDetails { get; set; }
+        public virtual DbSet<StockDetail> StockDetails { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }

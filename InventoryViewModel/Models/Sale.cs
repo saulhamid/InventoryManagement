@@ -15,19 +15,25 @@ namespace InventoryViewModel.Models
     public partial class Sale
     {
         public int Id { get; set; }
-        public string Code { get; set; }
         public string InvoiecNo { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> CustomerId { get; set; }
+        public Nullable<int> ZoneOrAreaId { get; set; }
         public Nullable<int> EmployeeId { get; set; }
+        public string DiscountRemarks { get; set; }
         public Nullable<decimal> Discount { get; set; }
-        public Nullable<decimal> Slup { get; set; }
-        public Nullable<decimal> UnitePrice { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public Nullable<decimal> TotalDiscount { get; set; }
+        public Nullable<decimal> TotalSlup { get; set; }
+        public Nullable<decimal> TotalQuantityReceive { get; set; }
+        public Nullable<decimal> TotalReturn { get; set; }
+        public Nullable<decimal> TotalReplace { get; set; }
+        public Nullable<decimal> TotalQuantity { get; set; }
         public Nullable<decimal> TotalPaid { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
         public Nullable<decimal> GrandTotal { get; set; }
         public string Datetimes { get; set; }
+        public Nullable<decimal> PackUnitPrice { get; set; }
+        public Nullable<decimal> PackQuantity { get; set; }
         public Nullable<decimal> OpeningQuantity { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }

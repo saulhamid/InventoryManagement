@@ -18,6 +18,7 @@ namespace Inven_Management.Areas.Config.Controllers
         public ActionResult Index()
         {
             UOM vm = new UOM();
+            vm.IsActive = true;
             return View(vm);
         }
 
@@ -95,11 +96,12 @@ namespace Inven_Management.Areas.Config.Controllers
                 filteredData = filteredData.OrderByDescending(orderingFunction);
 
             var displayedCompanies = filteredData.Skip(param.iDisplayStart).Take(param.iDisplayLength);
-            var result = from c in displayedCompanies select new[] { Convert.ToString(c.Id),
+            var result = from c in displayedCompanies select new[] { 
+                Convert.ToString(c.Id),
                 
-                c.Code, c.Name
+                c.Code,
+                c.Name
                 , Convert.ToString(c.IsActive == true ? "Y" : "N") 
-                
                 ,c.Remarks };
             return Json(new
             {
@@ -117,7 +119,7 @@ namespace Inven_Management.Areas.Config.Controllers
         //    return PartialView("Create", vm);
         //}
         [HttpPost]
-        public ActionResult Create(UOM vm)
+        public ActionResult Create(UOM vm, string IsActive)
         {
             string[] result = new string[3];
             try {
@@ -150,6 +152,7 @@ namespace Inven_Management.Areas.Config.Controllers
               vm=  _repo.GetSigle(Id);
               return View("Index", vm);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UOM vm)

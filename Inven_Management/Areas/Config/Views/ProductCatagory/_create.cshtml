@@ -1,100 +1,75 @@
 ﻿@model InventoryViewModel.Models.ProductCategory
-<div class="row">
-    <div class="col-md-12">
-        <!--BOX-->
-        <div class="box">
-            <!--BOX HEADER-->
-            <div class="box-header">
-                <!--BOX TITLE-->
-                <div class="box-title pull-left">
-                    <p><i class="fa fa-th-list"></i></p>
-                    <p class="create">Create</p>
-                </div>
-                <!--end: TITLE-->
-                <!--ICONS - FUNCTIONAL-->
-                <div class="box-icon pull-right">
-                    <a href="#" class="btn-code" title="Code Snippet" role="button"><i class="fa fa-caret-square-o-left fa-lg"></i></a>
-                    <a href="#" class="btn-information" title="Info" role="button"><i class="fa fa-info-circle fa-lg"></i></a>
-                    <a href="#" class="btn-help panel-fullscreen1" title="Help" id="" role="button"><i class="glyphicon glyphicon-resize-full"></i></a>
-                    <a href="#" class="btn-minimize" title="Expand / Collapse" data-toggle="collapse" data-target="#demo1" role="button"><i class="fa fa-chevron-up fa-lg"></i></a>
-                </div>
-                <!--end: ICONS-->
-            </div>
-            <!--end: BOX HEADER-->
-            <!--BOX CONTENT-->
-            <div class="box-content">
-                <div id="demo1">
-                    @using (Html.BeginForm("Create", "ProductCategory", FormMethod.Post, new { @area = "Config", enctype = "multipart/form-data", @Id = "upfrom" }))
-                    {
-                        @Html.ValidationSummary(true)
-                        @Html.HiddenFor(model => model.Id)
-                        <div class="row" style="">
-                            <div class="col-md-1">
-                                <div class="editor-label">
-                                    &nbsp;
-                                </div>
-                                <div class="editor-field">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.Code)
-                                </div>
-                                <div class="editor-field">
-                                    @Html.TextBoxFor(model => model.Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
-                                    @Html.ValidationMessageFor(model => model.Code)
-                                </div>
-                            </div>
-
-                            <div class="col-md-2">
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.Name)
-                                </div>
-                                <div class="editor-field">
-                                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Name", @class = " required form-control" })
-                                    @Html.ValidationMessageFor(model => model.Name)
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.IsArchive)
-                                </div>
-                                <div class="editor-field make-switch switch" data-on-label="Yes" data-off-label="No" id="toggle-state-switch">
-                                    @*<div class="editor-field">*@
-                                    <input type="checkbox" class="checkbox" value="@Model.IsActive" checked />                                @*@Html.CheckBox("IsActive", Model.IsActive.HasValue ? Model.IsActive : false, new { @Value = true, @placeholder = "IsActive", @id = "IsActive", @class = " form-control checkSwitch checkbox", @checked = "checked" })*@
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.Remarks)
-                                </div>
-                                <div class="editor-field">
-                                    @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
-                                    @Html.ValidationMessageFor(model => model.Name)
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="editor-label">
-                                    &nbsp;
-                                </div>
-                                <div class="editor-field">
-                                    <button type="submit" title="Save Data" onclick="pageSubmit('upfrom');" class="i-btn-save"> Save</button>
-                                    <button type="button" title="Cancel Data" onclick="controllerBKE.CancelBlack();" class="i-btn-cancel"> Cancel</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <!--end: BOX CONTENT-->
-            </div>
-            <!--end: BOX-->
-
-        </div>
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Product Catagory List</p>
     </div>
+    <p></p>
+    <div id="demo1">
+        @using (Html.BeginForm("Create", "ProductCatagory", FormMethod.Post, new { @Id = "upfrom" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="row" style="">
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <div class="editor-field">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
+                        @Html.ValidationMessageFor(model => model.Code)
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Name)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Name, new { @placeholder = "Name", @class = " required form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IsActive)
+                    </div>
+                    <div class="editor-field">
+                        @Html.CheckBox("IsActive", true, new { @class = "form-control", @checked = "checked" });
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <div class="editor-field">
+                        <button type="submit" title="Save Data" onclick="pageSubmit('upfrom');" class="i-btn-save"> Save</button>
+                        <button type="button" title="Cancel Data" onclick="controllerBKE.CancelBlack();" class="i-btn-cancel"> Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!--end: BOX CONTENT-->
 </div>
+
 @*<div class="headrow">
         <button type="button" title="Add New Blood Group" data-url="/Config/ProductCategory/Create" id="" class="btnCreate i-btn-add "> New</button>
         <button type="button" title="Delete Blood Group" data-url="/Config/ProductCategory/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="i-btn-remove"> Delete</button>
