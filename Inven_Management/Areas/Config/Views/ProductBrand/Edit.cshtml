@@ -1,0 +1,77 @@
+﻿@model InventoryViewModel.Models.ProductBrand
+
+<div class="thinbox">
+    @using (Html.BeginForm("Create", "ProductBrand", FormMethod.Post, new { @area = "Config", enctype = "multipart/form-data", @Id = "upfrom" }))
+    {
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="row" style="">
+            <div class="col-md-3">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Code)
+                </div>
+            </div>
+            <div class="col-md-9">
+
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
+                    @Html.ValidationMessageFor(model => model.Code)
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)
+                </div>
+            </div>
+            <div class="col-md-9">
+
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Name", @class = " required form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.IsActive)
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="editor-field">
+                    @Html.CheckBox("IsActive", true, new { @class = "form-control", @checked = "checked" });
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Remarks)
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="editor-label">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="editor-field">
+                    <button type="submit" title="Save Data" onclick="pageSubmit('upfrom');" class="i-btn-save"> Save</button>
+                    <button type="button" title="Cancel Data" onclick="controllerBKE.CancelBlack();" class="Cancel i-btn-cancel"> Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(function () {
+        valiDation("upfrom");
+
+    });
+</script>

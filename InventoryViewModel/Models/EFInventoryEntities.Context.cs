@@ -12,6 +12,8 @@ namespace InventoryViewModel.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class InventoryEntities : DbContext
     {
@@ -52,5 +54,235 @@ namespace InventoryViewModel.Models
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ZoneOrArea> ZoneOrAreas { get; set; }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual ObjectResult<sp_stockdetails> sp_stockdetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_stockdetails>("sp_stockdetails");
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<uom_select_Result> uom_select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uom_select_Result>("uom_select");
+        }
+    
+        public virtual ObjectResult<sp_stocks_Result> sp_stocks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_stocks_Result>("sp_stocks");
+        }
+    
+        public virtual int Insert_StockDetail(Nullable<int> stockIdint, Nullable<decimal> stockReplace, Nullable<decimal> transReplace, Nullable<decimal> totalReplace, Nullable<decimal> stockReturn, Nullable<decimal> transReturn, Nullable<decimal> totalReturn, Nullable<decimal> stockDiscount, Nullable<decimal> transDiscount, Nullable<decimal> totalDiscount, Nullable<decimal> transSlup, Nullable<decimal> stockSlup, Nullable<decimal> totalSlup, Nullable<decimal> stockQuantity, Nullable<decimal> transQuantity, Nullable<decimal> totalQuantity, Nullable<decimal> totalPaid, Nullable<decimal> stockPrice, Nullable<decimal> transPrice, Nullable<decimal> totalPrice, string remarks, Nullable<bool> stockStutes, string date)
+        {
+            var stockIdintParameter = stockIdint.HasValue ?
+                new ObjectParameter("StockIdint", stockIdint) :
+                new ObjectParameter("StockIdint", typeof(int));
+    
+            var stockReplaceParameter = stockReplace.HasValue ?
+                new ObjectParameter("StockReplace", stockReplace) :
+                new ObjectParameter("StockReplace", typeof(decimal));
+    
+            var transReplaceParameter = transReplace.HasValue ?
+                new ObjectParameter("TransReplace", transReplace) :
+                new ObjectParameter("TransReplace", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var stockReturnParameter = stockReturn.HasValue ?
+                new ObjectParameter("StockReturn", stockReturn) :
+                new ObjectParameter("StockReturn", typeof(decimal));
+    
+            var transReturnParameter = transReturn.HasValue ?
+                new ObjectParameter("TransReturn", transReturn) :
+                new ObjectParameter("TransReturn", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var stockDiscountParameter = stockDiscount.HasValue ?
+                new ObjectParameter("StockDiscount", stockDiscount) :
+                new ObjectParameter("StockDiscount", typeof(decimal));
+    
+            var transDiscountParameter = transDiscount.HasValue ?
+                new ObjectParameter("TransDiscount", transDiscount) :
+                new ObjectParameter("TransDiscount", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var transSlupParameter = transSlup.HasValue ?
+                new ObjectParameter("TransSlup", transSlup) :
+                new ObjectParameter("TransSlup", typeof(decimal));
+    
+            var stockSlupParameter = stockSlup.HasValue ?
+                new ObjectParameter("StockSlup", stockSlup) :
+                new ObjectParameter("StockSlup", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var stockQuantityParameter = stockQuantity.HasValue ?
+                new ObjectParameter("StockQuantity", stockQuantity) :
+                new ObjectParameter("StockQuantity", typeof(decimal));
+    
+            var transQuantityParameter = transQuantity.HasValue ?
+                new ObjectParameter("TransQuantity", transQuantity) :
+                new ObjectParameter("TransQuantity", typeof(decimal));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var stockPriceParameter = stockPrice.HasValue ?
+                new ObjectParameter("StockPrice", stockPrice) :
+                new ObjectParameter("StockPrice", typeof(decimal));
+    
+            var transPriceParameter = transPrice.HasValue ?
+                new ObjectParameter("TransPrice", transPrice) :
+                new ObjectParameter("TransPrice", typeof(decimal));
+    
+            var totalPriceParameter = totalPrice.HasValue ?
+                new ObjectParameter("TotalPrice", totalPrice) :
+                new ObjectParameter("TotalPrice", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_StockDetail", stockIdintParameter, stockReplaceParameter, transReplaceParameter, totalReplaceParameter, stockReturnParameter, transReturnParameter, totalReturnParameter, stockDiscountParameter, transDiscountParameter, totalDiscountParameter, transSlupParameter, stockSlupParameter, totalSlupParameter, stockQuantityParameter, transQuantityParameter, totalQuantityParameter, totalPaidParameter, stockPriceParameter, transPriceParameter, totalPriceParameter, remarksParameter, stockStutesParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<sp_salesDetail_Result> sp_salesDetail()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_salesDetail_Result>("sp_salesDetail");
+        }
+    
+        public virtual ObjectResult<sp_purcheaseDetal_Result> sp_purcheaseDetal()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_purcheaseDetal_Result>("sp_purcheaseDetal");
+        }
+    
+        public virtual ObjectResult<sp_SalesDetails_Result> sp_SalesDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SalesDetails_Result>("sp_SalesDetails");
+        }
     }
 }

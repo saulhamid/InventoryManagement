@@ -72,6 +72,7 @@
     <Compile Include="Config\UserDAL.cs" />
     <Compile Include="Config\ZoneorAreaDAL.cs" />
     <Compile Include="InventoryManagement\PurcheaseDAL.cs" />
+    <Compile Include="InventoryManagement\StockDetailDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

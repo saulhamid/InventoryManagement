@@ -42,9 +42,9 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 var isSearchable3 = Convert.ToBoolean(Request["bSearchable_3"]);
                 var isSearchable4 = Convert.ToBoolean(Request["bSearchable_4"]);
                 filteredData = getAllData.Where(c => isSearchable1 && c.InvoiecNo.ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable2 && c.ProductName.ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable2 && c.ZoneOrAreaNae.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable3 && c.CustomerName.ToString().ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable3 && c.PackQuantity.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable4 && c.TotalDiscount.ToString().ToLower().Contains(param.sSearch.ToLower())
                                );
             }
@@ -56,42 +56,42 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             if (InvoiceFilter != "" || DateFilter != "" || SupplierFilter != "")
             {
                 filteredData = getAllData.Where(c => (InvoiceFilter == "" || c.InvoiecNo.ToLower().Contains(InvoiceFilter.ToLower()))
-                                            && (DateFilter == "" || c.ProductName.ToLower().Contains(DateFilter.ToLower()))
-                                            && (SupplierFilter == "" || c.ProductName.ToString().ToLower().Contains(SupplierFilter.ToLower()))
-                                            && (TotalPriceFilter == "" || c.ProductName.ToString().ToLower().Contains(TotalPriceFilter.ToLower())));
+                                            && (DateFilter == "" || c.ZoneOrAreaNae.ToLower().Contains(DateFilter.ToLower()))
+                                            && (SupplierFilter == "" || c.CustomerName.ToString().ToLower().Contains(SupplierFilter.ToLower()))
+                                            && (TotalPriceFilter == "" || c.PackQuantity.ToString().ToLower().Contains(TotalPriceFilter.ToLower())));
             }
             #endregion Column Filtering
             var isSortable_1 = Convert.ToBoolean(Request["bSortable_1"]);
             var isSortable_2 = Convert.ToBoolean(Request["bSortable_2"]);
             var isSortable_3 = Convert.ToBoolean(Request["bSortable_3"]);
             var isSortable_4 = Convert.ToBoolean(Request["bSortable_4"]);
+            var isSortable_5 = Convert.ToBoolean(Request["bSortable_4"]);
+            var isSortable_6 = Convert.ToBoolean(Request["bSortable_4"]);
+            var isSortable_7 = Convert.ToBoolean(Request["bSortable_4"]);
             var sortColumnIndex = Convert.ToInt32(Request["iSortCol_0"]);
             Func<SalesVM, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.InvoiecNo :
-                                                           sortColumnIndex == 2 && isSortable_2 ? c.ProductName :
-                                                           sortColumnIndex == 3 && isSortable_2 ? c.ProductName.ToString() :
+                                                           sortColumnIndex == 2 && isSortable_2 ? c.CustomerName :
+                                                           sortColumnIndex == 3 && isSortable_2 ? c.ZoneOrAreaNae.ToString() :
                                                            sortColumnIndex == 4 && isSortable_3 ? c.TotalPrice.ToString() : "");
             var sortDirection = Request["sSortDir_0"]; // asc or desc
             if (sortDirection == "asc")
                 filteredData = filteredData.OrderBy(orderingFunction);
             else
                 filteredData = filteredData.OrderByDescending(orderingFunction);
+            filteredData = getAllData;
             var displayedCompanies = filteredData.Skip(param.iDisplayStart).Take(param.iDisplayLength);
             var result = from c in displayedCompanies
                          select new[] { 
                  Convert.ToString(c.Id)
                 ,c.InvoiecNo
-                ,c.ProductName
-                ,c.UnitePrice.ToString()
-                ,c.ReceiveQuantity.ToString()
-                ,c.SalesQuantity.ToString()
-                ,c.Return.ToString()
-                ,c.Replace.ToString()
-                ,c.Slup.ToString()
-                ,c.Discount.ToString()
-                ,c.Datetime
-                ,c.WithOurDiscountPrice.ToString()
                 ,c.CustomerName
                 ,c.ZoneOrAreaNae
+                ,c.TotalSlup.ToString()
+                ,c.TotalReturn.ToString()
+                ,c.TotalReplace.ToString()
+                ,c.TotalPackPrice.ToString()
+                ,c.TotalDiscount.ToString()
+                ,c.SalesQuantity.ToString()
                          };
             return Json(new
             {
@@ -125,20 +125,11 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");
                 }
-                else
-                {
-                    string a = result[0] + "~" + result[1];
-                    TempData["Msg"] = result[0] + "~" + result[1];
-                    ViewBag.msg = result[0] + "~" + result[1];
-                }
                 mgs = result[0] + "~" + result[1];
-
             }
             catch (Exception ex)
             {
-                TempData["Msg"] = result[0] + "~" + result[1] + " Error: " + ex.Message;
                 mgs = result[0] + "~" + result[1];
-
                 return Json(mgs, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Create",vm);
             }
@@ -186,24 +177,13 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");
                 }
-                else
-                {
-                    string a = result[0] + "~" + result[1];
-                    TempData["Msg"] = result[0] + "~" + result[1];
-                    ViewBag.msg = result[0] + "~" + result[1];
-                }
                 mgs = result[0] + "~" + result[1];
-
             }
             catch (Exception ex)
             {
-                TempData["Msg"] = result[0] + "~" + result[1] + " Error: " + ex.Message;
                 mgs = result[0] + "~" + result[1];
-
                 return Json(mgs, JsonRequestBehavior.AllowGet);
-                //return RedirectToAction("Create",vm);
             }
-            //return RedirectToAction("Index");
             return Json(mgs, JsonRequestBehavior.AllowGet);
         }
     }

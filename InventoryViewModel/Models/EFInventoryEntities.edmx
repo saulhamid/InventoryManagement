@@ -349,7 +349,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Code" Type="nvarchar" MaxLength="20" />
           <Property Name="InvoiecNo" Type="nvarchar" MaxLength="200" />
           <Property Name="ProductId" Type="int" />
           <Property Name="SupplierId" Type="int" />
@@ -397,7 +396,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="InvoiecNo" Type="nvarchar" MaxLength="200" />
           <Property Name="ProductId" Type="int" />
           <Property Name="CustomerId" Type="int" />
@@ -486,6 +485,7 @@
           <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
           <Property Name="StockStutes" Type="bit" />
+          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Date" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Stocks">
@@ -634,6 +634,68 @@
           <Property Name="LastUpdateAt" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdateFrom" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Insert_StockDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StockIdint" Type="int" Mode="In" />
+          <Parameter Name="StockReplace" Type="decimal" Mode="In" />
+          <Parameter Name="TransReplace" Type="decimal" Mode="In" />
+          <Parameter Name="TotalReplace" Type="decimal" Mode="In" />
+          <Parameter Name="StockReturn" Type="decimal" Mode="In" />
+          <Parameter Name="TransReturn" Type="decimal" Mode="In" />
+          <Parameter Name="TotalReturn" Type="decimal" Mode="In" />
+          <Parameter Name="StockDiscount" Type="decimal" Mode="In" />
+          <Parameter Name="TransDiscount" Type="decimal" Mode="In" />
+          <Parameter Name="TotalDiscount" Type="decimal" Mode="In" />
+          <Parameter Name="TransSlup" Type="decimal" Mode="In" />
+          <Parameter Name="StockSlup" Type="decimal" Mode="In" />
+          <Parameter Name="TotalSlup" Type="decimal" Mode="In" />
+          <Parameter Name="StockQuantity" Type="decimal" Mode="In" />
+          <Parameter Name="TransQuantity" Type="decimal" Mode="In" />
+          <Parameter Name="TotalQuantity" Type="decimal" Mode="In" />
+          <Parameter Name="TotalPaid" Type="decimal" Mode="In" />
+          <Parameter Name="StockPrice" Type="decimal" Mode="In" />
+          <Parameter Name="TransPrice" Type="decimal" Mode="In" />
+          <Parameter Name="TotalPrice" Type="decimal" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar" Mode="In" />
+          <Parameter Name="StockStutes" Type="bit" Mode="In" />
+          <Parameter Name="Date" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_purcheaseDetal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_salesDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SalesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_stockdetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_stocks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uom_select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="InventoryModelStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -668,6 +730,65 @@
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(InventoryModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(InventoryModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_stockdetails" ReturnType="Collection(InventoryModel.sp_stockdetails)" />
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="uom_select" ReturnType="Collection(InventoryModel.uom_select_Result)" />
+          <FunctionImport Name="sp_stocks" ReturnType="Collection(InventoryModel.sp_stocks_Result)" />
+          <FunctionImport Name="Insert_StockDetail">
+            <Parameter Name="StockIdint" Mode="In" Type="Int32" />
+            <Parameter Name="StockReplace" Mode="In" Type="Decimal" />
+            <Parameter Name="TransReplace" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalReplace" Mode="In" Type="Decimal" />
+            <Parameter Name="StockReturn" Mode="In" Type="Decimal" />
+            <Parameter Name="TransReturn" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalReturn" Mode="In" Type="Decimal" />
+            <Parameter Name="StockDiscount" Mode="In" Type="Decimal" />
+            <Parameter Name="TransDiscount" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalDiscount" Mode="In" Type="Decimal" />
+            <Parameter Name="TransSlup" Mode="In" Type="Decimal" />
+            <Parameter Name="StockSlup" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalSlup" Mode="In" Type="Decimal" />
+            <Parameter Name="StockQuantity" Mode="In" Type="Decimal" />
+            <Parameter Name="TransQuantity" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalQuantity" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalPaid" Mode="In" Type="Decimal" />
+            <Parameter Name="StockPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="TransPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="StockStutes" Mode="In" Type="Boolean" />
+            <Parameter Name="Date" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_salesDetail" ReturnType="Collection(InventoryModel.sp_salesDetail_Result)" />
           <EntitySet Name="Customers" EntityType="InventoryModel.Customer" />
           <EntitySet Name="Employees" EntityType="InventoryModel.Employee" />
           <EntitySet Name="EnumCountries" EntityType="InventoryModel.EnumCountry" />
@@ -695,7 +816,101 @@
           <EntitySet Name="UserRoles" EntityType="InventoryModel.UserRole" />
           <EntitySet Name="Users" EntityType="InventoryModel.User" />
           <EntitySet Name="ZoneOrAreas" EntityType="InventoryModel.ZoneOrArea" />
+          <FunctionImport Name="sp_purcheaseDetal" ReturnType="Collection(InventoryModel.sp_purcheaseDetal_Result)" />
+          <FunctionImport Name="sp_SalesDetails" ReturnType="Collection(InventoryModel.sp_SalesDetails_Result)" />
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_stockdetails_Result">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OpeningQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalDiscount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReturn" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalSlup" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="uom_select_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsArchive" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedAt" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedFrom" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastUpdateBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastUpdateAt" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastUpdateFrom" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_stockdetails2_Result">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OpeningQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalDiscount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReturn" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalSlup" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_stockdetails3_Result">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OpeningQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalDiscount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReturn" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalSlup" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_stockdetails">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OpeningQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalDiscount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReturn" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalSlup" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_stocks_Result">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OpeningQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalDiscount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalReturn" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalSlup" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_salesDetail_Result">
+          <Property Type="String" Name="InvoiecNo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ZoneOrAreaName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CustomerName1" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalReceive" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -1040,7 +1255,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InvoiecNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="SupplierId" Type="Int32" />
@@ -1088,7 +1302,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="InvoiecNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" />
@@ -1177,6 +1391,7 @@
           <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="StockStutes" Type="Boolean" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Stock">
@@ -1325,12 +1540,121 @@
           <Property Name="LastUpdateAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="sp_purcheaseDetal_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="InvoiecNo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotolDiscount" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="GrandTotal" Nullable="true" Precision="38" Scale="3" />
+        </ComplexType>
+        <ComplexType Name="sp_SalesDetails_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="InvoiecNo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ZoneName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="TotalPackPrice" Nullable="true" Precision="37" Scale="4" />
+          <Property Type="Decimal" Name="TotalDiscount" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="ReceiveQuantity" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalReplace" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalReturn" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="SalesQuantity" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalSlupPrice" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotalSalesPrice" Nullable="true" Precision="38" Scale="4" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InventoryModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InventoryModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InventoryModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InventoryModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InventoryModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InventoryModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_stockdetails" FunctionName="InventoryModel.Store.sp_stockdetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_stockdetails">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+                <ScalarProperty Name="TotalReturn" ColumnName="TotalReturn" />
+                <ScalarProperty Name="TotalReplace1" ColumnName="TotalReplace1" />
+                <ScalarProperty Name="TotalSlup" ColumnName="TotalSlup" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InventoryModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="uom_select" FunctionName="InventoryModel.Store.uom_select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.uom_select_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="LastUpdateAt" ColumnName="LastUpdateAt" />
+                <ScalarProperty Name="LastUpdateFrom" ColumnName="LastUpdateFrom" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_stocks" FunctionName="InventoryModel.Store.sp_stocks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_stocks_Result">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="OpeningQuantity" ColumnName="OpeningQuantity" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+                <ScalarProperty Name="TotalReturn" ColumnName="TotalReturn" />
+                <ScalarProperty Name="TotalSlup" ColumnName="TotalSlup" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Insert_StockDetail" FunctionName="InventoryModel.Store.Insert_StockDetail" />
+          <FunctionImportMapping FunctionImportName="sp_salesDetail" FunctionName="InventoryModel.Store.sp_salesDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_salesDetail_Result">
+                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="ZoneOrAreaName" ColumnName="ZoneOrAreaName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerName1" ColumnName="CustomerName1" />
+                <ScalarProperty Name="TotalReceive" ColumnName="TotalReceive" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="InventoryModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -1704,7 +2028,6 @@
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1808,6 +2131,7 @@
             <EntityTypeMapping TypeName="InventoryModel.StockDetail">
               <MappingFragment StoreEntitySet="StockDetails">
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
                 <ScalarProperty Name="StockStutes" ColumnName="StockStutes" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
@@ -1987,6 +2311,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_purcheaseDetal" FunctionName="InventoryModel.Store.sp_purcheaseDetal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_purcheaseDetal_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="TotolDiscount" ColumnName="TotolDiscount" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SalesDetails" FunctionName="InventoryModel.Store.sp_SalesDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.sp_SalesDetails_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiecNo" ColumnName="InvoiecNo" />
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="TotalPackPrice" ColumnName="TotalPackPrice" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="ReceiveQuantity" ColumnName="ReceiveQuantity" />
+                <ScalarProperty Name="TotalReplace" ColumnName="TotalReplace" />
+                <ScalarProperty Name="TotalReturn" ColumnName="TotalReturn" />
+                <ScalarProperty Name="SalesQuantity" ColumnName="SalesQuantity" />
+                <ScalarProperty Name="TotalSlupPrice" ColumnName="TotalSlupPrice" />
+                <ScalarProperty Name="TotalSalesPrice" ColumnName="TotalSalesPrice" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

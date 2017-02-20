@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model InventoryViewModel.Models.ProductColor
+<div class="creates">
+
+    @Html.Partial("_create", Model);
+</div>
+
+<div class="headrow">
+    <button type="button" title="Add New ProductColor" data-url="/Config/ProductColor/Create" onclick="GoTo(this)" id="" class="i-btn-add "> New</button>
+    <button type="button" title="Delete ProductColor" data-url="/Config/ProductColor/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="i-btn-remove"> Delete</button>
+</div>
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>ProductColor List</p>
+    </div>
+    <p></p>
+    <table id="myDataTable" class="display">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" class="chkAll" />Select All
+                </th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>Remarks</th>
+            </tr>
+            <tr>
+                <th style="padding-left: 2.5%">Actions</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="headrow">
+    <button type="button" title="Add New ProductColor" data-url="/Config/ProductColor/Create" id="" class="btnCreate i-btn-add "> New</button>
+    <button type="button" title="Delete ProductColor" data-url="/Config/ProductColor/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="i-btn-remove"> Delete</button>
+</div>
+@section head{
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/Config/ProductColor/_index",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "aoColumns": [
+                                {
+                                    "sName": "Id",
+                                    "bSearchable": false,
+                                    "bSortable": false,
+                                    "sWidth": "13%",
+                                    "fnRender": function (oObj) {
+                                        return ' <input onclick="CheckAll(this)" type="checkbox" data-Id="' + oObj.aData[0] + '">&nbsp; <a title="Click on for Edit" style="text-decoration:none;" href=\"/Config/ProductColor/Edit/' + oObj.aData[0] + '\"  class=" i-btn-edit-row"></a>' +
+                                        '&nbsp; <a title="Click on for Delete" style="text-decoration:none;"  data-url="/Config/ProductColor/Delete" onclick="deletedData(this, myDataTable,' + oObj.aData[0] + ');"  class="i-btn-remove-row"></a>';
+                                    }
+                                }
+                                , { "sName": "Code", "sWidth": "10%" }
+                                , { "sName": "Name", "sWidth": "10%" }
+                                , { "sName": "Active", "sWidth": "10%" }
+                                , { "sName": "Remarks", "sWidth": "10%" }
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [{ type: "checkbox", "sClass": "chkAll" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+            });
+            SelectAllForDelete();
+            $("#Code").keyup(function () {
+                $("#Code").parent().find("p").remove();
+                var url = "@Url.Action("check", "ProductColor", new { area = "Config" })"
+                var code = $(this).val();
+                $.get("@Url.Action("check", "ProductColor", new { area = "Config" })", { code: code }, function (data, status) {
+                    $("#Code").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                });
+            });
+            $("#Name").keyup(function () {
+                $("#Name").parent().find("p").remove();
+                var url = "@Url.Action("check", "ProductColor", new { area = "Config" })"
+                var name = $(this).val();
+                $.get("@Url.Action("check", "ProductColor", new { area = "Config" })", { name: name }, function (data, status) {
+                    $("#Name").parent().append('<p class="RequiredField" style="color:red;" >' + data + '</p>');
+                });
+            });
+        });
+    </script>
+}
+
+

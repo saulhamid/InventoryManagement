@@ -143,6 +143,16 @@ function pageSubmit(sender) {
         $("#"+sender).submit();
     }
 }
+function pageSubmitJSON(sender) {
+    var a = 0;
+    for (var i = 0; i < $('#' + sender + ' .required').length; i++) {
+        if ($($('#' + sender + ' .required')[i]).val() == "") {
+            $($('#' + sender + ' .required')[i]).parent().find('.RequiredField').show();
+            a++;
+        }
+    }
+    return a;
+}
 function Division() {
     $("select.country").change(function () {
         var a = $(this);

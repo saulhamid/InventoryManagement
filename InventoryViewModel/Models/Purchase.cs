@@ -15,7 +15,6 @@ namespace InventoryViewModel.Models
     public partial class Purchase
     {
         public int Id { get; set; }
-        public string Code { get; set; }
         public string InvoiecNo { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> SupplierId { get; set; }

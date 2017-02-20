@@ -1,0 +1,223 @@
+﻿@model InventoryViewModel.Models.Product
+@using UIHelper.MVC
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Create</p>
+    </div>
+                        @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { @area = "Config", enctype = "multipart/form-data", @Id = "upfrom" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.Id)
+                            <div class="row" style="">
+                                <div class="col-md-1">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.Code)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
+                                        @Html.ValidationMessageFor(model => model.Code)
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.Name)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.Name, new { @placeholder = "Name", @class = " required form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>Category</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.ProductCatagoriesId, "/Config/DropDown/ProductCategory", new { @placeholder = " Product Category Name", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductCatagoriesId)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>Product Color</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.ProductColorId, "/Config/DropDown/ProductColor", new { @placeholder = " Product Category Name", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductCatagoriesId)
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>ProductSize</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.ProductSizeId, "/Config/DropDown/ProductSize", new { @placeholder = " Product Category Name", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductCatagoriesId)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>ProductType</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.ProductTypeId, "/Config/DropDown/ProductType", new { @placeholder = " Product Category Name", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductTypeId)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>Product Brand</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.ProductBrandId, "/Config/DropDown/ProductBrand", new { @placeholder = " Product Category Name", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductBrandId)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-1">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>Unite Of Mesurment</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.UOMId, "/Config/DropDown/UOM", new { @placeholder = "Unite Of Mesurment", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductCatagoriesId)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        <p>Supplier</p>
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.SimpleDropDownFor(model => model.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Supplier", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductCatagoriesId)
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.OpeningQuantity)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.OpeningQuantity, new { @placeholder = "Opening Quantity", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.OpeningQuantity)
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.OtherCost)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.OtherCost, new { @placeholder = "Other Cost", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.OtherCost)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.UnitePrice)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.UnitePrice, new { @placeholder = "Unite Price", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.UnitePrice)
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.MinimumStock)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.MinimumStock, new { @placeholder = "Minimum Stock", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.MinimumStock)
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.Quantity)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.Quantity, new { @placeholder = "Quantity", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.Quantity)
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.Discount)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.Discount, new { @placeholder = "Discount", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.Discount)
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        @Html.LabelFor(model => model.Remarks)
+                                    </div>
+                                    <div class="editor-field">
+                                        @Html.TextBoxFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.Remarks)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="editor-label">
+                                        &nbsp;
+                                    </div>
+                                    <div class="editor-field">
+                                        <button type="submit" title="Save Data" onclick="pageSubmit('upfrom');" class="i-btn-save"> Save</button>
+                                        <button type="button" title="Cancel Data" onclick="controllerBKE.CancelBlack();" class="i-btn-cancel"> Cancel</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>

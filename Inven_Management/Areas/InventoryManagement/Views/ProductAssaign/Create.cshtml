@@ -1,0 +1,342 @@
+﻿@model InventoryViewModel.ViewModel.ProductAssaignVM
+@using UIHelper.MVC
+<style>
+   table input, table textarea {
+        margin:0pc!important;
+    }
+    /*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 0px !important;
+    }*/
+</style>
+@using (Html.BeginForm("Create", "ProductAssaign", FormMethod.Post, new { Id = "upform" }))
+{
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Purchase List</p>
+        </div>
+            <div id="demo1">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.proassgn.Id)
+                <div class="row" style="">
+                    @*<div class="col-md-1">
+                            <div class="editor-label">
+                                &nbsp;
+                            </div>
+                            <div class="editor-field">
+                            </div>
+                        </div>*@
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.proassgn.InvoiecNo)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.proassgn.InvoiecNo, new { @placeholder = "InvoiecNo", @class = " required form-control" })
+                            @Html.ValidationMessageFor(model => model.proassgn.InvoiecNo)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.proassgn.ZoneOrAreaId)
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDownFor(model => model.proassgn.ZoneOrAreaId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control " })
+                            @Html.ValidationMessageFor(model => model.proassgn.ZoneOrAreaId)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.proassgn.EmployeeId)
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDownFor(model => model.proassgn.EmployeeId, "/Config/DropDown/Employee", new { @placeholder = " Product Category Name", @class = "  simpledrop form-control" })
+                            @Html.ValidationMessageFor(model => model.proassgn.EmployeeId)
+                        </div>
+                    </div>
+                    @*<div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Date)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Date, new { @placeholder = "Date", @class = "customDatePicker required form-control" })
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.proassgn.Remarks)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.proassgn.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.proassgn.Remarks)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Purchase List</p>
+        </div>
+        <div id="demo1">
+
+            @Html.ValidationSummary(true)
+            <div class="row" style="">
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProductAssignDetail.FirstOrDefault().Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.SimpleDropDownFor(model => model.ProductAssignDetail.FirstOrDefault().Code, "/Config/DropDown/ProductwithCode", new { @placeholder = " Product Category Name", @class = "code form-control simpledrop" })
+
+
+                        @*@Html.TextBoxFor(model => model.ProductAssignDetail.FirstOrDefault().Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })*@
+                        @Html.ValidationMessageFor(model => model.ProductAssignDetail.FirstOrDefault().Code)
+                    </div>
+                </div>
+                @*<div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProductAssignDetail.FirstOrDefault().Name)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProductAssignDetail.FirstOrDefault().Name, new { @placeholder = "Name", @class = " Name required form-control", @readonly = "disable" })
+                        @Html.ValidationMessageFor(model => model.ProductAssignDetail.FirstOrDefault().Name)
+                    </div>
+                </div>*@
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProductAssignDetail.FirstOrDefault().UnitePrice)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProductAssignDetail.FirstOrDefault().UnitePrice, new { @placeholder = "UnitePrice", @class = "ppunit number form-control", @readonly = "disable" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProductAssignDetail.FirstOrDefault().Quantity)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProductAssignDetail.FirstOrDefault().Quantity, new { @placeholder = "Quantity", @class = "ppqty required number form-control" })
+                        @Html.ValidationMessageFor(model => model.ProductAssignDetail.FirstOrDefault().Quantity)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProductAssignDetail.FirstOrDefault().Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProductAssignDetail.FirstOrDefault().Quantity, new { @placeholder = "Quantity", @class = "ppqty required number form-control" })
+                        @Html.ValidationMessageFor(model => model.ProductAssignDetail.FirstOrDefault().Quantity)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProductAssignDetail.FirstOrDefault().Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProductAssignDetail.FirstOrDefault().Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                        @Html.ValidationMessageFor(model => model.ProductAssignDetail.FirstOrDefault().Remarks)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <button type="button" title="Save Data" class="i-btn-add AddRowIndent" id="addrow"> Addrow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-responsive table-striped table-hover display">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>UnitPrice</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProductAssignDetail)
+            {
+                Html.RenderPartial("_ProductAssignDetail", item);
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Total Quantity =</td>
+                <td><input type="text" readonly="readonly" class="totaolqty form-control" /></td>
+                <td><b> Total =</b></td>
+                <td><input type="text" readonly="readonly" class="result form-control" /> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Grand Total</td>
+                <td><input type="text" readonly="readonly" class="grandTotal right form-control" /></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="editor-label">
+                &nbsp;
+            </div>
+            <div class="editor-field">
+                <button type="button" title="Save Data" id="sub" class="i-btn-save"> Save</button>
+            </div>
+        </div>
+    </div>
+}
+<style>
+   
+    .simpledrop {
+        width:100%!important;
+
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".simpledrop").select2();
+        calculation();
+        @*$(".code").autocomplete({source: '@Url.Action("Product", "Autocomplete", new { area = "Config" })', minLength: 1,})*@
+    //$(".code").click(function () {
+    //    autocom();
+    //});
+        $(".code").change(function () {
+            alert("ss");
+        autocom();
+    });
+    function autocom() {
+            var value = $(".code").val();
+            var code = $(".code").val(value.split('-')[0]);
+            $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
+
+    }
+        $("table").hide();
+
+                $("#Products_Code").val('');
+                $("#Products_Code").val('');
+                if(
+                $("#Code").val()!= '')
+                {
+                    $("table").show();
+                }
+                $("#addrow").click(function () {
+                    var code = $(".code").val();
+                    var exit = true;
+                    $(".pa").each(function (i, item) {
+                        var el = $(this);
+
+                        var tcode = el.closest("tr").find(".pcode").val();
+                        if (code == tcode) {
+                            exit = false;
+                            alert("this Product Already Add in below List");
+                        }
+                    })
+            var Quantity = $(".ppqty").val();
+            var UnitePrice = $(".ppunit").val();
+            var remarks = $("#Remarks").val();
+            if (exit == true) {
+                var url = "/InventoryManagement/ProductAssaign/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Remarks=" + remarks;
+                $.get(url, function (data) {
+                    $("table tbody").append(data);
+                    calculation();
+                    //$(".Name").val('');
+                    //$(".code").val('');
+                    //$(".ppqty").val('');
+                    //$(".ppunit").val('');
+                    //$("#Remarks").val("");
+                    $("table").show();
+
+                });
+            }
+                });
+
+        $(".Edit-row").click(function () {
+            calculation();
+
+        });
+        $("#sub").click(function () {
+            var datas = $("#upform").serialize();
+            var url = $("form").attr("action");
+            $.post(url, datas, function (data, status) {
+                window.location.reload();
+                if (status == "success") {
+                    ShowResult(data);
+                }
+         });
+        });
+
+        $(".TotalDiscount,.grandTotal").change(function () {
+            calculation();
+        });
+        $(function () {
+            calculation();
+
+        });
+        function calculation() {
+            var result= 0;
+            var totaolqty = 0;
+            var totaldise = 0;
+            var ttotal = 0;
+            var tdis = 0;
+            $(".pa").each(function (i, item) {
+                var el = $(this);
+                var qty, unit, disc, amount = 0;
+                qty = el.closest("tr").find(".qty").val();
+                unit = el.closest("tr").find(".unit").val();
+                amount = (parseFloat(qty) * parseFloat(unit));
+                el.closest("tr").find(".amount").val(amount);
+                totaolqty += parseFloat(qty);
+                result += amount;
+            });
+            $('.result').val(result);
+            $('.totaolqty').val(totaolqty);
+            ttotal =result
+            $(".grandTotal").val(ttotal);
+        }
+        $('.qty,.unit,.disc').keyup(function () {
+            calculation();
+        });
+    $(".number").change(function () {
+        if (!$.isNumeric($(this).val())) {
+            $(this).val(" ");
+            alert("this not be Numeric")
+        }
+    });
+
+
+    $(".Edit-row").click(function () {
+        var a = $(this).parents().parents().children().find(".qty").val();
+        $(".code").val($(this).parents().parents().children().find(".pcode").val());
+        $(".Name").val($(this).parents().parents().children().find(".pname").val());
+        $(".ppqty").val($(this).parents().parents().children().find(".qty").val());
+        $(".ppunit").val($(this).parents().parents().children().find(".unit").val());
+        $(".ppdis").val($(this).parents().parents().children().find(".disc").val());
+        $(this).closest('.pa').remove();
+        calculation();
+
+    });
+    $(".remove-row").click(function () {
+        Ask("Are you sure to delete this file!", function () {
+            $(this).closest('tr.pa:first').remove();
+            calculation();
+
+        }, function () { });
+    });
+    });
+
+
+</script>
+
+
+

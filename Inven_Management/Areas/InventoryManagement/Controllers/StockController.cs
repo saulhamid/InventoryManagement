@@ -1,4 +1,5 @@
 ﻿using InventoryRepo.InventoryManagement;
+using InventoryViewModel.Models;
 using InventoryViewModel.ViewModel;
 using JQueryDataTables.Models;
 using System;
@@ -15,7 +16,8 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
         // GET: /InventoryManagement/Stock/
         #region Declare
         StockRepo _repo = new StockRepo();
-
+        InventoryEntities _context = new InventoryEntities();
+        
         #endregion Declare
 
         public ActionResult Index()
@@ -32,7 +34,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             var TotalPriceFilter = Convert.ToString(Request["sSearch_4"]);
             #endregion Column Search
 
-            var getAllData = _repo.GetAllStocks();
+            var getAllData = _repo.GETAllStockstor();
             IEnumerable<StockVM> filteredData;
             //Check whether the companies should be filtered by keyword
             if (!string.IsNullOrEmpty(param.sSearch))
@@ -44,7 +46,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 var isSearchable4 = Convert.ToBoolean(Request["bSearchable_4"]);
                 filteredData = getAllData.Where(c => isSearchable1 && c.InvoiecNo.ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable2 && c.Code.ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable3 && c.Name.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable4 && c.TotalDiscount.ToString().ToLower().Contains(param.sSearch.ToLower())
                                );
@@ -78,16 +80,13 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             var result = from c in displayedCompanies
                          select new[] { 
                  Convert.ToString(c.Id)
-                ,c.InvoiecNo
-                ,c.ProductName+"-"+c.ProductCode
-                ,c.SupplierName
-                ,c.TotalPackPrice.ToString()
+                ,c.Code+"-"+c.Name
                 ,c.TotalQuantity.ToString()
                 ,c.UnitPrice.ToString()
+                ,(c.TotalPrice=c.TotalQuantity+c.UnitPrice).ToString()
                 ,c.TotalReplace.ToString()
                 ,c.TotalReturn.ToString()
-                ,c.TotalPrice.ToString()
-                
+                ,c.TotalSlup.ToString()
                          };
             return Json(new
             {
