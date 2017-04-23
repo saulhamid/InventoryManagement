@@ -1,0 +1,359 @@
+﻿@{
+    ViewBag.Title = "Create1";
+}
+@model InventoryViewModel.ViewModel.PurcheaseReturnVM
+@using UIHelper.MVC
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 0px !important;
+    }
+</style>
+@Html.Partial("_IndexStock")
+@using (Html.BeginForm("Create", "PurcheaseReturn", FormMethod.Post, new { Id = "upform" }))
+{
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Purchase List</p>
+        </div>
+        <div class="box-content">
+            <div id="demo1">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Id, new { @class = "purcheaseId" })
+                <div class="row" style="">
+                   <div class="col-md-1">
+                            <div class="editor-label">
+                                &nbsp;
+                            </div>
+                            <div class="editor-field">
+                            </div>
+                        </div>
+
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.InvoiceNo)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.InvoiceNo, new { @placeholder = "InvoiecNo", @class = " required form-control" })
+                            @Html.ValidationMessageFor(model => model.InvoiceNo)
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="editor-label">
+                            @Html.Label("Supplier Name")
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDownFor(model => model.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control " })
+
+                            @Html.ValidationMessageFor(model => model.SupplierId)
+                        </div>
+                    </div>
+               
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.Label("Purchease Return Date")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Date, new { @placeholder = "Purchease Date", @class = "customDatePicker required form-control" })
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Remarks)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control",@rows="1" })
+                            @Html.ValidationMessageFor(model => model.Remarks)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="thinbox">
+
+
+
+        <table class="table table-responsive table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>UnitPrice</th>
+                    <th>Quantity</th>
+                    <th>Discount</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PurcheaseReturnDetailVM)
+                {
+                    Html.RenderPartial("_purcheaseDetail", item);
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><b> Total Quantity =</b></td>
+                    <td><input type="text" readonly="readonly" class="totaolqty right form-control" /></td>
+                    <td><b>TOtal Discount =</b></td>
+                    <td><input type="text" readonly="readonly" class=" totaldise right form-control" /></td>
+                    <td><b> Total =</b></td>
+                    <td><input type="text" readonly="readonly" class="result right form-control" /> </td>
+                </tr>
+                @*<tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Discount:</b></td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TotalDiscount, new { @placeholder = "Total Discount", @class = "right TotalDiscount form-control" })
+                            @Html.ValidationMessageFor(model => model.TotalDiscount)
+                        </td>
+                    </tr>*@
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Grand Total</b></td>
+                    <td><input type="text" readonly="readonly" class="grandTotal right form-control" /></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="editor-label">
+                &nbsp;
+            </div>
+            <div class="editor-field">
+                <button type="button" title="Save Data" id="sub" class="i-btn-save"> Save</button>
+            </div>
+        </div>
+    </div>
+}
+<script>
+
+    $(document).ready(function () {
+        valiDation("upform");
+        $(function () {
+            if ($(".purcheaseId").val() != null) {
+                $("table").show();
+            };
+        });
+        $(".simpledrop").select2();
+        calculation();
+        $(".Name").autocomplete({source: '@Url.Action("StockProductwithUnitePrice", "Autocomplete", new { area = "Config" })', minLength: 1,})
+    $(".code").click(function () {
+        autocom();
+    });
+    
+    });
+    
+    function removerow(sender) {
+        Ask("Are you sure to delete this file!", function () {
+            $(sender).parents("tr.pa:first").remove();
+            calculation();
+        }, function () { });
+    }
+    function autocom() {
+            var value = $(".code").val();
+            var code = $(".code").val(value.split('-')[0]);
+            $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
+    }
+    function selectProduct(send) {
+        var url = "/InventoryManagement/PurcheaseReturn/ProductDetail1?Id=" + send;
+
+        $.get(url, function (data) {
+            $(".table tbody").append(data);
+            $("table").show();
+            calculation();
+            blackfield();
+        });
+    }
+        $("table").hide();
+                if(
+                $("#Code").val()!= '')
+                {
+                    $("table").show();
+                }
+                $("#addrow").click(function () {
+                    var code = $(".code").val();
+                    var exit = true;
+                    $(".pa").each(function (i, item) {
+                        var el = $(this);
+                        var tcode = el.closest("tr").find(".pcode").val();
+                        if (code == tcode) {
+                            exit = false;
+                            ShowResult("this Product Already Add in below List");
+                            return;
+                        }
+                    })
+            var Quantity = $(".ppqty").val();
+            var UnitePrice = $(".ppunit").val();
+            var Discount = $(".ppdis").val();
+            var remarks = $("#Productvm_Remarks").val();
+            if (code == null) {
+                return;
+                ShowResult("Plaese Select a product");
+            }
+            if (Quantity == null) {
+                return;
+                ShowResult("Enter Quantity");
+            }
+            if (UnitePrice == null) {
+                return;
+                ShowResult("Enter UnitePrice");
+            }
+            if (exit == true) {
+                var url = "/InventoryManagement/PurcheaseReturn/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Discount=" + Discount + "&Remarks=" + remarks;
+                $.get(url, function (data) {
+                    $("table tbody").append(data);
+                    $("table").show();
+                    calculation();
+                    blackfield();
+                });
+            }
+                });
+                function blackfield() {
+                    $(".Name").val('');
+                    $(".code").val('');
+                    $(".ppqty").val('');
+                    $(".ppunit").val('');
+                    $(".ppdis").val('');
+                    $("#Remarks").val("");
+
+                }
+                blackfield();
+        $(".Edit-row").click(function () {
+            calculation();
+        });
+        $("#sub").click(function () {
+            alert("55")
+            var datas = $("#upform").serialize();
+            var url = $("form").attr("action");
+            if (pageSubmitJSON('upform') == 0) {
+                $.post(url, datas, function (data, status) {
+                    window.location.reload();
+                    if (status == "success") {
+                        ShowResult(data);
+                    }
+                });
+         };
+        });
+        $(".TotalDiscount,.grandTotal").change(function () {
+            calculation();
+        });
+
+        function calculation() {
+            var result= 0;
+            var totaolqty = 0;
+            var totaldise = 0;
+            var ttotal = 0;
+            var tdis = 0;
+            $(".pa").each(function (i, item) {
+                var el = $(this);
+                var qty, unit, disc, amount = 0;
+                qty = getNum(el.closest("tr").find(".qty").val());
+                unit = getNum(el.closest("tr").find(".unit").val());
+                disc =getNum( el.closest("tr").find(".disc").val());
+                amount = (parseFloat(qty) * parseFloat(unit)) - parseFloat(disc);
+                el.closest("tr").find(".amount").val(amount);
+                totaolqty += parseFloat(qty);
+                totaldise += parseFloat(disc);
+                result +=getNum(amount);
+            });
+            $('.result').val(result);
+            $('.totaolqty').val(totaolqty);
+            $('.totaldise').val(totaldise);
+            tdis = getNum($(".TotalDiscount").val());
+
+            ttotal = result - parseFloat(tdis);
+            $(".grandTotal").val(getNum(ttotal));
+        }
+        $('.qty,.unit,.disc').keyup(function () {
+            calculation();
+        });
+    $(".number").change(function () {
+        if (!$.isNumeric($(this).val())) {
+            $(this).val(" ");
+            ShowResult("this not be Numeric");
+        }
+    });
+    function getNum(val) {
+        if (isNaN(val) || val == null) {
+            return 0;
+        }
+        return val;
+    }
+    function pageSubmitJSON(sender) {
+        var a = 0;
+        for (var i = 0; i < $('#' + sender + ' .required').length; i++) {
+            if ($($('#' + sender + ' .required')[i]).val() == "") {
+                $($('#' + sender + ' .required')[i]).parent().find('.RequiredField').show();
+                a++;
+            }
+        }
+        return a;
+    }
+    function EditRow(send) {
+        $(".code").val($(send).parents().parents().children().find(".pcode").val());
+        $(".Name").val($(send).parents().parents().children().find(".pname").val());
+        $(".ppqty").val($(send).parents().parents().children().find(".qty").val());
+        $(".ppunit").val($(send).parents().parents().children().find(".unit").val());
+        $(".ppdis").val($(send).parents().parents().children().find(".disc").val());
+        $(send).closest('.pa').remove();
+        calculation();
+    };
+
+
+</script>
+@section head{
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/InventoryManagement/PurcheaseReturn/_indexStock",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "aoColumns": [
+                     {
+                         "sName": "Id",
+                         "bSearchable": false,
+                         "bSortable": false,
+                         "sWidth": "13%",
+                         "fnRender": function (oObj) {
+                             //return '<a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/PurcheaseReturn/Edit?Id=' + oObj.aData[0] + '\"   class="AddUser i-btn-edit-row"></a>';
+                             return '<a title="Click on for Edit" style="text-decoration:none;" onclick="selectProduct(' + oObj.aData[0] + ')"  class="AddUser i-btn-edit-row"></a>';
+                         }
+                     },
+                                 { "sName": "ProductName", "sWidth": "20%" }
+                                , { "sName": "TotalQuantity", "sWidth": "10%" }
+                                , { "sName": "UnitPrice", "sWidth": "10%" }
+                                , { "sName": "TotalPrice", "sWidth": "10%" }
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [
+                            { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+            });
+            SelectAllForDelete();
+        });
+    </script>
+}
+

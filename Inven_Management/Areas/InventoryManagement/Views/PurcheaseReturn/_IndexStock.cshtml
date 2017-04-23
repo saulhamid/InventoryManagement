@@ -1,0 +1,80 @@
+﻿<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Stock List</p>
+    </div>
+    <p></p>
+    <div class="row">
+        <div id="container">
+            <div id="demo">
+                <table id="myDataTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                Select All
+                            </th>
+                            <th>Product Name</th>
+                            <th>Total Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                            @*<th>Total Replace</th>
+                                <th>Total Return</th>
+                                <th>Total Slup</th>*@
+                        </tr>
+                        <tr>
+                            <th>
+                                Action
+                            </th>
+                            <th>Product Name</th>
+                            <th>Total Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section head{
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/InventoryManagement/PurcheaseReturn/_indexStock",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "aoColumns": [
+                     {
+                         "sName": "Id",
+                         "bSearchable": false,
+                         "bSortable": false,
+                         "sWidth": "13%",
+                         "fnRender": function (oObj) {
+                             //return '<a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/PurcheaseReturn/Edit?Id=' + oObj.aData[0] + '\"   class="AddUser i-btn-edit-row"></a>';
+                             return '<a title="Click on for Edit" style="text-decoration:none;" onclick="selectProduct('+ oObj.aData[0] +')"  class="AddUser i-btn-edit-row"></a>';
+                         }
+                     },
+                                 { "sName": "ProductName", "sWidth": "20%" }
+                                , { "sName": "TotalQuantity", "sWidth": "10%" }
+                                , { "sName": "UnitPrice", "sWidth": "10%" }
+                                , { "sName": "TotalPrice", "sWidth": "10%" }
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [
+                            { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+            });
+            SelectAllForDelete();
+        });
+    </script>
+}

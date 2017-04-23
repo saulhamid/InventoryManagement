@@ -1,0 +1,248 @@
+﻿@model InventoryViewModel.ViewModel.PurcheaseReturnVM
+@using UIHelper.MVC
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Purchease Return</p>
+    </div>
+    <p></p>
+    <div class="row">
+        @using (Html.BeginForm("Create", "PurcheaseReturn", FormMethod.Post, new { @area = "InventoryManagement", enctype = "multipart/form-data", @Id = "upfrom" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PurchaseId)
+            @Html.HiddenFor(model => model.SupplierId)
+            @Html.HiddenFor(model => model.EmployeeId)
+            <div class="row" style="">
+              
+                <div class="col-md-3">
+                    <div class="editor-label">
+                        @Html.Label("Supplier Name")
+                    </div>
+                    <div class="editor-field">
+                        @Html.SimpleDropDownFor(model => model.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Zoneor Area", @class = " form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.SupplierId)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="editor-label">
+                        @Html.Label("Employee Name")
+                    </div>
+                    <div class="editor-field">
+                        @Html.SimpleDropDownFor(model => model.EmployeeId, "/Config/DropDown/Employee", new { @placeholder = " Zoneor Area", @class = " form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.EmployeeId)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.UnitePrice)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.UnitePrice, new { @placeholder = "Unite Price", @class = " required form-control",@readonly="disable" })
+                        @Html.ValidationMessageFor(model => model.UnitePrice)
+                    </div>
+                </div>
+                @*<div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.Label("Purchease Quantity")
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.StockQuantity, new { @placeholder = "Quantity", @class = " required form-control", @readonly = "disable" })
+                        @Html.ValidationMessageFor(model => model.StockQuantity)
+                    </div>
+                </div>*@
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.Label("Return Quantity")
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Quantity, new { @placeholder = "Quantity", @class = " required black form-control"})
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.Label("Return Discount")
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Discount, new { @placeholder = "Quantity", @class = " required black form-control" })
+                        @Html.ValidationMessageFor(model => model.Discount)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Date)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Date, new { @placeholder = "Return Date", @class = "customDatePicker required form-control" })
+                        @Html.ValidationMessageFor(model => model.Date)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                        @Html.ValidationMessageFor(model => model.Remarks)
+                    </div>
+                </div>
+                </div>
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Purchase List</p>
+        </div>
+        <div id="demo1">
+            @Html.ValidationSummary(true)
+            <div class="row" style="">
+              
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.UnitePrice)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.UnitePrice, new { @placeholder = "Unite Price", @class = "ppqty number form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.UnitePrice)
+                    </div>
+                </div>
+                @*<div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.StockQuantity)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.StockQuantity, new { @placeholder = "Stock Quantity", @class = "  number form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.StockQuantity)
+                    </div>
+                </div>*@
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Discount)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Discount, new { @placeholder = "Discount", @class = "  number form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Discount)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Quantity)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Quantity, new { @placeholder = "Quantity", @class = "ppqty form-control" })
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.Label("Return Discount")
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Discount, new { @placeholder = "Quantity", @class = "ppdis required black form-control" })
+                        @Html.ValidationMessageFor(model => model.Discount)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <button type="button" title="Save Data" class="i-btn-add AddRowIndent" id="addrow"> Addrow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-responsive table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>UnitPrice</th>
+                <th>Discount</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var item in Model.PurcheaseReturn)
+            {
+                Html.RenderPartial("_purcheaseDetail", item);
+            }*@
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Grand Total</b></td>
+                <td><input type="text" readonly="readonly" class="grandTotal right form-control" /></td>
+            </tr>
+        </tfoot>
+    </table>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <div class="editor-field">
+                        <button type="submit" title="Save Data"  class="i-btn-save"> Save</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $(function () {
+        valiDation("upfrom");
+        $("#sub").click(function () {
+            var datas = $("#upform").serialize();
+            var url = $("form").attr("action");
+            if (pageSubmitJSON('upform') == 0) {
+                $.post(url, datas, function (data, status) {
+                    window.location.reload();
+                    if (status == "success") {
+                        ShowResult(data);
+                    }
+                });
+            };
+        });
+    });
+    $("#addrow").click(function () {
+        var code = $(".code").val();
+        var exit = true;
+        $(".pa").each(function (i, item) {
+            var el = $(this);
+            var tcode = el.closest("tr").find(".pcode").val();
+            if (code == tcode) {
+                exit = false;
+                ShowResult("this Product Already Add in below List");
+            }
+        })
+        var proid = $(".proname").val();
+        var Quantity = $(".ppqty").val();
+        var Discount = $(".ppdis").val();
+        var remarks = $("#Productvm_Remarks").val();
+        if (code == null) {
+            return;
+            ShowResult("Plaese Select a product");
+        }
+        if (Quantity == null) {
+            return;
+            ShowResult("Enter Quantity");
+        }
+        if (UnitePrice == null) {
+            return;
+            ShowResult("Enter UnitePrice");
+        }
+        if (exit == true) {
+            var url = "/InventoryManagement/PurcheaseReturn/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Discount=" + Discount + "&Remarks=" + remarks;
+            $.get(url, function (data) {
+                $("table tbody").append(data);
+                $("table").show();
+                calculation();
+                blackfield();
+            });
+        }
+    });
+</script>
