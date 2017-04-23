@@ -12,14 +12,10 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
 {
     public class StockController : Controller
     {
-        //
-        // GET: /InventoryManagement/Stock/
         #region Declare
         StockRepo _repo = new StockRepo();
         InventoryEntities _context = new InventoryEntities();
-        
         #endregion Declare
-
         public ActionResult Index()
         {
             return View();
@@ -44,9 +40,9 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 var isSearchable2 = Convert.ToBoolean(Request["bSearchable_2"]);
                 var isSearchable3 = Convert.ToBoolean(Request["bSearchable_3"]);
                 var isSearchable4 = Convert.ToBoolean(Request["bSearchable_4"]);
-                filteredData = getAllData.Where(c => isSearchable1 && c.InvoiecNo.ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable2 && c.Code.ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable3 && c.Name.ToString().ToLower().Contains(param.sSearch.ToLower())
+                filteredData = getAllData.Where(c => isSearchable1 && c.EmployeeName.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable2 && c.ProductCode.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable4 && c.TotalDiscount.ToString().ToLower().Contains(param.sSearch.ToLower())
                                );
@@ -58,7 +54,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             #region Column Filtering
             if (InvoiceFilter != "" || DateFilter != "" || SupplierFilter != "")
             {
-                filteredData = getAllData.Where(c => (InvoiceFilter == "" || c.InvoiecNo.ToLower().Contains(InvoiceFilter.ToLower()))
+                filteredData = getAllData.Where(c => (InvoiceFilter == "" || c.SupplierName.ToLower().Contains(InvoiceFilter.ToLower()))
                                             && (SupplierFilter == "" || c.SupplierName.ToString().ToLower().Contains(SupplierFilter.ToLower()))
                                             && (TotalPriceFilter == "" || c.UnitPrice.ToString().ToLower().Contains(TotalPriceFilter.ToLower())));
             }
@@ -68,7 +64,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             var isSortable_3 = Convert.ToBoolean(Request["bSortable_3"]);
             var isSortable_4 = Convert.ToBoolean(Request["bSortable_4"]);
             var sortColumnIndex = Convert.ToInt32(Request["iSortCol_0"]);
-            Func<StockVM, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.InvoiecNo :
+            Func<StockVM, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.SupplierName :
                                                            sortColumnIndex == 3 && isSortable_2 ? c.SupplierName.ToString() :
                                                            sortColumnIndex == 4 && isSortable_3 ? c.TotalPrice.ToString() : "");
             var sortDirection = Request["sSortDir_0"]; // asc or desc
@@ -79,14 +75,14 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             var displayedCompanies = filteredData.Skip(param.iDisplayStart).Take(param.iDisplayLength);
             var result = from c in displayedCompanies
                          select new[] { 
-                 Convert.ToString(c.Id)
-                ,c.Code+"-"+c.Name
+                 //Convert.ToString(c.Id)
+                c.ProductName+"-"+c.ProductCode
                 ,c.TotalQuantity.ToString()
-                ,c.UnitPrice.ToString()
-                ,(c.TotalPrice=c.TotalQuantity+c.UnitPrice).ToString()
-                ,c.TotalReplace.ToString()
-                ,c.TotalReturn.ToString()
-                ,c.TotalSlup.ToString()
+                ,c.FinalUnitPrice.ToString()
+                ,(c.TotalPrice=c.TotalQuantity+c.FinalUnitPrice).ToString()
+                //,c.TotalReplace.ToString()
+                //,c.TotalReturn.ToString()
+                //,c.TotalSlup.ToString()
                          };
             return Json(new
             {
@@ -98,7 +94,5 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 aaData = result
             }, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

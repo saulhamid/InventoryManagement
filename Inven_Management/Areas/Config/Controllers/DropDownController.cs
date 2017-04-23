@@ -1,4 +1,5 @@
-﻿using InventoryRepo.InventoryManagement;
+﻿using InventoryRepo.Config;
+using InventoryRepo.InventoryManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,14 @@ namespace Inven_Management.Areas.Config.Controllers
         public JsonResult ZoneorArea()
         {
             return Json(new SelectList(new ZoneorAreaRepo().Dropdown(), "Id", "Name"), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Market(int Id)
+        {
+            return Json(new SelectList(new MarketRepo().Dropdown(Id), "Id", "Name"), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult StockProduct()
+        {
+            return Json(new SelectList(new StockRepo().Dropdown(), "Id", "Name"), JsonRequestBehavior.AllowGet);
         }
     }
 }

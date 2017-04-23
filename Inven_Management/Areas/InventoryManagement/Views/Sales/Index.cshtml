@@ -72,7 +72,8 @@
                                     "sWidth": "12%",
                                     "fnRender": function (oObj) {
                                         return ' <input onclick="CheckAll(this)" type="checkbox" data-Id="' + oObj.aData[0] + '">&nbsp; <a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/Sales/Edit/' + oObj.aData[0] + '\"  class=" i-btn-edit-row"></a>' +
-                                        '&nbsp; <a title="Click on for Delete" style="text-decoration:none;"  data-url="/InventoryManagement/Sales/Delete" onclick="deletedData(this, myDataTable,' + oObj.aData[0] + ');"  class="i-btn-remove-row"></a>';
+                                        '&nbsp; <a title="Click on for Delete" style="text-decoration:none;"  data-url="/InventoryManagement/Sales/Delete" onclick="deletedData(this, myDataTable,' + oObj.aData[0] + ');"  class="i-btn-remove-row"></a>'+
+                                            '<a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/Sales/rptSales/' + oObj.aData[0] + '\"  class=" i-btn-edit-row"></a>';
                                     }
                                 }
                                 , { "sName": "InvoiecNo", "sWidth": "8%" }

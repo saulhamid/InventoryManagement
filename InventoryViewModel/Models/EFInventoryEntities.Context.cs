@@ -32,6 +32,7 @@ namespace InventoryViewModel.Models
         public virtual DbSet<EnumCountry> EnumCountries { get; set; }
         public virtual DbSet<EnumDistric> EnumDistrics { get; set; }
         public virtual DbSet<EnumDivision> EnumDivisions { get; set; }
+        public virtual DbSet<Market> Markets { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<ProductAssignDetail> ProductAssignDetails { get; set; }
         public virtual DbSet<ProductAssign> ProductAssigns { get; set; }
@@ -44,133 +45,26 @@ namespace InventoryViewModel.Models
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
         public virtual DbSet<PurcheaseDetail> PurcheaseDetails { get; set; }
+        public virtual DbSet<PurcheaseReturnDetail> PurcheaseReturnDetails { get; set; }
+        public virtual DbSet<PurcheaseReturn> PurcheaseReturns { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
         public virtual DbSet<StockDetail> StockDetails { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ZoneOrArea> ZoneOrAreas { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
     
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        public virtual ObjectResult<string> AutoProduct(string term)
         {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
+            var termParameter = term != null ?
+                new ObjectParameter("term", term) :
+                new ObjectParameter("term", typeof(string));
     
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual ObjectResult<sp_stockdetails> sp_stockdetails()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_stockdetails>("sp_stockdetails");
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<uom_select_Result> uom_select()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uom_select_Result>("uom_select");
-        }
-    
-        public virtual ObjectResult<sp_stocks_Result> sp_stocks()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_stocks_Result>("sp_stocks");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AutoProduct", termParameter);
         }
     
         public virtual int Insert_StockDetail(Nullable<int> stockIdint, Nullable<decimal> stockReplace, Nullable<decimal> transReplace, Nullable<decimal> totalReplace, Nullable<decimal> stockReturn, Nullable<decimal> transReturn, Nullable<decimal> totalReturn, Nullable<decimal> stockDiscount, Nullable<decimal> transDiscount, Nullable<decimal> totalDiscount, Nullable<decimal> transSlup, Nullable<decimal> stockSlup, Nullable<decimal> totalSlup, Nullable<decimal> stockQuantity, Nullable<decimal> transQuantity, Nullable<decimal> totalQuantity, Nullable<decimal> totalPaid, Nullable<decimal> stockPrice, Nullable<decimal> transPrice, Nullable<decimal> totalPrice, string remarks, Nullable<bool> stockStutes, string date)
@@ -270,19 +164,484 @@ namespace InventoryViewModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_StockDetail", stockIdintParameter, stockReplaceParameter, transReplaceParameter, totalReplaceParameter, stockReturnParameter, transReturnParameter, totalReturnParameter, stockDiscountParameter, transDiscountParameter, totalDiscountParameter, transSlupParameter, stockSlupParameter, totalSlupParameter, stockQuantityParameter, transQuantityParameter, totalQuantityParameter, totalPaidParameter, stockPriceParameter, transPriceParameter, totalPriceParameter, remarksParameter, stockStutesParameter, dateParameter);
         }
     
-        public virtual ObjectResult<sp_salesDetail_Result> sp_salesDetail()
+        public virtual ObjectResult<market_All_Result> market_All()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_salesDetail_Result>("sp_salesDetail");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<market_All_Result>("market_All");
         }
     
-        public virtual ObjectResult<sp_purcheaseDetal_Result> sp_purcheaseDetal()
+        public virtual int Market_Insert(Nullable<int> id, Nullable<int> zoneOrAreaId, string code, string name, string description, string remarks, Nullable<bool> isActive, Nullable<bool> isArchive, string createdBy, string createdAt, string createdFrom, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_purcheaseDetal_Result>("sp_purcheaseDetal");
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var zoneOrAreaIdParameter = zoneOrAreaId.HasValue ?
+                new ObjectParameter("ZoneOrAreaId", zoneOrAreaId) :
+                new ObjectParameter("ZoneOrAreaId", typeof(int));
+    
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isArchiveParameter = isArchive.HasValue ?
+                new ObjectParameter("IsArchive", isArchive) :
+                new ObjectParameter("IsArchive", typeof(bool));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Market_Insert", idParameter, zoneOrAreaIdParameter, codeParameter, nameParameter, descriptionParameter, remarksParameter, isActiveParameter, isArchiveParameter, createdByParameter, createdAtParameter, createdFromParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual ObjectResult<market_SelectbyId_Result> market_SelectbyId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<market_SelectbyId_Result>("market_SelectbyId", idParameter);
+        }
+    
+        public virtual ObjectResult<productdetail_Result> productdetail()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<productdetail_Result>("productdetail");
+        }
+    
+        public virtual int PurcheasReturnsByInvoice(string invoiecNo)
+        {
+            var invoiecNoParameter = invoiecNo != null ?
+                new ObjectParameter("InvoiecNo", invoiecNo) :
+                new ObjectParameter("InvoiecNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PurcheasReturnsByInvoice", invoiecNoParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<SP_Productdetail_Result> SP_Productdetail(Nullable<int> productId, Nullable<int> productBrandId, Nullable<int> productCatagoriesId, Nullable<int> productColorId, Nullable<int> productTypeId, string productCode)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var productBrandIdParameter = productBrandId.HasValue ?
+                new ObjectParameter("ProductBrandId", productBrandId) :
+                new ObjectParameter("ProductBrandId", typeof(int));
+    
+            var productCatagoriesIdParameter = productCatagoriesId.HasValue ?
+                new ObjectParameter("ProductCatagoriesId", productCatagoriesId) :
+                new ObjectParameter("ProductCatagoriesId", typeof(int));
+    
+            var productColorIdParameter = productColorId.HasValue ?
+                new ObjectParameter("ProductColorId", productColorId) :
+                new ObjectParameter("ProductColorId", typeof(int));
+    
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(int));
+    
+            var productCodeParameter = productCode != null ?
+                new ObjectParameter("ProductCode", productCode) :
+                new ObjectParameter("ProductCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Productdetail_Result>("SP_Productdetail", productIdParameter, productBrandIdParameter, productCatagoriesIdParameter, productColorIdParameter, productTypeIdParameter, productCodeParameter);
+        }
+    
+        public virtual ObjectResult<SP_PucheaseAllParam_Result> SP_PucheaseAllParam(Nullable<int> purcheaseId, Nullable<int> supplierId, Nullable<int> employeeId, string invoiecNo, string startDate, string endDate)
+        {
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var invoiecNoParameter = invoiecNo != null ?
+                new ObjectParameter("InvoiecNo", invoiecNo) :
+                new ObjectParameter("InvoiecNo", typeof(string));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PucheaseAllParam_Result>("SP_PucheaseAllParam", purcheaseIdParameter, supplierIdParameter, employeeIdParameter, invoiecNoParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<SP_PucheaseSingle_Result> SP_PucheaseSingle(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PucheaseSingle_Result>("SP_PucheaseSingle", idParameter);
+        }
+    
+        public virtual ObjectResult<SP_PurcheaseDetail_Result> SP_PurcheaseDetail(Nullable<int> purcheaseId, string invoiceNO, Nullable<int> productId, Nullable<int> supplierId, string startDate, string endDate)
+        {
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var invoiceNOParameter = invoiceNO != null ?
+                new ObjectParameter("InvoiceNO", invoiceNO) :
+                new ObjectParameter("InvoiceNO", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurcheaseDetail_Result>("SP_PurcheaseDetail", purcheaseIdParameter, invoiceNOParameter, productIdParameter, supplierIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual int sp_purcheaseReturenDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_purcheaseReturenDetails");
+        }
+    
+        public virtual ObjectResult<SP_PurcheaseReturnDetail_Result> SP_PurcheaseReturnDetail(Nullable<int> purcheaseReturnId, string invoiceNO, Nullable<int> productId, Nullable<int> supplierId, string startDate, string endDate)
+        {
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var invoiceNOParameter = invoiceNO != null ?
+                new ObjectParameter("InvoiceNO", invoiceNO) :
+                new ObjectParameter("InvoiceNO", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurcheaseReturnDetail_Result>("SP_PurcheaseReturnDetail", purcheaseReturnIdParameter, invoiceNOParameter, productIdParameter, supplierIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual ObjectResult<SP_SalesDatail_Result> SP_SalesDatail(Nullable<int> salesId, string invoiceNO, Nullable<int> productId, Nullable<int> customerId, Nullable<int> employeeId, Nullable<int> zoneId, Nullable<int> marketId, string startDate, string endDate)
+        {
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var invoiceNOParameter = invoiceNO != null ?
+                new ObjectParameter("InvoiceNO", invoiceNO) :
+                new ObjectParameter("InvoiceNO", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var zoneIdParameter = zoneId.HasValue ?
+                new ObjectParameter("ZoneId", zoneId) :
+                new ObjectParameter("ZoneId", typeof(int));
+    
+            var marketIdParameter = marketId.HasValue ?
+                new ObjectParameter("MarketId", marketId) :
+                new ObjectParameter("MarketId", typeof(int));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SalesDatail_Result>("SP_SalesDatail", salesIdParameter, invoiceNOParameter, productIdParameter, customerIdParameter, employeeIdParameter, zoneIdParameter, marketIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_salesDatailrpts_Result> sp_salesDatailrpts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_salesDatailrpts_Result>("sp_salesDatailrpts");
         }
     
         public virtual ObjectResult<sp_SalesDetails_Result> sp_SalesDetails()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SalesDetails_Result>("sp_SalesDetails");
+        }
+    
+        public virtual ObjectResult<sp_singleCustomer_Result> sp_singleCustomer(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_singleCustomer_Result>("sp_singleCustomer", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_singleEmployee_Result> sp_singleEmployee(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_singleEmployee_Result>("sp_singleEmployee", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_singleSupplier_Result> sp_singleSupplier(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_singleSupplier_Result>("sp_singleSupplier", idParameter);
+        }
+    
+        public virtual int sp_StockAutoProduct()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_StockAutoProduct");
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<uom_select_Result> uom_select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uom_select_Result>("uom_select");
+        }
+    
+        public virtual ObjectResult<SP_PurcheaseIndex_Result> SP_PurcheaseIndex(Nullable<int> purcheaseId, string invoiceNO, Nullable<int> supplierId, string startDate, string endDate)
+        {
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var invoiceNOParameter = invoiceNO != null ?
+                new ObjectParameter("InvoiceNO", invoiceNO) :
+                new ObjectParameter("InvoiceNO", typeof(string));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurcheaseIndex_Result>("SP_PurcheaseIndex", purcheaseIdParameter, invoiceNOParameter, supplierIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<SP_Stocks_Result> SP_Stocks(Nullable<int> stockId, Nullable<int> productId, Nullable<int> productBrandId, Nullable<int> productCatagoriesId, Nullable<int> productColorId, Nullable<int> productTypeId, string productCode, Nullable<int> supplierId, string startDate, string endDate)
+        {
+            var stockIdParameter = stockId.HasValue ?
+                new ObjectParameter("StockId", stockId) :
+                new ObjectParameter("StockId", typeof(int));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var productBrandIdParameter = productBrandId.HasValue ?
+                new ObjectParameter("ProductBrandId", productBrandId) :
+                new ObjectParameter("ProductBrandId", typeof(int));
+    
+            var productCatagoriesIdParameter = productCatagoriesId.HasValue ?
+                new ObjectParameter("ProductCatagoriesId", productCatagoriesId) :
+                new ObjectParameter("ProductCatagoriesId", typeof(int));
+    
+            var productColorIdParameter = productColorId.HasValue ?
+                new ObjectParameter("ProductColorId", productColorId) :
+                new ObjectParameter("ProductColorId", typeof(int));
+    
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(int));
+    
+            var productCodeParameter = productCode != null ?
+                new ObjectParameter("ProductCode", productCode) :
+                new ObjectParameter("ProductCode", typeof(string));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Stocks_Result>("SP_Stocks", stockIdParameter, productIdParameter, productBrandIdParameter, productCatagoriesIdParameter, productColorIdParameter, productTypeIdParameter, productCodeParameter, supplierIdParameter, startDateParameter, endDateParameter);
         }
     }
 }

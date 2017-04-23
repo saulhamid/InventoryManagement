@@ -42,6 +42,8 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Config\CustomerRepo.cs" />
     <Compile Include="Config\EmployeeRepo.cs" />
+    <Compile Include="Config\MarketRepo.cs" />
+    <Compile Include="Config\OrganizationRepo.cs" />
     <Compile Include="Config\ProductBrandRepo.cs" />
     <Compile Include="Config\ProductCategoryRepo.cs" />
     <Compile Include="Config\ProductColorRepo.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="InventoryManagement\ProductAssaignRepo.cs" />
     <Compile Include="InventoryManagement\ProductDetailRepo.cs" />
     <Compile Include="InventoryManagement\PurcheaseRepo.cs" />
+    <Compile Include="InventoryManagement\PurcheaseReturnRepo.cs" />
     <Compile Include="InventoryManagement\SalesRepo.cs" />
     <Compile Include="InventoryManagement\StockRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

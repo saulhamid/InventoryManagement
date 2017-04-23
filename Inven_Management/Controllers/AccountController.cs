@@ -55,7 +55,6 @@ namespace Inven_Management.Controllers
             }
             catch(Exception ex){
                 return View(model);
-
             }
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("Index", "Home", new { area = "Config" });

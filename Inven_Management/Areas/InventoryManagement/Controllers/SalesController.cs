@@ -1,9 +1,13 @@
-﻿using InventoryRepo.InventoryManagement;
+﻿using Commons;
+using CrystalDecisions.CrystalReports.Engine;
+using InventoryRepo.InventoryManagement;
 using InventoryViewModel.Models;
 using InventoryViewModel.ViewModel;
 using JQueryDataTables.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -72,7 +76,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             Func<SalesVM, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.InvoiecNo :
                                                            sortColumnIndex == 2 && isSortable_2 ? c.CustomerName :
                                                            sortColumnIndex == 3 && isSortable_2 ? c.ZoneOrAreaNae.ToString() :
-                                                           sortColumnIndex == 4 && isSortable_3 ? c.TotalPrice.ToString() : "");
+                                                           sortColumnIndex == 4 && isSortable_3 ? c.ZoneOrAreaNae.ToString() : "");
             var sortDirection = Request["sSortDir_0"]; // asc or desc
             if (sortDirection == "asc")
                 filteredData = filteredData.OrderBy(orderingFunction);
@@ -142,18 +146,18 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             SalesDetail provm = new SalesDetail();
             vm = _prorepo.GETAllByCode(code);
             provm.ProductId = vm.Id;
-            provm.Code = vm.Code;
-            provm.Name =vm.Code+"-"+ vm.Name + "-" + vm.ProductSizeName + vm.UOMName;
+            provm.ProductCode = vm.Code;
+            provm.ProductName = vm.Name;
             provm.UnitePrice = Convert.ToDecimal(UnitePrice);
-            provm.ReceiveQuantity = Convert.ToDecimal(reivecqty);
+            provm.AssaignQuantity = Convert.ToDecimal(reivecqty);
             provm.Slup = Convert.ToDecimal(slup);
             provm.Return = Convert.ToDecimal(returns);
             provm.Replace = Convert.ToDecimal(replace);
             provm.Discount = Convert.ToDecimal(Discount);
-            provm.SalesQuantity = provm.ReceiveQuantity-provm.Slup-provm.Replace-provm.Return;
+            provm.SalesQuantity = provm.AssaignQuantity - provm.Slup - provm.Replace - provm.Return;
             provm.Remarks = Remarks;
             provm.TotalSlupPrice = provm.UnitePrice * provm.Slup;
-            provm.WithOurDiscountPrice = provm.UnitePrice * provm.ReceiveQuantity;
+            provm.WithOurDiscountPrice = provm.UnitePrice * provm.AssaignQuantity;
             provm.TotalAmount = provm.WithOurDiscountPrice-provm.TotalSlupPrice-(provm.Replace*provm.UnitePrice)-(provm.Replace*provm.UnitePrice)-provm.Discount;
             provm.Remarks = Remarks;
             return PartialView("_SalesDetail", provm);
@@ -185,6 +189,27 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                 return Json(mgs, JsonRequestBehavior.AllowGet);
             }
             return Json(mgs, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult rptSales(int Id)
+        {
+            DataTable table = new DataTable();
+            table = Common.ListToDataTable(_repo.rptSales().Where(m => m.Id == Id).ToList());
+            DataSet ds = new DataSet();
+            ds.Tables.Add(table);
+            ds.Tables[0].TableName = "dtSalesDatail";
+            ReportDocument doc = new ReportDocument();
+            string rptLocation = "";
+            rptLocation = AppDomain.CurrentDomain.BaseDirectory + @"Areas\\InventoryManagement\\Report\\rptSales.rpt";
+            doc.Load(rptLocation);
+            doc.SetDataSource(ds);
+            var rpt = RenderReportAsPDF(doc);
+            doc.Close();
+            return rpt;
+        }
+        private FileStreamResult RenderReportAsPDF(ReportDocument rptDoc)
+        {
+            Stream stream = rptDoc.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/PDF");
         }
     }
 }

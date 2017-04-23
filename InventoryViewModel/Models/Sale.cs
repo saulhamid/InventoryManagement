@@ -23,18 +23,13 @@ namespace InventoryViewModel.Models
         public string DiscountRemarks { get; set; }
         public Nullable<decimal> Discount { get; set; }
         public Nullable<decimal> TotalDiscount { get; set; }
-        public Nullable<decimal> TotalSlup { get; set; }
-        public Nullable<decimal> TotalQuantityReceive { get; set; }
-        public Nullable<decimal> TotalReturn { get; set; }
-        public Nullable<decimal> TotalReplace { get; set; }
-        public Nullable<decimal> TotalQuantity { get; set; }
         public Nullable<decimal> TotalPaid { get; set; }
-        public Nullable<decimal> TotalPrice { get; set; }
         public Nullable<decimal> GrandTotal { get; set; }
-        public string Datetimes { get; set; }
+        public string Date { get; set; }
         public Nullable<decimal> PackUnitPrice { get; set; }
         public Nullable<decimal> PackQuantity { get; set; }
-        public Nullable<decimal> OpeningQuantity { get; set; }
+        public string EventName { get; set; }
+        public Nullable<decimal> EventAamount { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsArchive { get; set; }

@@ -1,5 +1,4 @@
-﻿using Inven_Management.Areas.Config.Models;
-using InventoryRepo.InventoryManagement;
+﻿using InventoryRepo.Config;
 using InventoryViewModel.Models;
 using JQueryDataTables.Models;
 using System;
@@ -10,14 +9,14 @@ using System.Web.Mvc;
 
 namespace Inven_Management.Areas.Config.Controllers
 {
-    public class ProductController : Controller
+    public class OrganizationController : Controller
     {
         #region Declare
-        ProductRepo _repo = new ProductRepo();
+        OrganizationRepo _repo = new OrganizationRepo();
         #endregion Declare
         public ActionResult Index()
         {
-            Product vm = new Product();
+            Organization vm = new Organization();
             vm.IsActive = true;
             return View(vm);
         }
@@ -27,13 +26,18 @@ namespace Inven_Management.Areas.Config.Controllers
             var idFilter = Convert.ToString(Request["sSearch_0"]);
             var codeFilter = Convert.ToString(Request["sSearch_1"]);
             var nameFilter = Convert.ToString(Request["sSearch_2"]);
-            var isActiveFilter = Convert.ToString(Request["sSearch_3"]);
-            var RemarkFilter = Convert.ToString(Request["sSearch_4"]);
+            var MobileFilter = Convert.ToString(Request["sSearch_3"]);
+            var EmailFilter = Convert.ToString(Request["sSearch_5"]);
+            var PaddFilter = Convert.ToString(Request["sSearch_6"]);
+            var PrddFilter = Convert.ToString(Request["sSearch_7"]);
+            var isActiveFilter = Convert.ToString(Request["sSearch_8"]);
+            var RemarkFilter = Convert.ToString(Request["sSearch_9"]);
+
             var isActiveFilter1 = isActiveFilter.ToLower() == "y" ? true.ToString() : false.ToString();
             #endregion Column Search
 
-            var getAllData = _repo.GETAllProducts();
-            IEnumerable<Product> filteredData;
+            var getAllData = _repo.GETAllOrganization();
+            IEnumerable<Organization> filteredData;
             //Check whether the companies should be filtered by keyword
             if (!string.IsNullOrEmpty(param.sSearch))
             {
@@ -41,59 +45,88 @@ namespace Inven_Management.Areas.Config.Controllers
                 var isSearchable1 = Convert.ToBoolean(Request["bSearchable_1"]);
                 var isSearchable2 = Convert.ToBoolean(Request["bSearchable_2"]);
                 var isSearchable3 = Convert.ToBoolean(Request["bSearchable_3"]);
-                filteredData = getAllData.Where(c => isSearchable1 && c.Name.ToLower().Contains(param.sSearch.ToLower())
+                var isSearchable4 = Convert.ToBoolean(Request["bSearchable_4"]);
+                var isSearchable5 = Convert.ToBoolean(Request["bSearchable_5"]);
+                var isSearchable6 = Convert.ToBoolean(Request["bSearchable_6"]);
+                var isSearchable7 = Convert.ToBoolean(Request["bSearchable_7"]);
+                filteredData = getAllData
+                   .Where(c => isSearchable1 && c.Name.ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable2 && c.Code.ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable3 && c.Remarks.ToLower().Contains(param.sSearch.ToLower()));
+                               || isSearchable3 && c.Mobile.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable4 && c.Email.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable5 && c.PresentAddress.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable6 && c.PermanentAddress.ToLower().Contains(param.sSearch.ToLower())
+                               || isSearchable7 && c.Remarks.ToLower().Contains(param.sSearch.ToLower()));
             }
             else
             {
                 filteredData = getAllData;
             }
             #region Column Filtering
-            if (codeFilter != "" || nameFilter != "" || isActiveFilter != "")
+            if (codeFilter != "" || nameFilter != "" || MobileFilter != "" || EmailFilter != "" || PaddFilter != "" || PrddFilter != "" || isActiveFilter != "")
             {
-                filteredData = getAllData.Where(c => (codeFilter == "" || c.Code.ToLower().Contains(codeFilter.ToLower()))
+                filteredData = getAllData
+                                .Where(c => (codeFilter == "" || c.Code.ToLower().Contains(codeFilter.ToLower()))
                                             && (nameFilter == "" || c.Name.ToLower().Contains(nameFilter.ToLower()))
+                                            && (MobileFilter == "" || c.Mobile.ToLower().Contains(nameFilter.ToLower()))
+                                            && (EmailFilter == "" || c.Email.ToLower().Contains(nameFilter.ToLower()))
+                                            && (PaddFilter == "" || c.PresentAddress.ToLower().Contains(nameFilter.ToLower()))
+                                            && (PrddFilter == "" || c.PermanentAddress.ToLower().Contains(nameFilter.ToLower()))
                                             && (isActiveFilter == "" || c.IsActive.ToString().ToLower().Contains(isActiveFilter1.ToLower()))
-                                            && (RemarkFilter == "" || c.Remarks.ToLower().Contains(RemarkFilter.ToLower())));}
+                                            && (RemarkFilter == "" || c.Remarks.ToLower().Contains(RemarkFilter.ToLower()))
+                                        );
+            }
+
             #endregion Column Filtering
             var isSortable_1 = Convert.ToBoolean(Request["bSortable_1"]);
             var isSortable_2 = Convert.ToBoolean(Request["bSortable_2"]);
             var isSortable_3 = Convert.ToBoolean(Request["bSortable_3"]);
+            var isSortable_4 = Convert.ToBoolean(Request["bSortable_4"]);
+            var isSortable_5 = Convert.ToBoolean(Request["bSortable_5"]);
+            var isSortable_6 = Convert.ToBoolean(Request["bSortable_6"]);
+            var isSortable_7 = Convert.ToBoolean(Request["bSortable_7"]);
             var sortColumnIndex = Convert.ToInt32(Request["iSortCol_0"]);
-            Func<Product, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.Name :
+            Func<Organization, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.Name :
                                                            sortColumnIndex == 2 && isSortable_2 ? c.Code :
-                                                           sortColumnIndex == 3 && isSortable_3 ? c.Remarks : "");
+                                                           sortColumnIndex == 3 && isSortable_3 ? c.Mobile :
+                                                           sortColumnIndex == 4 && isSortable_3 ? c.Email :
+                                                           sortColumnIndex == 5 && isSortable_3 ? c.PresentAddress :
+                                                           sortColumnIndex == 6 && isSortable_3 ? c.PresentAddress :
+                                                           sortColumnIndex == 7 && isSortable_4 ? c.Remarks :
+                                                           "");
             var sortDirection = Request["sSortDir_0"]; // asc or desc
             if (sortDirection == "asc")
                 filteredData = filteredData.OrderBy(orderingFunction);
             else
                 filteredData = filteredData.OrderByDescending(orderingFunction);
+
             var displayedCompanies = filteredData.Skip(param.iDisplayStart).Take(param.iDisplayLength);
-            var result = from c in displayedCompanies select new[] { 
-                 Convert.ToString(c.Id)
-                ,c.Code
-                ,c.Name
-                ,c.UOMName
-                ,c.ProductSizeName
-                ,c.ProductCatagoriesName
-                ,c.ProductBrandName
-                ,c.ProductColorName
-                ,c.ProductTypeName
-                ,Convert.ToString(c.IsActive == true ? "Yes" : "No")
+            var result = from c in displayedCompanies
+                         select new[] { Convert.ToString(c.Id),
+                c.Code
+                , c.Name
+                , c.Mobile
+                , c.Email
+                , c.PresentAddress
+                , c.PresentAddress
+                , Convert.ToString(c.IsActive == true ? "Y" : "N") 
                 ,c.Remarks };
-              return Json(new
-             {   sEcho = param.sEcho,iTotalRecords = getAllData.Count()
-                 ,iTotalDisplayRecords = filteredData.Count()
-                 ,aaData = result }, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                sEcho = param.sEcho,
+                iTotalRecords = getAllData.Count(),
+                iTotalDisplayRecords = filteredData.Count(),
+                aaData = result
+            }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Create()
-        { 
-            Product vm=new Product();
-            return View(vm);
-        }
+
+        //public ActionResult Create()
+        //{
+        //    Organization vm = new Organization();
+        //    return PartialView("Create", vm);
+        //}
         [HttpPost]
-        public ActionResult Create(Product vm, string IsActive)
+        public ActionResult Create(Organization vm, string IsActive)
         {
             string[] result = new string[3];
             try
@@ -105,28 +138,33 @@ namespace Inven_Management.Areas.Config.Controllers
                 }
                 else
                 {
+
                     string a = result[0] + "~" + result[1];
                     TempData["Msg"] = result[0] + "~" + result[1];
                     ViewBag.msg = result[0] + "~" + result[1];
+
                 }
             }
             catch (Exception ex)
             {
                 TempData["Msg"] = result[0] + "~" + result[1] + " Error: " + ex.Message;
                 ViewBag.msg = result[0] + "~" + result[1];
-                return View(vm);
+
+                return RedirectToAction("Index");
+
             }
             return RedirectToAction("Index");
         }
         public ActionResult Edit(int Id)
         {
-            Product vm = new Product();
+            Organization vm = new Organization();
             vm = _repo.GetSigle(Id);
-            return View( vm);
+            return View("Index", vm);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product vm)
+        public ActionResult Edit(Organization vm)
         {
             string[] result = new string[3];
             try
@@ -142,7 +180,7 @@ namespace Inven_Management.Areas.Config.Controllers
             catch (Exception ex)
             {
                 ViewBag.fail = result[0] + " " + result[1] + " Error: " + ex.Message;
-                return RedirectToAction("Edit",vm);
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
@@ -176,11 +214,12 @@ namespace Inven_Management.Areas.Config.Controllers
             else
             {
                 return "This value Already Exit";
+
             }
         }
         public JsonResult Edits(int Id)
         {
-            Product vm = _repo.GetSigle(Id);
+            Organization vm = _repo.GetSigle(Id);
             return Json(vm, JsonRequestBehavior.AllowGet);
         }
 

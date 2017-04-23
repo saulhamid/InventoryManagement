@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using UIHelper.MVC
+<div class="headrow">
+    <button type="button" title="Add New Product" data-url="/InventoryManagement/PurcheaseReturn/Create1" onclick="GoTo(this)" id="" class="i-btn-add "> New</button>
+    <button type="button" title="Delete Product" data-url="/InventoryManagement/PurcheaseReturn/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="i-btn-remove"> Delete</button>
+</div>
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Purchase Return List</p>
+    </div>
+    <p></p>
+    <div class="row">
+        <div id="container">
+            <div id="demo">
+                <table id="myDataTable1" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                Select All
+                            </th>
+                            <th>Invoiec No.</th>
+                            <th>Date</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>UnitePrice</th>
+                            <th>Discount</th>
+                            <th>Supplier Name</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Action
+                            </th>
+                            <th>Invoiec No.</th>
+                            <th>Date</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>UnitePrice</th>
+                            <th>Discount</th>
+                            <th>Supplier Name</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var oTable = $('#myDataTable1').dataTable({
+            "bServerSide": true,
+            "sAjaxSource": "/InventoryManagement/PurcheaseReturn/_indexs",
+            "bProcessing": true,
+            "aLengthMenu": tablelength(),
+            "bJqueryUI": true,
+            "bAutoWidth": false,
+            "aoColumns": [
+                 {
+                     "sName": "Id",
+                     "bSearchable": false,
+                     "bSortable": false,
+                     "sWidth": "13%",
+                     "fnRender": function (oObj) {
+                         return '<a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/PurcheaseReturn/Edit?Id=' + oObj.aData[0] + '\"   class="AddUser i-btn-edit-row"></a>';
+                     }
+                 }
+                             , { "sName": "Invoice", "sWidth": "7%" }
+                            , { "sName": "Date", "sWidth": "7%" }
+                            , { "sName": "ProductName", "sWidth": "20%" }
+                            , { "sName": "Quantity", "sWidth": "8%" }
+                            , { "sName": "UnitePrice", "sWidth": "8%" }
+                            , { "sName": "Discount", "sWidth": "8%" }
+                            , { "sName": "SupplierName", "sWidth": "12%" }
+            ]
+        });
+        oTable.columnFilter({
+            sPlaceHolder: "head:after",
+            aoColumns: [{ type: "text" }
+                       , { type: "text" }
+                       , { type: "text" }
+                       , { type: "text" }
+                       , { type: "text" }
+                       , { type: "text" }
+                       , { type: "text" }
+                       , { type: "text" }
+            ]
+        });
+    });
+    $('.AddUser').on('click', function () {
+        $("#AddUserForm").dialog({
+            autoOpen: true,
+            position: { my: "center", at: "top+350", of: window },
+            width: 1000,
+            resizable: false,
+            title: 'Add User Form',
+            modal: true,
+            open: function () {
+                $(this).load($(this).attr("href"));
+            },
+            buttons: {
+                "Add User": function () {
+                    addUserInfo();
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        return false;
+    });
+</script>

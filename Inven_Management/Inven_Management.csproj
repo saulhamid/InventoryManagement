@@ -196,6 +196,8 @@
     <Compile Include="Areas\Config\Controllers\DropDownController.cs" />
     <Compile Include="Areas\Config\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Config\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Config\Controllers\MarketController.cs" />
+    <Compile Include="Areas\Config\Controllers\OrganizationController.cs" />
     <Compile Include="Areas\Config\Controllers\ProductBrandController.cs" />
     <Compile Include="Areas\Config\Controllers\ProductCatagoryController.cs" />
     <Compile Include="Areas\Config\Controllers\ProductColorController.cs" />
@@ -210,12 +212,30 @@
     </Compile>
     <Compile Include="Areas\InventoryManagement\Controllers\ProductAssaignController.cs" />
     <Compile Include="Areas\InventoryManagement\Controllers\PurchaseController.cs" />
+    <Compile Include="Areas\InventoryManagement\Controllers\PurcheaseReturnController.cs" />
     <Compile Include="Areas\InventoryManagement\Controllers\SalesController.cs" />
     <Compile Include="Areas\InventoryManagement\Controllers\StockController.cs" />
     <Compile Include="Areas\InventoryManagement\InventoryManagementAreaRegistration.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\InventoryManagement\Models\PurcheaseVM.cs" />
+    <Compile Include="Areas\InventoryManagement\Report\InventoryDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryDataset.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\InventoryManagement\Report\rptPurchease.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPurchease.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\InventoryManagement\Report\rptSales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptSales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Areas\InventoryManagement\Report\SalesRepor.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3685,6 +3705,29 @@
     <Content Include="assets\AllReport.xsc">
       <DependentUpon>AllReport.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Config\Views\Market\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Market\_create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Report\InventoryDataset.xsc">
+      <DependentUpon>InventoryDataset.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Config\Views\Organization\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Organization\_create.cshtml" />
+    <None Include="Areas\InventoryManagement\Report\InventoryDataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InventoryDataset.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Areas\InventoryManagement\Report\InventoryDataset.xss">
+      <DependentUpon>InventoryDataset.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\Index.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\Indexdetail.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\_indexingProduct.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\PurDetail.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\_purcheaseDetail.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\Create.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\Create1.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\_IndexStock.cshtml" />
     <None Include="assets\AllReport.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -3788,6 +3831,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\InventoryManagement\Report\rptPurchease.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPurchease.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\InventoryManagement\Report\rptSales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSales.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\InventoryManagement\Report\SalesRepor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SalesRepor.cs</LastGenOutput>

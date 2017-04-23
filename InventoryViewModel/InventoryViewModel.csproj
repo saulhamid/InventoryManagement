@@ -85,6 +85,15 @@
     <Compile Include="Models\EnumDivision.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Market.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\market_All_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\market_SelectbyId_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Organization.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
@@ -109,6 +118,9 @@
     <Compile Include="Models\ProductDetail.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\productdetail_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductSize.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
@@ -119,6 +131,12 @@
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PurcheaseDetail.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurcheaseReturn.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurcheaseReturnDetail.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sale.cs">
@@ -133,28 +151,43 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_purcheaseDetal_Result.cs">
+    <Compile Include="Models\SP_Productdetail_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_PucheaseAllParam_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_PucheaseSingle_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_PurcheaseDetail_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_PurcheaseIndex_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_PurcheaseReturnDetail_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_salesDatailrpts_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_SalesDatail_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_SalesDetails_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_salesDetail_Result.cs">
+    <Compile Include="Models\sp_singleCustomer_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_stockdetails.cs">
+    <Compile Include="Models\sp_singleEmployee_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_stockdetails2_Result.cs">
+    <Compile Include="Models\sp_singleSupplier_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_stockdetails3_Result.cs">
-      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_stockdetails_Result.cs">
-      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_stocks_Result.cs">
+    <Compile Include="Models\SP_Stocks_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stock.cs">
@@ -185,11 +218,15 @@
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\ProductAssaignVM.cs" />
     <Compile Include="ViewModel\ProductDateilVM.cs" />
     <Compile Include="ViewModel\PurcheaseDetailVM.cs" />
+    <Compile Include="ViewModel\PurcheaseReturnVM.cs" />
+    <Compile Include="ViewModel\RPTVM.cs" />
     <Compile Include="ViewModel\SalesVM.cs" />
     <Compile Include="ViewModel\StockVM.cs" />
+    <Compile Include="ViewModel\SupplierVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\EFInventoryEntities.edmx">

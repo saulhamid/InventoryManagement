@@ -1,0 +1,113 @@
+﻿
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Purchase List</p>
+    </div>
+    <p></p>
+    <div class="row">
+        <div id="container">
+            <div id="demo">
+                <table id="myDataTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                Select All
+                            </th>
+                            <th>Invoiec No.</th>
+                            <th>Date</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>UnitePrice</th>
+                            <th>Discount</th>
+                            <th>Supplier Name</th>
+                            <th>Employee Name</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Action
+                            </th>
+                            <th>Invoiec No.</th>
+                            <th>Date</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>UnitePrice</th>
+                            <th>Discount</th>
+                            <th>Supplier Name</th>
+                            <th>Employee Name</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="AddUserForm">
+
+</div>
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/InventoryManagement/PurcheaseReturn/_index?invoceno=@ViewBag.invoceno",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "aoColumns": [
+                     {
+                         "sName": "Id",
+                         "bSearchable": false,
+                         "bSortable": false,
+                         "sWidth": "5%",
+                         "fnRender": function (oObj) {
+                             return '<a title="Click on for Edit" style="text-decoration:none;" href=\"/InventoryManagement/PurcheaseReturn/Create?PId=' + oObj.aData[0] + '\" id="lnkEdit1"   class="AddUser i-btn-edit-row"></a>';
+                         }
+                     }
+                                 ,{ "sName": "Invoice", "sWidth": "9%" }
+                                , { "sName": "Date", "sWidth": "9%" }
+                                , { "sName": "ProductName", "sWidth": "20%" }
+                                , { "sName": "Quantity", "sWidth": "8%" }
+                                , { "sName": "UnitePrice", "sWidth": "8%" }
+                                , { "sName": "Discount", "sWidth": "8%" }
+                                , { "sName": "SupplierName", "sWidth": "12%" }
+                                , { "sName": "EmployeeName", "sWidth": "12%" }
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [ { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+            });
+        });
+        $('.AddUser').on('click', function () {
+            $("#AddUserForm").dialog({
+                autoOpen: true,
+                position: { my: "center", at: "top+350", of: window },
+                width: 1000,
+                resizable: false,
+                title: 'Add User Form',
+                modal: true,
+                open: function () {
+                    $(this).load($(this).attr("href"));
+                },
+                buttons: {
+                    "Add User": function () {
+                        addUserInfo();
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            return false;
+        });
+    </script>

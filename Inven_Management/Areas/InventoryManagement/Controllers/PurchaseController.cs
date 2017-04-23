@@ -1,4 +1,6 @@
-﻿using Inven_Management.Areas.Config.Models;
+﻿using Commons;
+using CrystalDecisions.CrystalReports.Engine;
+using Inven_Management.Areas.Config.Models;
 using Inven_Management.Areas.InventoryManagement.Models;
 using InventoryRepo.InventoryManagement;
 using InventoryViewModel.Models;
@@ -6,6 +8,8 @@ using InventoryViewModel.ViewModel;
 using JQueryDataTables.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -103,9 +107,9 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             PurcheaseDetail purvmd = new PurcheaseDetail();
             purvmd.IsActive = true;
             vm = new ProductRepo().GETAllByCode(code);
-            purvmd.Code = vm.Code;
+            purvmd.ProductCode = vm.Code;
             purvmd.ProductId = vm.Id;
-            purvmd.Name = vm.Name + "-" + vm.ProductSizeName + vm.UOMName;
+            purvmd.ProductName = vm.Code+"~"+vm.Name;
             purvmd.Quantity = Convert.ToDecimal(Quantity);
             purvmd.UnitePrice = Convert.ToDecimal(UnitePrice);
             purvmd.Discount = Convert.ToDecimal(Discount);
@@ -183,6 +187,27 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string[] result = new string[6];
             result = _repo.Delete(a);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult rptPurchease(int Id)
+        {
+            DataTable table = new DataTable();
+            table = Common.ListToDataTable(_repo.rptPurchease().Where(m=>m.Id == Id).ToList());
+            DataSet ds = new DataSet();
+            ds.Tables.Add(table);
+            ds.Tables[0].TableName = "dtPurcheaseDetail";
+            ReportDocument doc = new ReportDocument();
+            string rptLocation = "";
+            rptLocation = AppDomain.CurrentDomain.BaseDirectory + @"Areas\\InventoryManagement\\Report\\rptPurchease.rpt";
+            doc.Load(rptLocation);
+            doc.SetDataSource(ds);
+            var rpt = RenderReportAsPDF(doc);
+            doc.Close();
+            return rpt;
+        }
+        private FileStreamResult RenderReportAsPDF(ReportDocument rptDoc)
+        {
+            Stream stream = rptDoc.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/PDF");
         }
     }
 }

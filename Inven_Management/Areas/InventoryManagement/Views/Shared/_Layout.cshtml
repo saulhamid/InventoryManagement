@@ -158,39 +158,18 @@
                 }
             }
         });
-
-       
-
-        
-       
-        
-
-       
-
-      
-       
-
     });
     </script>
-
-
 </head>
 <body>
     <div class="container">
             <script>
-               
             </script>
         @Html.Partial("_header")
-       
-        
-
         </div>
-
     <div>
         <div class="dialog-alert" style="display: none">
             <div class="msgg">jj</div>
-
-
         </div>
         <div class="dialog-confirm" style="display: none">
             <p>
@@ -206,25 +185,19 @@
         </div>
     </div>
     <div class="container">
-
         <p class="alert alert-danger text-capitalize text-center" style="margin-bottom:0px!important">  @TempData["Msg"]</p>
-
     </div>
         <div id="body">
-
             @RenderSection("featured", required: false)
             <section class="main-content clear-fix" style="min-height:400px">
                     @RenderBody()
                         </section>
         </div>
         @Html.Partial("_footer")
-
-
        @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/bootstrapjs")
-   
     <script src="~/assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
     @*<script src="~/assets/plugins/DataTables/media/js/DT_bootstrap.js"></script>*@
     @*<script src="~/assets/plugins/DataTables/extras/ColVis/media/js/ColVis.js"></script>*@
@@ -239,7 +212,6 @@
         }
     });
     </script>
-
         @RenderSection("scripts", required: false)
 </body>
 </html>

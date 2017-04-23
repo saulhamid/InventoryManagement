@@ -16,12 +16,9 @@ namespace InventoryViewModel.Models
     {
         public int Id { get; set; }
         public string InvoiecNo { get; set; }
-        public Nullable<int> ProductId { get; set; }
         public Nullable<int> SupplierId { get; set; }
         public Nullable<int> EmployeeId { get; set; }
         public string Date { get; set; }
-        public Nullable<decimal> GrandTotal { get; set; }
-        public Nullable<decimal> TotalDiscount { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsArchive { get; set; }

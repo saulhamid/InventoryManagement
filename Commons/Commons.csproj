@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="CurrentUserName.cs" />
     <Compile Include="GetIpAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

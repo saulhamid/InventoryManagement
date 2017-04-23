@@ -29,5 +29,11 @@ namespace InventoryViewModel.ViewModel
         public IEnumerable<SalesDetail> SalesDetailvms { get; set; }
 
         public decimal? WithOurDiscountPrice { get; set; }
+
+        public decimal? TotalSlup { get; set; }
+
+        public decimal? TotalReturn { get; set; }
+
+        public decimal? TotalReplace { get; set; }
     }
 }

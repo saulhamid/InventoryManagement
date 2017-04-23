@@ -17,66 +17,73 @@ namespace InventoryServices.InventoryManagement
         #endregion Declare
         public string[] SaveAndEditdescrease(StockDetail data)
        {
-           bool check;
+           
            string[] result = new string[6];
            StockDetail stock = new StockDetail();
-           try
-           {
+            try {
                if (data == null) throw new ArgumentNullException("The expected data not found For Insert");
-
-               check = _context.StockDetails.Any(m => m.InvoiceNo == data.InvoiceNo);
-               if (check == true)
+               if (stock.PurcheaseId != null ||stock.PurcheaseReturnId != null ||stock.SalesId != null ||stock.SalesReturnId != null)
                {
-                   var update = _context.StockDetails.FirstOrDefault(m => m.InvoiceNo == data.InvoiceNo);
-                   if (update.StockQuantity < data.StockQuantity)
+                   if (stock.PurcheaseId != null) {
+                       stock = _context.StockDetails.FirstOrDefault(m => m.PurcheaseId == data.PurcheaseId);
+                   }
+                    if (stock.PurcheaseReturnId != null) {
+                        stock = _context.StockDetails.FirstOrDefault(m => m.PurcheaseReturnId == data.PurcheaseReturnId);
+                   }
+                   if (stock.SalesId != null) {
+                       stock = _context.StockDetails.FirstOrDefault(m => m.SalesId == data.SalesId);
+                   }
+                    if (stock.SalesReturnId != null) {
+                        stock = _context.StockDetails.FirstOrDefault(m => m.SalesReturnId == data.SalesReturnId);
+                   }
+                    if (stock.StockQuantity < data.StockQuantity)
                    {
-                       data.TransQuantity = update.StockQuantity + data.StockQuantity;
-                       data.TotalQuantity = update.TotalQuantity + data.TransQuantity;
+                       data.TransQuantity = stock.StockQuantity + data.StockQuantity;
+                       data.TotalQuantity = stock.TotalQuantity + data.TransQuantity;
                    }
                    else
                    {
-                       data.TransQuantity = update.StockQuantity - data.StockQuantity;
-                       data.TotalQuantity = update.TotalQuantity - data.TransQuantity;
+                       data.TransQuantity = stock.StockQuantity - data.StockQuantity;
+                       data.TotalQuantity = stock.TotalQuantity - data.TransQuantity;
                    }
-                   if (update.StockDiscount < data.StockDiscount)
+                    if (stock.StockDiscount < data.StockDiscount)
                    {
-                       data.TransDiscount = update.StockDiscount + data.StockDiscount;
-                       data.TotalDiscount = update.TotalDiscount + data.TransDiscount;
+                       data.TransDiscount = stock.StockDiscount + data.StockDiscount;
+                       data.TotalDiscount = stock.TotalDiscount + data.TransDiscount;
                    }
                    else
                    {
-                       data.TransDiscount = update.StockDiscount - data.StockDiscount;
-                       data.TotalDiscount = update.TotalDiscount - data.TransDiscount;
+                       data.TransDiscount = stock.StockDiscount - data.StockDiscount;
+                       data.TotalDiscount = stock.TotalDiscount - data.TransDiscount;
                    }
-                   if (update.StockPrice < data.StockPrice)
+                    if (stock.StockPrice < data.StockPrice)
                    {
-                       data.TransPrice = update.StockPrice + data.StockPrice;
-                       data.TotalPrice = update.TotalPrice + data.TransPrice;
+                       data.TransPrice = stock.StockPrice + data.StockPrice;
+                       data.TotalPrice = stock.TotalPrice + data.TransPrice;
                    }
                    else
                    {
-                       data.TransPrice = update.StockPrice - data.StockPrice;
-                       data.TotalPrice = update.TotalPrice - data.TransPrice;
+                       data.TransPrice = stock.StockPrice - data.StockPrice;
+                       data.TotalPrice = stock.TotalPrice - data.TransPrice;
                    }
-                   if (update.StockSlup < data.StockSlup)
+                    if (stock.StockSlup < data.StockSlup)
                    {
-                       data.TransSlup = update.StockSlup + data.StockSlup;
-                       data.TotalSlup = update.TotalSlup + data.TransSlup;
+                       data.TransSlup = stock.StockSlup + data.StockSlup;
+                       data.TotalSlup = stock.TotalSlup + data.TransSlup;
                    }
                    else
                    {
-                       data.TransSlup = update.StockSlup - data.StockSlup;
-                       data.TotalSlup = update.TotalSlup - data.TransSlup;
+                       data.TransSlup = stock.StockSlup - data.StockSlup;
+                       data.TotalSlup = stock.TotalSlup - data.TransSlup;
                    }
-                   update.Date = DateTime.Now.ToString("MM/dd/yy");
+                    stock.Date = DateTime.Now.ToString("MM/dd/yy");
                    //_context.Entry(update).CurrentValues.SetValues(data);
-                   _context.Entry(update).State = System.Data.Entity.EntityState.Modified;
+                    _context.Entry(stock).State = System.Data.Entity.EntityState.Modified;
                    _context.SaveChanges();
                }
                else
                {
                    data.Date = DateTime.Now.ToString("MM/dd/yy");
-                   
                    _context.StockDetails.Add(data);
                    result[1] = "Stock Data Save";
                    result[0] = "Successfully";
@@ -87,7 +94,7 @@ namespace InventoryServices.InventoryManagement
            catch (DbEntityValidationException dbEx)
            {
                result[0] = "Fail";
-               foreach (var validationErrors in dbEx.EntityValidationErrors)
+               foreach ( var validationErrors in dbEx.EntityValidationErrors)
                {
                    foreach (var validationError in validationErrors.ValidationErrors)
                    {

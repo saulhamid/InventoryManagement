@@ -1,4 +1,5 @@
-﻿using InventoryRepo.InventoryManagement;
+﻿using InventoryRepo.Config;
+using InventoryRepo.InventoryManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,6 @@ namespace Inven_Management.Areas.Config.Controllers
 {
     public class AutoCompleteController : Controller
     {
-        //
-        // GET: /Config/AutoComplete/
-
         public ActionResult Index()
         {
             return View();
@@ -23,6 +21,34 @@ namespace Inven_Management.Areas.Config.Controllers
         public JsonResult Product(string term)
         {
             return Json(new ProductRepo().Autocomplete(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ProductWithCodeName(string term)
+        {
+            return Json(new ProductRepo().AutocompleteWithCodeName(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ZoneOrArea(string term)
+        {
+            return Json(new ZoneorAreaRepo().Autocomplete(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Market(string term)
+        {
+            return Json(new MarketRepo().Autocomplete(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult StockProduct(string term)
+        {
+            return Json(new StockRepo().Autocomplete(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult StockProductwithUnitePrice(string term)
+        {
+            return Json(new StockRepo().AutocompleteUnitePrice(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult AutocompleteInvoice(string term)
+        {
+            return Json(new StockRepo().AutocompleteInvoice(term), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult AutocompleteInvoicePurchease(string term)
+        {
+            return Json(new PurcheaseRepo().AutocompleteInvoice(term), JsonRequestBehavior.AllowGet);
         }
     }
 }

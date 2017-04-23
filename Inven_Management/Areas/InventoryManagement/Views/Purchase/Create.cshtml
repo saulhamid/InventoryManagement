@@ -85,30 +85,22 @@
 
             @Html.ValidationSummary(true)
             <div class="row" style="">
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.PurcheaseDetails.FirstOrDefault().Code)
+                        @Html.Label("Product Code")
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().Code, new { @placeholder = "Code", @class = " form-control code", @Onchage = "CheckCode(this)" })
-                        @Html.ValidationMessageFor(model => model.PurcheaseDetails.FirstOrDefault().Code)
+                        @Html.TextBox("Product Code", null, new { @placeholder = "Code", @class = " form-control code", @Onchage = "CheckCode(this)" })
+                        @Html.ValidationMessage("Product Code")
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.PurcheaseDetails.FirstOrDefault().Name)
-                    </div>
-                    <div class="editor-field">
-                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().Name, new { @placeholder = "Name", @class = " Name  form-control" })
-                        @Html.ValidationMessageFor(model => model.PurcheaseDetails.FirstOrDefault().Name)
-                    </div>
-                </div>
+             
                 <div class="col-md-1">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.PurcheaseDetails.FirstOrDefault().Quantity)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().Quantity, new { @placeholder = "Quantity", @class = "ppqty  number form-control" })
+                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().Quantity, new { @placeholder = "Quantity", @class = "ppqty center  number form-control" })
                         @Html.ValidationMessageFor(model => model.PurcheaseDetails.FirstOrDefault().Quantity)
                     </div>
                 </div>
@@ -117,7 +109,7 @@
                         @Html.LabelFor(model => model.PurcheaseDetails.FirstOrDefault().UnitePrice)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().UnitePrice, new { @placeholder = "UnitePrice", @class = "ppunit  number form-control" })
+                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().UnitePrice, new { @placeholder = "UnitePrice", @class = "ppunit center number form-control" })
                         @Html.ValidationMessageFor(model => model.PurcheaseDetails.FirstOrDefault().UnitePrice)
                     </div>
                 </div>
@@ -126,7 +118,7 @@
                         @Html.LabelFor(model => model.PurcheaseDetails.FirstOrDefault().Discount)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().Discount, new { @placeholder = "Discount", @class = "ppdis  number form-control" })
+                        @Html.TextBoxFor(model => model.PurcheaseDetails.FirstOrDefault().Discount, new { @placeholder = "Discount", @class = "ppdis center number form-control" })
                         @Html.ValidationMessageFor(model => model.PurcheaseDetails.FirstOrDefault().Discount)
                     </div>
                 </div>
@@ -153,8 +145,7 @@
         <thead>
             <tr>
                 <th>Action</th>
-                <th>Code</th>
-                <th>Name</th>
+                <th>Code and Name</th>
                 <th>Quantity</th>
                 <th>UnitPrice</th>
                 <th>Discount</th>
@@ -169,7 +160,6 @@
         </tbody>
         <tfoot>
             <tr>
-                <td></td>
                 <td><b> Total Quantity =</b></td>
                 <td><input type="text" readonly="readonly" class="totaolqty right form-control" /></td>
                 <td><b>TOtal Discount =</b></td>
@@ -182,15 +172,13 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
                 <td><b>Discount:</b></td>
                 <td>
-                 @Html.TextBoxFor(model => model.Purchasevm.TotalDiscount, new { @placeholder = "Total Discount", @class = "right TotalDiscount form-control" })
-                        @Html.ValidationMessageFor(model => model.Purchasevm.TotalDiscount)
+                 @Html.TextBox("Total Discount",null, new { @placeholder = "Total Discount", @class = "right TotalDiscount form-control" })
+                        @Html.ValidationMessage("Total Discount")
                 </td>
             </tr>
             <tr>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -200,7 +188,6 @@
             </tr>
         </tfoot>
     </table>
-   
     <div class="row">
         <div class="col-md-3">
             <div class="editor-label">
@@ -213,7 +200,6 @@
     </div>
 }
 <script>
-   
     $(document).ready(function () {
         valiDation("upform");
         $(function () {
@@ -251,18 +237,22 @@
                 }
                 $("#addrow").click(function () {
                     var code = $(".code").val();
+                    code = code.split('~')[0]
                     var exit = true;
                     $(".pa").each(function (i, item) {
                         var el = $(this);
-                        var tcode = el.closest("tr").find(".pcode").val();
+                        var tcode = el.closest("tr").find(".pname").val();
+                        tcode = tcode.split('~')[0]
                         if (code == tcode) {
+                            alert(tcode);
                             exit = false;
                             ShowResult("this Product Already Add in below List");
+                            return;
                         }
                     })
             var Quantity = $(".ppqty").val();
             var UnitePrice = $(".ppunit").val();
-            var Discount = $(".ppdis").val();
+            var Discount =getNum($(".ppdis").val());
             var remarks = $("#Productvm_Remarks").val();
             if (code == null) {
                 return;
@@ -314,13 +304,13 @@
         $(".TotalDiscount,.grandTotal").change(function () {
             calculation();
         });
-       
         function calculation() {
             var result= 0;
             var totaolqty = 0;
             var totaldise = 0;
             var ttotal = 0;
-            var tdis = 0;
+            var tdis = getNum($(".TotalDiscount").val());
+
             $(".pa").each(function (i, item) {
                 var el = $(this);
                 var qty, unit, disc, amount = 0;
@@ -331,14 +321,16 @@
                 el.closest("tr").find(".amount").val(amount);
                 totaolqty += parseFloat(qty);
                 totaldise += parseFloat(disc);
-                result +=getNum(amount);
+                result += getNum(amount);
+                
             });
             $('.result').val(result);
-            $('.totaolqty').val(totaolqty);
-            $('.totaldise').val(totaldise);
-            tdis = getNum($(".TotalDiscount").val());
+            $('.totaolqty').val(getNum(totaolqty));
+
+            $('.totaldise').val(getNum(totaldise));
 
             ttotal = result - parseFloat(tdis);
+          
             $(".grandTotal").val(getNum(ttotal));
         }
         $('.qty,.unit,.disc').keyup(function () {
@@ -346,12 +338,12 @@
         });
     $(".number").change(function () {
         if (!$.isNumeric($(this).val())) {
-            $(this).val(" ");
+            $(this).val(0);
             ShowResult("this not be Numeric");
         }
     });
     function getNum(val) {
-        if (isNaN(val) || val == null) {
+        if (isNaN(val) || val == null || val == '' || typeof val == 'undefined') {
             return 0;
         }
         return val;
@@ -367,7 +359,7 @@
         return a;
     }
     function EditRow(send) {
-        $(".code").val($(send).parents().parents().children().find(".pcode").val());
+        $(".code").val($(send).parents().parents().children().find(".pname").val());
         $(".Name").val($(send).parents().parents().children().find(".pname").val());
         $(".ppqty").val($(send).parents().parents().children().find(".qty").val());
         $(".ppunit").val($(send).parents().parents().children().find(".unit").val());
@@ -375,8 +367,6 @@
         $(send).closest('.pa').remove();
         calculation();
     };
-    
-
 </script>
 
 

@@ -7,7 +7,6 @@
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
         padding: 2px !important;
     }
-
    table input,table textarea {
        margin:0px!important;
     }
@@ -24,14 +23,6 @@
                @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.Sales.Id)
                 <div class="row" style="">
-                    @*<div class="col-md-1">
-                            <div class="editor-label">
-                                &nbsp;
-                            </div>
-                            <div class="editor-field">
-                            </div>
-                        </div>*@
-                    
                     <div class="col-md-2">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Sales.InvoiecNo)
@@ -41,7 +32,7 @@
                             @Html.ValidationMessageFor(model => model.Sales.InvoiecNo)
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Sales.EmployeeId)
                         </div>
@@ -50,16 +41,27 @@
                             @Html.ValidationMessageFor(model => model.Sales.EmployeeId)
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Sales.ZoneOrAreaId)
                         </div>
                         <div class="editor-field">
-                            @Html.SimpleDropDownFor(model => model.Sales.ZoneOrAreaId, "/Config/DropDown/ZoneorArea", new { @placeholder = " Product Category Name", @class = " form-control " })
+                            @Html.SimpleDropDownFor(model => model.Sales.ZoneOrAreaId, "/Config/DropDown/ZoneorArea", new { @placeholder = " Product Category Name", @class = " form-control Zoneorarea" })
                             @Html.ValidationMessageFor(model => model.Sales.ZoneOrAreaId)
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.Label("Market")
+                        </div>
+                        <div class="editor-field">
+                            @Html.SimpleDropDown("MarketId", null, new { @placeholder = "Market", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.ZoneOrAreaId)
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-3">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Sales.CustomerId)
                         </div>
@@ -70,14 +72,14 @@
                     </div>
                     <div class="col-md-2">
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.Sales.Datetimes)
+                            @Html.LabelFor(model => model.Sales.Date)
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(model => model.Sales.Datetimes, new { @placeholder = "Date", @class = "customDatePicker required form-control" })
-                            @Html.ValidationMessageFor(model => model.Sales.Datetimes)
+                            @Html.TextBoxFor(model => model.Sales.Date, new { @placeholder = "Date", @class = "customDatePicker required form-control" })
+                            @Html.ValidationMessageFor(model => model.Sales.Date)
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Sales.Remarks)
                         </div>
@@ -99,22 +101,13 @@
             <div class="row" style="">
                 <div class="col-md-3">
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Code)
+                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().ProductCode)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
-                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Code)
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().ProductCode, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().ProductCode)
                     </div>
                 </div>
-                @*<div class="col-md-2">
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().Name)
-                    </div>
-                    <div class="editor-field">
-                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().Name, new { @placeholder = "Name", @class = " Name required form-control" })
-                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().Name)
-                    </div>
-                </div>*@
                 <div class="col-md-1">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().UnitePrice)
@@ -130,8 +123,8 @@
                         @*@Html.LabelFor(model => model.SalesDetailvms.FirstOrDefault().ReceiveQuantity)*@
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().ReceiveQuantity, new { @placeholder = "ReceiveQuantity", @class = "prqty center required number form-control" })
-                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().ReceiveQuantity)
+                        @Html.TextBoxFor(model => model.SalesDetailvms.FirstOrDefault().AssaignQuantity, new { @placeholder = "Assaign Quantity", @class = "prqty center required number form-control" })
+                        @Html.ValidationMessageFor(model => model.SalesDetailvms.FirstOrDefault().AssaignQuantity)
                     </div>
                 </div>
                 <div class="col-md-1">
@@ -188,7 +181,6 @@
             </div>
         </div>
     </div>
-
     <table class="table table-responsive display">
         <thead>
             <tr>
@@ -241,24 +233,43 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
         <td></td>
         <td></td>
-                <td colspan="2" class="Right"><b>Packet Quantity =</b></td>
+                <td class="Right"><b>Packet Quantity =</b></td>
         <td>
             @Html.TextBoxFor(model => model.Sales.PackQuantity, new { @placeholder = "Pack Quantity", @Onchange = "pack()", @class = "right packqty form-control" })
             @Html.ValidationMessageFor(model => model.Sales.PackQuantity)
         </td>
-                <td colspan="2" class="Right"><b>Packet Unit Price =</b></td>
+                <td  class="Right"><b>Packet Unit Price =</b></td>
         <td>
             @Html.TextBoxFor(model => model.Sales.PackUnitPrice, new { @placeholder = "Pack Unit Price", @Onchange = "pack()", @class = "right packunit form-control" })
             @Html.ValidationMessageFor(model => model.Sales.PackUnitPrice)
         </td>
-                <td colspan="2" class="Right"><b>Total Packet Price =</b></td>
+                <td  class="Right"><b>Total Packet Price =</b></td>
         <td>
             @Html.TextBoxFor(model => model.TotalPackPrice, new { @placeholder = "Total Pack Price", @readonly = "readonly", @class = "right packtotal form-control" })
             @Html.ValidationMessageFor(model => model.TotalPackPrice)
         </td>
-    </tr>
+    </tr><tr>
+             <td></td>
+     <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+             <td class="Right"><b>Event Name =</b></td>
+             <td colspan="3">
+                 @Html.TextBoxFor(model => model.Sales.EventName, new { @placeholder = "Event Name", @class = " form-control" })
+                 @Html.ValidationMessageFor(model => model.Sales.EventName)
+             </td>
+    <td  class="Right"><b>Event Amount =</b></td>
+    <td>
+        @Html.TextBoxFor(model => model.Sales.EventAamount, new { @placeholder = "Event Aamount", @class = "right eAmount form-control" })
+        @Html.ValidationMessageFor(model => model.Sales.EventAamount)
+    </td>
+</tr>
             <tr>
         <td></td>
         <td></td>
@@ -308,8 +319,8 @@
                 }
                 $("#addrow").click(function () {
                     var value = $(".code").val();
-                    var code = value.split('-')[0];
-                    $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
+                     var code = $(".code").val();
+                     code = code.split('~')[0];
                     //var code = $(".code").val();
                     var exit = true;
                     $(".pa").each(function (i, item) {
@@ -381,6 +392,9 @@
     $(".TotalDiscount").change(function () {
         calculation();
     });
+    $(".eAmount").change(function () {
+        calculation();
+    });
     function calculation() {
         var result = 0;
         var totaldis = 0;
@@ -394,7 +408,8 @@
         var TotalDiscount = getNum($(".TotalDiscount").val());
         var packunit=getNum($(".packunit").val());
         var packqty=getNum($(".packqty").val());
-        var packtotal = getNum($(".packtotal").val());
+        var packtotal = getNum($(".packtotal").val()); eAmount
+        var eAmount = getNum($(".eAmount").val());
         var ttotal = 0;
         var tdis = 0;
         $(".pa").each(function (i, item) {
@@ -430,7 +445,7 @@
         $('.totalspprice').val(totalspprice);
         $('.wodis').val(wodis);
         $('.totalamounts').val(totalamounts);
-        ttotal = result - TotalDiscount - packtotal;
+        ttotal = result - TotalDiscount - packtotal - eAmount;
         ttotal = parseFloat(ttotal);
         $(".grandTotal").val(getNum(ttotal));
     }
@@ -458,6 +473,39 @@
         }
         return val;
     }
+    //$('.Zoneorarea').change(function () {
+    //    dropdown();
+    //});
+    //$(function () {
+    //    dropdown();
+    //});
+    $('.Zoneorarea').change(function () {
+        var id = $(this).val();
+       
+     
+        var url1 = "/Config/DropDown/Market?Id=" + id;
+        $.getJSON(url1, function (data) {
+            $.each(data, function (i, state) {
+                $('#MarketId').append('<option value=' + state.Value + '>' +state.Text+'</option>');
+                //projects += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+            });
+            //$('#MarketId').html(projects);
+        });
+    })
+    function dropdown() {
+       
+          var id=  $('.Zoneorarea').val();
+            $('#MarketId').html("");
+            var projects = "";
+            var url1 = "/Config/AutoComplete/Market?term=" +id;
+            $.getJSON(url1, function (data) {
+                $.each(data, function (i, state) {
+                    $('#MarketId').append(new Option(state.Text, state.Value));
+                    //projects += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                });
+                //$('#MarketId').html(projects);
+            });
+        };
 </script>
 
 

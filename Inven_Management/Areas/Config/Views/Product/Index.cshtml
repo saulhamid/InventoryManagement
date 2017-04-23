@@ -23,28 +23,26 @@
                             </th>
                             <th>Code</th>
                             <th>Name</th>
-                            <th>Quantity</th>
-                            <th>UnitPrice</th>
-                            <th>IsActive</th>
-                            <th>ProductCategory</th>
-                            <th>ProductBrand</th>
-                            <th>ProductSize</th>
                             <th>UOM</th>
-                            <th>Supplier</th>
+                            <th>Product Size</th>
+                            <th>Product Category</th>
+                            <th>Product Brand</th>
+                            <th>Product Color</th>
+                            <th>Product Type</th>
+                            <th>IsActive</th>
                             <th>Remarks</th>
                         </tr>
                         <tr>
                             <th style="padding-left: 2.5%">Actions</th>
                             <th>Code</th>
                             <th>Name</th>
-                            <th>Quantity</th>
-                            <th>UnitPrice</th>
-                            <th>IsActive</th>
-                            <th>ProductCategory</th>
-                            <th>ProductBrand</th>
-                            <th>ProductSize</th>
                             <th>UOM</th>
-                            <th>Supplier</th>
+                            <th>Product Size</th>
+                            <th>Product Category</th>
+                            <th>Product Brand</th>
+                            <th>Product Color</th>
+                            <th>Product Type</th>
+                            <th>IsActive</th>
                             <th>Remarks</th>
                         </tr>
                     </thead>
@@ -67,7 +65,7 @@
             "aLengthMenu": tablelength(),
             "bJqueryUI": true,
             "bAutoWidth": false,
-            "sScrollX": '150%',
+            "sScrollX": '110%',
 
             "aoColumns": [
                             {
@@ -82,22 +80,19 @@
                             }
                             , { "sName": "Code", "sWidth": "10%" }
                                     , { "sName": "Name", "sWidth": "10%" }
-                                    , { "sName": "Quantity", "sWidth": "10%" }
-                                    , { "sName": "UnitPrice", "sWidth": "10%" }
-                                    , { "sName": "IsActive", "sWidth": "10%" }
+                                    , { "sName": "UOM", "sWidth": "5%" }
+                                    , { "sName": "ProductSize", "sWidth": "5%" }
                                     , { "sName": "ProductCategory", "sWidth": "10%" }
                                     , { "sName": "ProductBrand", "sWidth": "10%" }
-                                    , { "sName": "ProductSize", "sWidth": "10%" }
-                                    , { "sName": "UOM", "sWidth": "10%" }
-                                    , { "sName": "Supplier", "sWidth": "10%" }
+                                    , { "sName": "ProductColorName", "sWidth": "10%" }
+                                    , { "sName": "ProductTypeName", "sWidth": "10%" }
+                                    , { "sName": "IsActive", "sWidth": "10%" }
                                     , { "sName": "Remarks", "sWidth": "20%" }
             ]
         });
         oTable.columnFilter({
             sPlaceHolder: "head:after",
             aoColumns: [{ type: "checkbox", "sClass": "chkAll" }
-                       , { type: "text" }
-                       , { type: "text" }
                        , { type: "text" }
                        , { type: "text" }
                        , { type: "text" }
