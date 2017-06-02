@@ -1,0 +1,321 @@
+﻿@model InventoryViewModel.ViewModel.PurcheaseDetailVM
+@using UIHelper.MVC
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 0px !important;
+    }
+</style>
+@using (Html.BeginForm("Create", "Purchase", FormMethod.Post, new { Id = "upform" }))
+{
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Purchease</p>
+        </div>
+        <p></p>
+        <div class="row">
+            @Html.ValidationSummary(true)
+            <div class="row" style="">
+                
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Purchasevm.Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Purchasevm.Code, new { @placeholder = "Code", @class = "required form-control", @Onchage = "CheckCode(this)" })
+                        @Html.ValidationMessageFor(model => model.Purchasevm.Code)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Purchasevm.InvoiecNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Purchasevm.InvoiecNo, new { @placeholder = "InvoiecNo", @class = " required form-control" })
+                        @Html.ValidationMessageFor(model => model.Purchasevm.InvoiecNo)
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Purchasevm.SupplierId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.SimpleDropDownFor(model => model.Purchasevm.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control" })
+
+                        @Html.ValidationMessageFor(model => model.Purchasevm.SupplierId)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Purchasevm.EmployeeId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.SimpleDropDownFor(model => model.Purchasevm.EmployeeId, "/Config/DropDown/Employee", new { @placeholder = " Product Category Name", @class = " form-control" })
+
+                        @Html.ValidationMessageFor(model => model.Purchasevm.EmployeeId)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Purchasevm.Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Purchasevm.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                        @Html.ValidationMessageFor(model => model.Purchasevm.Remarks)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="thinbox">
+        <div class="th_thinbox">
+            <p>Product List</p>
+        </div>
+        <p></p>
+        <div class="row">
+
+            @Html.ValidationSummary(true)
+            <div class="row" style="">
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Productvms.FirstOrDefault().Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Productvms.FirstOrDefault().Code, new { @placeholder = "Code", @class = "required form-control code", @Onchage = "CheckCode(this)" })
+                        @Html.ValidationMessageFor(model => model.Productvms.FirstOrDefault().Code)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Productvms.FirstOrDefault().Name)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Productvms.FirstOrDefault().Name, new { @placeholder = "Name", @class = " Name required form-control" })
+                        @Html.ValidationMessageFor(model => model.Productvms.FirstOrDefault().Name)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Productvms.FirstOrDefault().Quantity)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Productvms.FirstOrDefault().Quantity, new { @placeholder = "Quantity", @class = " required number form-control" })
+                        @Html.ValidationMessageFor(model => model.Productvms.FirstOrDefault().Quantity)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Productvms.FirstOrDefault().UnitePrice)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Productvms.FirstOrDefault().UnitePrice, new { @placeholder = "UnitePrice", @class = " required number form-control" })
+                        @Html.ValidationMessageFor(model => model.Productvms.FirstOrDefault().UnitePrice)
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Productvms.FirstOrDefault().Discount)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Productvms.FirstOrDefault().Discount, new { @placeholder = "Discount", @class = " required number form-control" })
+                        @Html.ValidationMessageFor(model => model.Productvms.FirstOrDefault().Discount)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Productvms.FirstOrDefault().Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Productvms.FirstOrDefault().Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                        @Html.ValidationMessageFor(model => model.Productvms.FirstOrDefault().Remarks)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="editor-label">
+                        &nbsp;
+                    </div>
+                    <button type="button" title="Save Data" class="i-btn-add AddRowIndent" id="addrow"> Addrow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <td>Action</td>
+
+                <th>Code</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>UnitPrice</th>
+                <th>Discount</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Productvms)
+            {
+                Html.RenderPartial("_purcheaseDetail", item);
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>Total Quantity =</td>
+                <td><input type="text" readonly="readonly" class="totaolqty form-control" /></td>
+                <td>TOtal Discount =</td>
+                <td><input type="text" readonly="readonly" class=" totaldise form-control" /></td>
+                <td><b> Total =</b></td>
+                <td><input type="text" readonly="readonly" class="result form-control" /> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Discount:</td>
+                <td><input type="text" class="TotalDiscount form-control" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Grand Total</td>
+                <td><input type="text" readonly="readonly" class="grandTotal form-control" /></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="editor-label">
+                &nbsp;
+            </div>
+            <div class="editor-field">
+                <button type="button" title="Save Data" id="sub" class="i-btn-save"> Save</button>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".code").autocomplete({
+            source: '@Url.Action("Product", "Autocomplete", new { area = "Config" })', minLength: 1,
+            select: function (event, ui) {
+                var value = $(this).val();
+                $(".code").val(value.split('-')[0]);
+                $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
+                event.preventDefault();
+            }
+        });
+        //$(".code").on('input', function () {
+        //    var value = $(this).val();
+        //    $(".code").val(value.split('-')[0]);
+        //    $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
+        //});
+        $("table").hide();
+        //$('.AddRowIndent:not(.AddRowInited)').on("click", function () {
+
+        //    var code = $(".code").val();
+        //    var Quantity = $("#Quantity").val();
+        //    var UnitePrice = $("#UnitePrice").val();
+        //    var Discount = $("#Discount").val();
+        //    var remarks = $("#Remarks").val();
+        //    var url = "/InventoryManagement/Purchase/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Discount=" + Discount + "&Remarks=" + remarks;
+        //    $.ajax({
+        //        url: url,
+        //        //type: 'POST',
+        //        cache: false,
+
+        //        success: function (html) {
+        //            $("#" + container).append(html);
+
+        //        }
+        //    });
+        //    //CalculateTotal();
+        //    $('#detail').show();
+        //    $(".IndPro").val("")
+        //    $(".IndQty").val("")
+        //    $(".IndUPrice").val("")
+        //    return false;
+
+        //}).addClass("AddRowInited");
+
+        $("#addrow").click(function () {
+            var code = $(".code").val();
+            var Quantity = $("#Quantity").val();
+            var UnitePrice = $("#UnitePrice").val();
+            var Discount = $("#Discount").val();
+            var remarks = $("#Remarks").val();
+            var url = "/InventoryManagement/Purchase/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Discount=" + Discount;
+            var Hurl = "/InventoryManagement/Purchase/ProductDetail?code=" + code //+ "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice;
+            $.get(Hurl, function (data) {
+                $("table tbody").append(data);
+                $("table").show();
+                calculation();
+                //fnAlltotal();
+                $("#Products_Code").val('');
+                $("#Products_Name").val('');
+                $("#Products_Quantity").val('');
+                $("#Products_UnitePrice").val('');
+            });
+        });
+        $("#sub").click(function () {
+            var datas = $("#upform").serialize();
+            var url = $("form").attr("action");
+            $.post(url, datas, function (data, status) {
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+        });
+
+        $(".TotalDiscount,.grandTotal").change(function () {
+            calculation();
+        });
+        calculation();
+        function calculation() {
+            var result = 0;
+            var totaolqty = 0;
+            var totaldise = 0;
+            var ttotal = 0;
+            var tdis = 0;
+            $(".pa").each(function (i, item) {
+                var el = $(this);
+                var qty, unit, disc, amount = 0;
+                qty = el.closest("tr").find(".qty").val();
+                unit = el.closest("tr").find(".unit").val();
+                disc = el.closest("tr").find(".disc").val();
+                amount = (parseFloat(qty) * parseFloat(unit)) - parseFloat(disc);
+                el.closest("tr").find(".amount").val(amount);
+                totaolqty += parseFloat(qty);
+                totaldise += parseFloat(disc);
+                result += amount;
+            });
+            $('.result').val(result);
+            $('.totaolqty').val(totaolqty);
+            $('.totaldise').val(totaldise);
+            tdis = $(".TotalDiscount").val();
+            ttotal = result - parseFloat(tdis)
+            $(".grandTotal").val(ttotal);
+        }
+        $('.qty,.unit,.disc').keyup(function () {
+            calculation();
+        });
+    });
+    $(".number").change(function () {
+        if (!$.isNumeric($(this).val())) {
+            $(this).val(" ");
+            alert("this not be Numeric")
+        }
+    });
+
+
+
+
+
+</script>
+
+
+

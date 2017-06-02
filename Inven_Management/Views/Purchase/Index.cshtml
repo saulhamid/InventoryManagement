@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="headrow">
+    <div class="pull-left">
+        <button type="button" title="Add New Bank" data-url="/InventoryManagement/Purchase/Create" onclick="GoTo(this)" id="" class="sym-btn-add "> New</button>
+        <button type="button" title="Delete Checked Bank" data-url="/InventoryManagement/Purchase/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="sym-btn-remove"> Delete</button>
+ </div>
+    <div class=" pull-right">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="thinbox">
+    <div class="th_thinbox">
+        <p>Purchease</p>
+    </div>
+    <p></p>
+    <table id="myDataTable" class="display">
+        <thead>
+            <tr>
+                <th class="center"><input type="checkbox" class="chkAll" /> Select All</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <th class="center">Actions</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody></tbody>
+    </table>
+    <br />
+</div>
+<div class="headrow">
+    <button type="button" title="Add New Bank" data-url="/InventoryManagement/Purchase/Create" onclick="GoTo(this)" id="" class="sym-btn-add "> New</button>
+    <button type="button" title="Delete Checked Bank" data-url="/InventoryManagement/Purchase/Delete" onclick="deletedData(this, 'myDataTable');" id="" class="sym-btn-remove"> Delete</button>
+</div>
+
+@section head{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            SelectAllForDelete();
+            $.datepicker.regional[""].dateFormat = 'dd/M/y';
+            $.datepicker.setDefaults($.datepicker.regional['']);
+            var oTable = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/InventoryManagement/Purchase/_index",
+                "bProcessing": true,
+                "aLengthMenu": tablelength(),
+                "bJqueryUI": true,
+                "bAutoWidth": false,
+                "aoColumns": [
+                                {
+                                    "sName": "Id",
+                                    "bSearchable": false,
+                                    "bSortable": false,
+                                    "sWidth": "12%",
+                                    "fnRender": function (oObj) {
+                                        return ' <input onclick="CheckAll(this)" type="checkbox" data-Id="' + oObj.aData[0] + '">&nbsp; <a title="Click on for Edit" style="text-decoration:none;"   href=\"/PharmaRaw/Bank/Edit/' + oObj.aData[0] + '\" class="sym-btn-edit-row"></a>' +
+                                        '&nbsp; <a title="Click on for Delete" style="text-decoration:none;" data-url="/PharmaRaw/Bank/Delete" onclick="deletedData(this, myDataTable,' + oObj.aData[0] + ');"  class="sym-btn-remove-row"></a>';
+                                    }
+                                }
+                                , { "sName": "Code", "sWidth": "10%" }
+                                , { "sName": "Name", "sWidth": "25%" }
+                                , { "sName": "Quantity", "sWidth": "20%" }
+                                , { "sName": "Unit Price", "sWidth": "15%" }
+                                , { "sName": "Total", "sWidth": "15%" }
+
+                ]
+            });
+            oTable.columnFilter({
+                sPlaceHolder: "head:after",
+                aoColumns: [{ type: "checkbox", "sClass": "chkAll" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                           , { type: "text" }
+                ]
+
+            });
+        });
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿@model InventoryViewModel.Models.Product
+@using UIHelper.MVC
+
+<tr class="pa">
+@using (Html.BeginCollectionItem("Productvms"))
+{
+    @Html.HiddenFor(model=>model.Id);
+    <td style="width:10%"><button class="Edit i-btn-edit-row"></button><button class="Edit i-btn-remove-row"></button></td>
+    <td style="width:10%">@Html.TextBoxFor(model => model.Code, new { @placeholder = " Product Code", @class = " form-control",@readonly="disable" })</td>
+    <td style="width:25%">@Html.TextBoxFor(model => model.Name, new { @placeholder = " Product Name", @class = " form-control", @readonly = "disable" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.Quantity, new { @placeholder = " Product Quantity", @class = "qty form-control", @readonly = "disable" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.UnitePrice, new { @placeholder = " Product UnitePrice", @class = "unit form-control", @readonly = "disable" })</td>
+    <td style="width:8%">@Html.TextBoxFor(model => model.Discount, new { @placeholder = " Product Discount", @class = "disc form-control", @readonly = "disable" })</td>
+    <td style="width:20%">@Html.TextBoxFor(model => model.Discount, new { @placeholder = " Product Amount", @class = "amount right form-control", @readonly = "disable" })</td>
+}
+</tr>

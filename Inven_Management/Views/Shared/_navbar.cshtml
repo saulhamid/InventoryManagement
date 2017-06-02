@@ -1,0 +1,201 @@
+﻿<div class="content white menuheight">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+              <ul class="nav col-xs-4 visible-xs" >
+        <li class="dropdown1" style="padding-top:4px">
+          <a href="#" class=" btn btn-warning" >Payroll </a>
+        </li>
+      </ul>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!--/.navbar-header-->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                @if ((HttpContext.Current.User.IsInRole("Master") || HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Account")))
+                {
+                        
+                    <li class="Home dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if ((HttpContext.Current.User.IsInRole("Master") || HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Account")))
+                            {
+                                <li><a class="btn btn-info" href="/Common/Home/">Admin</a></li>
+                            }
+                            <li><a class="btn btn-info" href="/HRM/EmployeeInfo/">HRM</a></li>
+                            <li><a class="btn btn-info" href="/PharmaRaw/Home/">Pharma Raw</a></li>
+                            <li><a class="btn btn-info" href="/Payroll/Home/">Payroll</a></li>
+                        </ul>
+                    </li>@*
+                    <li class="dropdown Structure">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-1">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="multi-column-dropdown">
+                                        <li><a class="btn btn-info" href="/Payroll/SalaryStructure">Salary </a></li>
+                                        <li><a class="btn btn-info" href="/Payroll/PFStructure">Provident Fund(PF) </a></li>
+                                        <li><a class="btn btn-info" href="/Payroll/TaxStructure">Tax </a></li>
+                                        <li><a class="btn btn-info" href="/Payroll/BonusStructure">Bonus </a></li>
+                                        <li><a class="btn btn-info" href="/Payroll/ProjectAllocation">Project Expense Allocation </a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>*@
+                      <li class="dropdown Structure">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup<b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-1">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="multi-column-dropdown">
+                                        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle btn btn-info" data-toggle="dropdown">Structure</a>
+                                            <ul class="dropdown-menu">
+                                                 <li><a class="btn btn-info" href="/Payroll/SalaryStructure">Salary</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/PFStructure">Provident Fund(PF)</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/TaxStructure">Tax </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/BonusStructure">Bonus </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/ProjectAllocation">Project Expense Allocation</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown  "><a href="/Payroll/Structure" class="btn btn-info">Structure Assign</a></li>
+                                         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle btn btn-info" data-toggle="dropdown">Head</a>
+                                            <ul class="dropdown-menu">
+                                            <li><a class="btn btn-info" href="/Payroll/EnumSalaryType">Salary Head</a></li>
+                                            <li><a class="btn btn-info" href="/Payroll/EnumLoanType">LoanType</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown Structure">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Payroll Entry <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-1">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="multi-column-dropdown">
+                                        <li class="dropdown "><a href="/Payroll/SingleEmployee" class="btn btn-info">All Salary Entry</a>  </li>
+                                        <li class="dropdown "><a href="/Payroll/EmployeeOtherEarning" class="btn btn-info">Other Earning</a>  </li>
+                                        <li class="dropdown "><a href="/Payroll/EmployeeOtherDeduction" class="btn btn-info">Other Deduction</a>  </li>
+
+
+
+                                      @*  <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle btn btn-info" data-toggle="dropdown">Earning</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeAreer">Arrear </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeOverTime">Overtime </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeReimbursableExpense">Reimbursable Expense </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeOtherEarning">Other Earning </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle btn btn-info" data-toggle="dropdown">Deduction</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeOtherDeduction">Other Deduction </a></li>
+                                            </ul>
+                                        </li>*@
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown Structure">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Payroll Process <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-1">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="multi-column-dropdown">
+                                        <li class="dropdown "><a href="/Payroll/SalaryProcess" class="btn btn-info">Full Salary Process</a>  </li>
+                                         @*<li class="dropdown "><a href="/Payroll/SalaryOtherEarning" class="btn btn-info">Other Earning</a>  </li>
+                                         <li class="dropdown "><a href="/Payroll/SalaryOtherDeduction" class="btn btn-info">Other Deduction</a>  </li>
+*@
+
+
+
+                                        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle btn btn-info" data-toggle="dropdown">Earning Process</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryEarning">Earning </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryOtherEarning">Other Earning </a></li>
+
+                                                @*<li><a class="btn btn-info" href="/Payroll/SalaryAreer">Arrear </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryOverTime">Overtime </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryReimbursableExpense">Reimbursable Expense </a></li>
+                                           *@
+                                                 </ul>
+                                        </li>
+
+
+                                        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle btn btn-info" data-toggle="dropdown">Deduction Process</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryPF">Provident Fund </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryTax">Tax </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryOtherDeduction">Other Deduction </a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryLoan">Loan</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="dropdown "><a href="/Payroll/SalaryProcess/EmployeeSalary" class="btn btn-info">Single Employee Process</a>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown Structure"><a href="/Payroll/Loan/AllLoan" class="dropdown-toggle">Loan </a></li>
+                    @*<li class="dropdown Structure"><a href="/Payroll/EmployeeBonus" class="dropdown-toggle">Bonus </a></li>
+                     <li class="dropdown Structure"><a class="dropdown-toggle" href="/Payroll/SalaryProcess/EmployeeSalary">Employee Salary </a></li>*@
+                    <li class="dropdown Leave">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-1">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="multi-column-dropdown">
+                                        <li><a class="btn btn-info" href="/Payroll/SalaryProcess/SalarySheet/">Salary Sheet</a></li>
+                                        @*<li><a class="btn btn-info" href="/Payroll/SalaryProcess/PaySlip/">Pay Slip</a></li>*@
+                                        <li class="dropdown dropdown-submenu"><a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Payroll Process</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryPF/SalaryPFReport?view=Y">Provident Fund</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryTax/SalaryTaxReport?view=Y">Tax</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryEarning/SalaryEarningReport?view=Y">Earning</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryAreer/SalaryAreerReport?view=Y">Arrear</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryOverTime/SalaryOverTimeReport?view=Y">OverTime</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/SalaryConvence/SalaryConvenceReport?view=Y">Conveyance</a></li>
+                                                <li><a class="btn btn-info"href="/Payroll/SalaryReimbursableExpense/SalaryReimbursableExpenseReport?view=Y">Reimbursable Expense</a></li>
+                                                <li><a class="btn btn-info"href="/Payroll/SalaryLoan/SalaryLoanReport?view=Y">Loan</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown dropdown-submenu"><a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Payroll Entry</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeOtherEarning/EmployeeOtherEarningReport?view=Y">Other Earning</a></li>
+                                                @*<li><a class="btn btn-info" href="/Payroll/EmployeeAreer/EmployeeAreerListReport?view=Y">Arrear</a></li>*@
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeOverTime/EmployeeOverTimeListReport?view=Y">Overtime</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeConvence/EmployeeConvenceListReport?view=Y">Conveyance</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeReimbursableExpense/EmployeeReimbursableExpenseListReport?view=Y">Salary Reimbursable Expense</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeBonus/EmployeeBonusListReport?view=Y">Employee Bonus</a></li>
+                                                <li><a class="btn btn-info" href="/Payroll/EmployeeDeduction/EmployeeDeductionListReport?view=Y">Deduction</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                 
+                }
+            </ul>
+           <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown1">
+          <a href="#" class="dropdown-toggle btn btn-warning" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Payroll </a>
+        </li>
+      </ul>
+        </div>
+    </nav>
+</div>
