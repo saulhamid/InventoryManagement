@@ -153,6 +153,9 @@
     <Compile Include="Models\PurcheaseDetail.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PurcheaseDetail_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PurcheaseReturn.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
@@ -174,6 +177,9 @@
     <Compile Include="Models\SP_Productdetail_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_Product_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_PucheaseAllParam_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
@@ -187,6 +193,9 @@
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_PurcheaseReturnDetail_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Purchease_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_salesDatailrpts_Result.cs">
@@ -208,6 +217,9 @@
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_Stocks_Result.cs">
+      <DependentUpon>EFInventoryEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Stock_Result.cs">
       <DependentUpon>EFInventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stock.cs">
@@ -241,6 +253,7 @@
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\ProductAssaignVM.cs" />
     <Compile Include="ViewModel\ProductDateilVM.cs" />
+    <Compile Include="ViewModel\ProductVM.cs" />
     <Compile Include="ViewModel\PurcheaseDetailVM.cs" />
     <Compile Include="ViewModel\PurcheaseReturnVM.cs" />
     <Compile Include="ViewModel\RPTVM.cs" />

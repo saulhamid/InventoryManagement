@@ -1,9 +1,12 @@
-﻿@model InventoryViewModel.ViewModel.PurcheaseDetailVM
+﻿@model InventoryViewModel.ViewModel.PurchaseVM
 @using UIHelper.MVC
 <style>
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
  padding:0px!important;
            }
+     #ProductCode  {
+            width:300px!important;
+        }
 </style>
 @using (Html.BeginForm("Create", "Purchase", FormMethod.Post, new { Id="upform"}))
 { 
@@ -14,7 +17,7 @@
                 <div class="box-content">
                     <div id="demo1">
                         @Html.ValidationSummary(true)
-                        @Html.HiddenFor(model => model.Purchasevm.Id, new {  @class = "purcheaseId" })
+                        @Html.HiddenFor(model => model.Id, new {  @class = "purcheaseId" })
                         <div class="row" style="">
                             @*<div class="col-md-1">
                                 <div class="editor-label">
@@ -26,51 +29,51 @@
                             
                             <div class="col-md-2">
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.Purchasevm.InvoiecNo)
+                                    @Html.LabelFor(model => model.InvoiecNo)
                                 </div>
                                 <div class="editor-field">
-                                    @Html.TextBoxFor(model => model.Purchasevm.InvoiecNo, new { @placeholder = "InvoiecNo", @class = " required form-control" })
-                                    @Html.ValidationMessageFor(model => model.Purchasevm.InvoiecNo)
+                                    @Html.TextBoxFor(model => model.InvoiecNo, new { @placeholder = "InvoiecNo", @class = " required form-control" })
+                                    @Html.ValidationMessageFor(model => model.InvoiecNo)
                                 </div>
                             </div>
                           
                             <div class="col-md-2">
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.Purchasevm.SupplierId)
+                                    @Html.LabelFor(model => model.SupplierId)
                                 </div>
                                 <div class="editor-field">
-                                    @Html.SimpleDropDownFor(model => model.Purchasevm.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control " })
+                                    @Html.SimpleDropDownFor(model => model.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control select2" })
 
-                                    @Html.ValidationMessageFor(model => model.Purchasevm.SupplierId)
+                                    @Html.ValidationMessageFor(model => model.SupplierId)
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.Purchasevm.EmployeeId)
+                                    @Html.LabelFor(model => model.EmployeeId)
                                 </div>
                                 <div class="editor-field">
-                                    @Html.SimpleDropDownFor(model => model.Purchasevm.EmployeeId, "/Config/DropDown/Employee", new { @placeholder = " Product Category Name", @class = " form-control" })
+                                    @Html.SimpleDropDownFor(model => model.EmployeeId, "/Config/DropDown/Employee", new { @placeholder = " Product Category Name", @class = " form-control select2" })
 
-                                    @Html.ValidationMessageFor(model => model.Purchasevm.EmployeeId)
+                                    @Html.ValidationMessageFor(model => model.EmployeeId)
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.Purchasevm.Date)
+                                    @Html.LabelFor(model => model.Date)
                                 </div>
                                 <div class="editor-field">
-                                    @Html.TextBoxFor(model => model.Purchasevm.Date, new { @placeholder = "Date", @class = "customDatePicker required form-control" })
-                                    @Html.ValidationMessageFor(model => model.Purchasevm.Date)
+                                    @Html.TextBoxFor(model => model.Date, new { @placeholder = "Date", @class = "customDatePicker required form-control" })
+                                    @Html.ValidationMessageFor(model => model.Date)
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.Purchasevm.Remarks)
+                                    @Html.LabelFor(model => model.Remarks)
                                 </div>
                                 <div class="editor-field">
-                                    @Html.TextAreaFor(model => model.Purchasevm.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
-                                    @Html.ValidationMessageFor(model => model.Purchasevm.Remarks)
+                                    @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = " form-control" })
+                                    @Html.ValidationMessageFor(model => model.Remarks)
                                 </div>
                             </div>
                         </div>
@@ -90,7 +93,7 @@
                         @Html.Label("Product Code")
                     </div>
                     <div class="editor-field">
-                        @Html.TextBox("Product Code", null, new { @placeholder = "Code", @class = " form-control code", @Onchage = "CheckCode(this)" })
+                        @Html.SimpleDropDown("ProductCode", "/Config/DropDown/ProductwithCode", new { @placeholder = " Product Category Name", @class = " form-control select2 code", @style= "width:400px!important;" })
                         @Html.ValidationMessage("Product Code")
                     </div>
                 </div>
@@ -175,7 +178,7 @@
                 <td><b>Discount:</b></td>
                 <td>
                  @Html.TextBox("Total Discount",null, new { @placeholder = "Total Discount", @class = "right TotalDiscount form-control" })
-                        @Html.ValidationMessage("Total Discount")
+                 @Html.ValidationMessage("Total Discount")
                 </td>
             </tr>
             <tr>
@@ -201,6 +204,8 @@
 }
 <script>
     $(document).ready(function () {
+        $(".select2").select2();
+        $(".select2").removeClass("form-control");
         valiDation("upform");
         $(function () {
             if ($(".purcheaseId").val() != null) {
@@ -209,14 +214,6 @@
         });
         $(".simpledrop").select2();
         calculation();
-        $(".code").autocomplete({
-            source: '@Url.Action("Product", "Autocomplete", new { area = "Config" })', minLength: 1,})
-    $(".code").click(function () {
-        autocom();
-    });
-    $(".code").change(function () {
-        autocom();
-    });
     });
     function removerow(sender) {
         Ask("Are you sure to delete this file!", function () {
@@ -224,27 +221,23 @@
             calculation();
         }, function () { });
     }
-    function autocom() {
-            var value = $(".code").val();
-            var code = $(".code").val(value.split('-')[0]);
-            $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
-    }
-        $("table").hide();
+         $("table").hide();
                 if(
                 $("#Code").val()!= '')
                 {
                     $("table").show();
                 }
                 $("#addrow").click(function () {
-                    var code = $(".code").val();
-                    code = code.split('~')[0]
+                    var code = $('.code  :selected').text();
+                    code = code.split('-')[0];
+                    alert(code);
+
                     var exit = true;
                     $(".pa").each(function (i, item) {
                         var el = $(this);
                         var tcode = el.closest("tr").find(".pname").val();
                         tcode = tcode.split('~')[0]
-                        if (code == tcode) {
-                            alert(tcode);
+                        if (code == tcode || code.toLowerCase() == 'select') {
                             exit = false;
                             ShowResult("this Product Already Add in below List");
                             return;
@@ -258,13 +251,15 @@
                 return;
                 ShowResult("Plaese Select a product");
             }
-            if (Quantity == null) {
-                return;
+            if (Quantity == null || Quantity == '') {
                 ShowResult("Enter Quantity");
-            }
-            if (UnitePrice == null) {
+
                 return;
+            }
+            alert(Quantity);
+            if (UnitePrice == null || UnitePrice == '') {
                 ShowResult("Enter UnitePrice");
+                return;
             }
             if (exit == true) {
                 var url = "/InventoryManagement/Purchase/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Discount=" + Discount + "&Remarks=" + remarks;

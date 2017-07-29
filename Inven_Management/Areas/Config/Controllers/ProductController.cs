@@ -1,6 +1,7 @@
 ﻿using Inven_Management.Areas.Config.Models;
 using InventoryRepo.InventoryManagement;
 using InventoryViewModel.Models;
+using InventoryViewModel.ViewModel;
 using JQueryDataTables.Models;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace Inven_Management.Areas.Config.Controllers
             #endregion Column Search
 
             var getAllData = _repo.GETAllProducts();
-            IEnumerable<Product> filteredData;
+            IEnumerable<ProductVM> filteredData;
             //Check whether the companies should be filtered by keyword
             if (!string.IsNullOrEmpty(param.sSearch))
             {
@@ -61,7 +62,7 @@ namespace Inven_Management.Areas.Config.Controllers
             var isSortable_2 = Convert.ToBoolean(Request["bSortable_2"]);
             var isSortable_3 = Convert.ToBoolean(Request["bSortable_3"]);
             var sortColumnIndex = Convert.ToInt32(Request["iSortCol_0"]);
-            Func<Product, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.Name :
+            Func<ProductVM, string> orderingFunction = (c => sortColumnIndex == 1 && isSortable_1 ? c.Name :
                                                            sortColumnIndex == 2 && isSortable_2 ? c.Code :
                                                            sortColumnIndex == 3 && isSortable_3 ? c.Remarks : "");
             var sortDirection = Request["sSortDir_0"]; // asc or desc

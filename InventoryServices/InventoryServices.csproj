@@ -84,6 +84,7 @@
     <Compile Include="Config\ProductColorDAL.cs" />
     <Compile Include="Config\ProductDAL.cs" />
     <Compile Include="InventoryManagement\ProductAssaignDAL.cs" />
+    <Compile Include="InventoryManagement\PurcheaseDetailDAL.cs" />
     <Compile Include="InventoryManagement\PurcheaseReturnDAL.cs" />
     <Compile Include="InventoryManagement\SalesDAL.cs" />
     <Compile Include="InventoryManagement\StockDAL.cs" />

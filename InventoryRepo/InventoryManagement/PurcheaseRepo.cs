@@ -21,7 +21,7 @@ namespace InventoryRepo.InventoryManagement
       {
           return _dal.GETAllPurchases();
       }
-      public PurcheaseDetailVM GetSigle(int Id)
+      public PurchaseVM GetSigle(int Id)
         {
             return _dal.GetSigle(Id);
         }
@@ -29,9 +29,31 @@ namespace InventoryRepo.InventoryManagement
         {
             return _dal.GETbySearch(Id, name, code);
         }
-      public string[] SaveAndEdit(PurcheaseDetailVM data)
+      public string[] SaveAndEdit(PurchaseVM data)
         {
-            return _dal.SaveAndEdit(data);
+            string[] result = new string[6];
+            try
+            {
+                data.Id = _dal.GETAllPurchases().Count() +1;
+                result= _dal.Save(data);
+                if (data == null) throw new ArgumentNullException("The expected data not found For Insert");
+
+                PurcheaseDetailDAL pudDal = new PurcheaseDetailDAL();
+                foreach (var item in data.PurcheaseDetails)
+                {
+                    item.PurchaseId = data.Id;
+                    item.CreatedAt = data.CreatedAt;
+                    item.CreatedAtBy = data.CreatedBy;
+                    item.CreatedFrom = data.CreatedFrom;
+                    result = pudDal.SaveAndEdit(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                result[1] = ex.Message;
+                throw ex;
+            }
+            return result;
         }
         public string[] Delete(string[] Ids)
         {
@@ -45,14 +67,16 @@ namespace InventoryRepo.InventoryManagement
         {
             return _dal.Autocomplete(term);
         }
-        public List<RPTVM> rptPurchease()
-        {
-            return _dal.rptPurchease();
-        }
+        //public List<RPTVM> rptPurchease()
+        //{
+        //    return _dal.rptPurchease();
+        //}
          public dynamic AutocompleteInvoice(string term)
         {
             return _dal.AutocompleteInvoice(term);
         }
+
+       
         #endregion Method
 
     }

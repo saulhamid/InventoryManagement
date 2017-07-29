@@ -1,8 +1,10 @@
 ﻿using Inven_Management.Areas.Config.Models;
 using InventoryViewModel.Models;
+using InventoryViewModel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,14 +23,9 @@ namespace InventoryServices.InventoryManagement
         #region Method
         public IEnumerable<Product> GETAllProduct { get { return _context.Products.Where(m => m.IsArchive == false).AsEnumerable(); } }
 
-        public Product GETAllByCode(string Code) {
-            //return _context.Products.FirstOrDefault(m => m.IsArchive == false && m.IsActive == true && m.Code == Code);
-          Product vm=new Product();
-               var prod= _context.SP_Productdetail(null, null, null, null, null, Code).Single();
-            vm.Id=prod.Id;
-            vm.Name = prod.Name;
-            vm.Code = prod.Code;
-            return vm;
+        public dynamic GETAllByCode(string Code) {
+            var Product = _context.Database.SqlQuery<ProductVM>(@"exec [dbo].[SP_Product] @Option={0} @Code={1} ", 7,Code).ToList();
+            return Product;
 
         }
         public string GETProductName(int Id)
@@ -42,13 +39,13 @@ namespace InventoryServices.InventoryManagement
           
             return prod;
         }
-       public List<Product> GETAllProducts() {
-           List<Product> vms = new List<Product>();
-           Product vm = new Product();
+       public List<ProductVM> GETAllProducts() {
+           List<ProductVM> vms = new List<ProductVM>();
+            ProductVM vm = new ProductVM();
            var prod = _context.productdetail().ToList();
            foreach (var pro in prod)
            {
-               vm = new Product();
+               vm = new ProductVM();
                vm.Id = pro.Id;
                vm.Name = pro.Name;
                vm.Code = pro.Code;
@@ -194,13 +191,10 @@ namespace InventoryServices.InventoryManagement
         }
         public dynamic DropdownWithCode()
         {
-            var Product = from pro in _context.Products
-                          join uom in _context.UOMs on pro.UOMId equals uom.Id
-                          where pro.IsActive == true && pro.IsArchive == false 
-                          select (pro.Code + "-" + pro.Name + "-" + uom.Name);
-            //_context.Products.Where(m => m.IsActive == true && m.IsArchive == false && (m.Code.Contains(term) || m.Name.Contains(term))).OrderBy(m => m.Name).Select(m =>m.Code +"-"+ m.Name+"("+m.UOMId).ToList();
+            var Product = _context.Database.SqlQuery<dropdown>(@"exec [dbo].[SP_Product] @Option={0}", 6).ToList();
             return Product;
         }
+
         public dynamic Autocomplete(string term)
         {
 
@@ -225,5 +219,9 @@ namespace InventoryServices.InventoryManagement
         #endregion Method
 
        
+    }
+    public class dropdown {
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }

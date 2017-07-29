@@ -124,7 +124,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");
@@ -176,7 +176,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");

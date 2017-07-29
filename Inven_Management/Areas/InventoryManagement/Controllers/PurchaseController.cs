@@ -1,7 +1,5 @@
 ﻿using Commons;
 using CrystalDecisions.CrystalReports.Engine;
-using Inven_Management.Areas.Config.Models;
-using Inven_Management.Areas.InventoryManagement.Models;
 using InventoryRepo.InventoryManagement;
 using InventoryViewModel.Models;
 using InventoryViewModel.ViewModel;
@@ -11,8 +9,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Inven_Management.Areas.InventoryManagement.Controllers
@@ -118,15 +114,13 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
         }
         public ActionResult Create()
         {
-            PurcheaseDetailVM vm = new PurcheaseDetailVM();
-            Purchase Purchase = new Purchase();
+            PurchaseVM vm = new PurchaseVM();
             List<PurcheaseDetail> PurcheaseDetails = new List<PurcheaseDetail>();
-            vm.Purchasevm = Purchase;
             vm.PurcheaseDetails = PurcheaseDetails;
             return View(vm);
         }
         [HttpPost]
-        public ActionResult Create(PurcheaseDetailVM vm, string IsActive)
+        public ActionResult Create(PurchaseVM vm)
         {
             string[] result = new string[3];
             string mgs;
@@ -155,13 +149,13 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
         }
         public ActionResult Edit(int Id)
         {
-            PurcheaseDetailVM vm = new PurcheaseDetailVM();
+            PurchaseVM vm = new PurchaseVM();
             vm = _repo.GetSigle(Id);
             return View("Create", vm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PurcheaseDetailVM vm)
+        public ActionResult Edit(PurchaseVM vm)
         {
             string[] result = new string[3];
             try
@@ -191,7 +185,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
         public ActionResult rptPurchease(int Id)
         {
             DataTable table = new DataTable();
-            table = Common.ListToDataTable(_repo.rptPurchease().Where(m=>m.Id == Id).ToList());
+            //table = Common.ListToDataTable(_repo.rptPurchease().Where(m=>m.Id == Id).ToList());
             DataSet ds = new DataSet();
             ds.Tables.Add(table);
             ds.Tables[0].TableName = "dtPurcheaseDetail";

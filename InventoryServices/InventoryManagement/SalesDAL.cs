@@ -34,123 +34,123 @@ namespace InventoryServices.InventoryManagement
        }
        #endregion SelectAll
        #region Save and Edit
-       public string[] SaveAndEdit(SalesVM data)
-       {
-           StockDAL _dal = new StockDAL();
-           StockVM stock = new StockVM();
-           string[] result = new string[6];
-           try
-           {
-               try
-               {
-                   if (data == null) throw new ArgumentNullException("The expected data not found For Insert");
-                   if (data.Sales.Id == 0)
-                   {
-                       data.Sales.Id = _context.Sales.Count()+111 ;
-                       data.Sales.IsActive = data.Sales.IsActive == false ? false : true;
-                       //data.Date = (Convert.ToDateTime(data.Date).ToString("MM/dd/yy")).ToString();
-                       data.Sales.IsArchive = false;
-                       data.Sales.CreatedBy = Thread.CurrentPrincipal.Identity.Name;
-                       data.Sales.CreatedAt = DateTime.Now.ToString("MM/dd/yy");
-                       data.Sales.CreatedFrom = Commons.GetIpAddress.GetLocalIPAddress();
-                       _context.Sales.Add(data.Sales);
-                       SalesDetail purvms = new SalesDetail();
-                       if (data.SalesDetailvms.Count() > 0 && data.SalesDetailvms != null)
-                       {
-                           foreach (var purdetail in data.SalesDetailvms)
-                           {
-                               purvms.ProductId = purdetail.ProductId;
-                               purdetail.SalesId = data.Sales.Id;
-                               purdetail.CreatedAt = data.Sales.CreatedAt;
-                               purdetail.CreatedBy = data.Sales.CreatedBy;
-                               purdetail.CreatedFrom = data.Sales.CreatedFrom;
-                               _context.SalesDetails.Add(purdetail);
-                               _context.SaveChanges();
-                               stock.StockStutes = false;
-                               stock.ProductId = purdetail.ProductId;
-                               stock.TotalQuantity = purdetail.SalesQuantity;
-                               stock.TotalDiscount = purdetail.Discount;
-                               stock.TotalReplace = purdetail.Replace;
-                               stock.TotalReturn = purdetail.Return;
-                               stock.TotalPrice = purdetail.SalesQuantity * purdetail.UnitePrice;
-                               _dal.SaveAndEditUpdate(stock);
-                           }
-                       }
-                       result[1] = "Sales Data Save";
-                       result[0] = "Successfully";
-                   }
-                   else
-                   {
-                       var edit = _context.Sales.Find(data.Sales.Id);
-                       if (edit == null) throw new ArgumentNullException("The expected data not found for Update");
-                       //data.Date = (Convert.ToDateTime(data.Date).ToString("MM/dd/yy")).ToString();
-                       data.Sales.IsActive = data.Sales.IsActive == false ? false : true;
-                       data.Sales.IsArchive = false;
-                       data.Sales.LastUpdateBy = Thread.CurrentPrincipal.Identity.Name; //Commons.CurrentUserName.UserName;
-                       data.Sales.LastUpdateAt = DateTime.Now.ToString("MM/dd/yy");
-                       data.Sales.LastUpdateFrom = Commons.GetIpAddress.GetLocalIPAddress();
-                       _context.Entry(edit).CurrentValues.SetValues(data.Sales);
-                       result[1] = "Sales Data Update";
-                       result[0] = "Successfully";
-                       _context.SaveChanges();
-                       if (data.SalesDetailvms.Count() > 0 && data.SalesDetailvms != null)
-                       {
-                           try
-                           {
-                               var a = _context.SalesDetails.Where(m => m.SalesId == data.Id);
-                               _context.SalesDetails.RemoveRange(a);
-                               _context.SaveChanges();
-                           }
-                           catch (Exception ex)
-                           {
-                               throw new ArgumentNullException("the not delete");
-                           }
-                           foreach (var purdetail in data.SalesDetailvms)
-                           {
-                               purdetail.ProductId = purdetail.ProductId;
-                               purdetail.SalesId = data.Sales.Id;
-                               purdetail.CreatedAt = data.Sales.CreatedAt;
-                               purdetail.CreatedBy = data.Sales.CreatedBy;
-                               purdetail.CreatedFrom = data.Sales.CreatedFrom;
-                               _context.SalesDetails.Add(purdetail);
-                               _context.SaveChanges();
-                               stock.StockStutes = false;
-                               stock.ProductId = purdetail.ProductId;
+       //public string[] SaveAndEdit(SalesVM data)
+       //{
+       //    StockDAL _dal = new StockDAL();
+       //    StockVM stock = new StockVM();
+       //    string[] result = new string[6];
+       //    try
+       //    {
+       //        try
+       //        {
+       //            if (data == null) throw new ArgumentNullException("The expected data not found For Insert");
+       //            if (data.Sales.Id == 0)
+       //            {
+       //                data.Sales.Id = _context.Sales.Count()+111 ;
+       //                data.Sales.IsActive = data.Sales.IsActive == false ? false : true;
+       //                //data.Date = (Convert.ToDateTime(data.Date).ToString("MM/dd/yy")).ToString();
+       //                data.Sales.IsArchive = false;
+       //                data.Sales.CreatedBy = Thread.CurrentPrincipal.Identity.Name;
+       //                data.Sales.CreatedAt = DateTime.Now.ToString("MM/dd/yy");
+       //                data.Sales.CreatedFrom = Commons.GetIpAddress.GetLocalIPAddress();
+       //                _context.Sales.Add(data.Sales);
+       //                SalesDetail purvms = new SalesDetail();
+       //                if (data.SalesDetailvms.Count() > 0 && data.SalesDetailvms != null)
+       //                {
+       //                    foreach (var purdetail in data.SalesDetailvms)
+       //                    {
+       //                        purvms.ProductId = purdetail.ProductId;
+       //                        purdetail.SalesId = data.Sales.Id;
+       //                        purdetail.CreatedAt = data.Sales.CreatedAt;
+       //                        purdetail.CreatedBy = data.Sales.CreatedBy;
+       //                        purdetail.CreatedFrom = data.Sales.CreatedFrom;
+       //                        _context.SalesDetails.Add(purdetail);
+       //                        _context.SaveChanges();
+       //                        stock.StockStutes = false;
+       //                        stock.ProductId = purdetail.ProductId;
+       //                        stock.TotalQuantity = purdetail.SalesQuantity;
+       //                        stock.TotalDiscount = purdetail.Discount;
+       //                        stock.TotalReplace = purdetail.Replace;
+       //                        stock.TotalReturn = purdetail.Return;
+       //                        stock.TotalPrice = purdetail.SalesQuantity * purdetail.UnitePrice;
+       //                        _dal.SaveAndEditUpdate(stock);
+       //                    }
+       //                }
+       //                result[1] = "Sales Data Save";
+       //                result[0] = "Successfully";
+       //            }
+       //            else
+       //            {
+       //                var edit = _context.Sales.Find(data.Sales.Id);
+       //                if (edit == null) throw new ArgumentNullException("The expected data not found for Update");
+       //                //data.Date = (Convert.ToDateTime(data.Date).ToString("MM/dd/yy")).ToString();
+       //                data.Sales.IsActive = data.Sales.IsActive == false ? false : true;
+       //                data.Sales.IsArchive = false;
+       //                data.Sales.LastUpdateBy = Thread.CurrentPrincipal.Identity.Name; //Commons.CurrentUserName.UserName;
+       //                data.Sales.LastUpdateAt = DateTime.Now.ToString("MM/dd/yy");
+       //                data.Sales.LastUpdateFrom = Commons.GetIpAddress.GetLocalIPAddress();
+       //                _context.Entry(edit).CurrentValues.SetValues(data.Sales);
+       //                result[1] = "Sales Data Update";
+       //                result[0] = "Successfully";
+       //                _context.SaveChanges();
+       //                if (data.SalesDetailvms.Count() > 0 && data.SalesDetailvms != null)
+       //                {
+       //                    try
+       //                    {
+       //                        var a = _context.SalesDetails.Where(m => m.SalesId == data.Id);
+       //                        _context.SalesDetails.RemoveRange(a);
+       //                        _context.SaveChanges();
+       //                    }
+       //                    catch (Exception ex)
+       //                    {
+       //                        throw new ArgumentNullException("the not delete");
+       //                    }
+       //                    foreach (var purdetail in data.SalesDetailvms)
+       //                    {
+       //                        purdetail.ProductId = purdetail.ProductId;
+       //                        purdetail.SalesId = data.Sales.Id;
+       //                        purdetail.CreatedAt = data.Sales.CreatedAt;
+       //                        purdetail.CreatedBy = data.Sales.CreatedBy;
+       //                        purdetail.CreatedFrom = data.Sales.CreatedFrom;
+       //                        _context.SalesDetails.Add(purdetail);
+       //                        _context.SaveChanges();
+       //                        stock.StockStutes = false;
+       //                        stock.ProductId = purdetail.ProductId;
                               
-                               stock.TotalQuantity = purdetail.SalesQuantity;
-                               stock.TotalDiscount = purdetail.Discount;
-                               stock.TotalReplace = purdetail.Replace;
-                               stock.TotalReturn = purdetail.Return;
-                               stock.TotalPrice = purdetail.SalesQuantity * purdetail.UnitePrice;
-                               _dal.SaveAndEditUpdate(stock);
-                           }
-                       }
-                   }
-               }
-               catch (Exception ex)
-               {
-                   result[1] = ex.Message;
-               }
-           }
-           catch (DbEntityValidationException dbEx)
-           {
-               result[0] = "Fail";
-               foreach (var validationErrors in dbEx.EntityValidationErrors)
-               {
-                   foreach (var validationError in validationErrors.ValidationErrors)
-                   {
-                       Trace.TraceInformation(
-                             "Class: {0}, Property: {1}, Error: {2}",
-                          result[1] = " -- " + validationErrors.Entry.Entity.GetType().FullName,
-                            result[1] += " -- " + validationError.PropertyName,
-                           result[1] += validationError.ErrorMessage);
-                   }
-               }
-               result[0] = "Fail";
-           }
-           _context.SaveChanges();
-           return result;
-       }
+       //                        stock.TotalQuantity = purdetail.SalesQuantity;
+       //                        stock.TotalDiscount = purdetail.Discount;
+       //                        stock.TotalReplace = purdetail.Replace;
+       //                        stock.TotalReturn = purdetail.Return;
+       //                        stock.TotalPrice = purdetail.SalesQuantity * purdetail.UnitePrice;
+       //                        _dal.SaveAndEditUpdate(stock);
+       //                    }
+       //                }
+       //            }
+       //        }
+       //        catch (Exception ex)
+       //        {
+       //            result[1] = ex.Message;
+       //        }
+       //    }
+       //    catch (DbEntityValidationException dbEx)
+       //    {
+       //        result[0] = "Fail";
+       //        foreach (var validationErrors in dbEx.EntityValidationErrors)
+       //        {
+       //            foreach (var validationError in validationErrors.ValidationErrors)
+       //            {
+       //                Trace.TraceInformation(
+       //                      "Class: {0}, Property: {1}, Error: {2}",
+       //                   result[1] = " -- " + validationErrors.Entry.Entity.GetType().FullName,
+       //                     result[1] += " -- " + validationError.PropertyName,
+       //                    result[1] += validationError.ErrorMessage);
+       //            }
+       //        }
+       //        result[0] = "Fail";
+       //    }
+       //    _context.SaveChanges();
+       //    return result;
+       //}
        #endregion Save and Edit
         #region report
        public List<RPTVM> rptSales()

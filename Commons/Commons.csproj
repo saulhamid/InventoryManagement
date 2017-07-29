@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Common1.cs" />
     <Compile Include="CurrentUserName.cs" />
     <Compile Include="GetIpAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

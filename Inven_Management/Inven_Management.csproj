@@ -117,6 +117,14 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.3.2.3\lib\net45\Microsoft.Web.WebPages.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.8.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mysql.data.entity.EF6, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entities.6.8.3.0\lib\net45\mysql.data.entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -451,6 +459,7 @@
     <Content Include="assets\javascripts\pjquery.dataTables.columnFilter.js" />
     <Content Include="assets\javascripts\pjquery.dataTables.min.js" />
     <Content Include="assets\javascripts\prefixfree.min.js" />
+    <Content Include="assets\javascripts\select2.js" />
     <Content Include="assets\js\charts.js" />
     <Content Include="assets\js\form-calendar.js" />
     <Content Include="assets\js\form-dropzone.js" />
@@ -3123,6 +3132,8 @@
     <Content Include="assets\stylesheets\custom-cent.css" />
     <Content Include="assets\stylesheets\normalize.css" />
     <Content Include="assets\stylesheets\print.css" />
+    <Content Include="assets\stylesheets\select2-spinner.gif" />
+    <Content Include="assets\stylesheets\select2.css" />
     <Content Include="assets\stylesheets\style.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
@@ -3748,6 +3759,7 @@
     <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\Create.cshtml" />
     <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\Create1.cshtml" />
     <Content Include="Areas\InventoryManagement\Views\PurcheaseReturn\_IndexStock.cshtml" />
+    <Content Include="Areas\InventoryManagement\Views\Home\Index1.cshtml" />
     <None Include="assets\AllReport.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -3835,10 +3847,23 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Office_Sym\SymERP_Web 11-12-16\SymERP_Web\UIHelper.MVC\UIHelper.MVC.csproj">
-      <Project>{dc4a37f2-4a7c-43fc-a2b8-7fd3fe692e19}</Project>
-      <Name>UIHelper.MVC</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Areas\InventoryManagement\Report\rptPurchease.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPurchease.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\InventoryManagement\Report\rptSales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSales.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\InventoryManagement\Report\SalesRepor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SalesRepor.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Commons\Commons.csproj">
       <Project>{d21306c2-3a45-4567-b6fa-f596cec22cdd}</Project>
       <Name>Commons</Name>
@@ -3855,23 +3880,10 @@
       <Project>{669222ec-2ebe-44d5-a009-a8fd4522e8fd}</Project>
       <Name>InventoryViewModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\InventoryManagement\Report\rptPurchease.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptPurchease.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\InventoryManagement\Report\rptSales.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptSales.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\InventoryManagement\Report\SalesRepor.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SalesRepor.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+    <ProjectReference Include="..\UIHelper.MVC\UIHelper.MVC.csproj">
+      <Project>{dc4a37f2-4a7c-43fc-a2b8-7fd3fe692e19}</Project>
+      <Name>UIHelper.MVC</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

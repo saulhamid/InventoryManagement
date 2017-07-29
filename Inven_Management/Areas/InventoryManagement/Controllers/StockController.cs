@@ -44,7 +44,6 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                                || isSearchable2 && c.ProductCode.ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable4 && c.TotalDiscount.ToString().ToLower().Contains(param.sSearch.ToLower())
                                );
             }
             else
@@ -77,9 +76,9 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                          select new[] { 
                  //Convert.ToString(c.Id)
                 c.ProductName+"-"+c.ProductCode
-                ,c.TotalQuantity.ToString()
+               // ,c.TotalQuantity.ToString()
                 ,c.FinalUnitPrice.ToString()
-                ,(c.TotalPrice=c.TotalQuantity+c.FinalUnitPrice).ToString()
+                //,(c.TotalPrice=c.TotalQuantity+c.FinalUnitPrice).ToString()
                 //,c.TotalReplace.ToString()
                 //,c.TotalReturn.ToString()
                 //,c.TotalSlup.ToString()

@@ -34,10 +34,10 @@ namespace InventoryRepo.InventoryManagement
         //{
         //    return _dal.GETbySearch(Id, name, code);
         //}
-        public string[] SaveAndEdit(PurcheaseReturnVM data)
-        {
-            return _dal.SaveAndEdit(data);
-        }
+        //public string[] SaveAndEdit(PurcheaseReturnVM data)
+        //{
+        //    return _dal.SaveAndEdit(data);
+        //}
         public string[] Delete(string[] Ids)
         {
             return _dal.Delete(Ids);

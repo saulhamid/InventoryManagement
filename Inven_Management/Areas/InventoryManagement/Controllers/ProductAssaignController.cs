@@ -28,7 +28,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             vm = _prorepo.GETAllProducts().Where(m => m.Code == code).Single();
             provm.ProductId = vm.Id;
             provm.Code = vm.Code;
-            provm.Name = vm.Name + "-" + vm.ProductSizeName +vm.UOMName;
+            //provm.Name = vm.Name + "-" + vm.ProductSizeName +vm.UOMName;
             provm.Quantity = Convert.ToDecimal(Quantity);
             provm.UnitePrice = vm.UnitePrice;
             provm.Remarks = Remarks;
@@ -42,7 +42,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             vm = _prorepo.GETAllProducts().Where(m => m.Code == code).Single();
             provm.ProductId = vm.Id;
             provm.Code = vm.Code;
-            provm.Name = vm.Name + "-" + vm.ProductSizeName + vm.UOMName;
+            //provm.Name = vm.Name + "-" + vm.ProductSizeName + vm.UOMName;
             provm.Quantity = Convert.ToDecimal(Quantity);
             provm.UnitePrice = vm.UnitePrice;
             provm.Remarks = Remarks;
@@ -66,7 +66,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");
@@ -109,7 +109,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");

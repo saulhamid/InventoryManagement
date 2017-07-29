@@ -16,12 +16,6 @@ namespace InventoryViewModel.Models
     {
         public int Id { get; set; }
         public Nullable<int> ProductId { get; set; }
-        public Nullable<decimal> TotalReplace { get; set; }
-        public Nullable<decimal> TotalReturn { get; set; }
-        public Nullable<decimal> TotalDiscount { get; set; }
-        public Nullable<decimal> TotalSlup { get; set; }
-        public Nullable<decimal> StockQuantity { get; set; }
-        public Nullable<decimal> TotalQuantity { get; set; }
         public Nullable<decimal> TotalPaid { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
         public Nullable<decimal> GrandTotal { get; set; }
@@ -35,8 +29,6 @@ namespace InventoryViewModel.Models
         public string CreatedBy { get; set; }
         public string CreatedAt { get; set; }
         public string CreatedFrom { get; set; }
-        public string LastUpdateBy { get; set; }
-        public string LastUpdateAt { get; set; }
-        public string LastUpdateFrom { get; set; }
+        public Nullable<decimal> Quantity { get; set; }
     }
 }

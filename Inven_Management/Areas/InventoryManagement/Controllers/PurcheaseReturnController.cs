@@ -229,7 +229,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                                || isSearchable2 && c.ProductName.ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
                                || isSearchable3 && c.ProductName.ToString().ToLower().Contains(param.sSearch.ToLower())
-                               || isSearchable4 && c.TotalDiscount.ToString().ToLower().Contains(param.sSearch.ToLower())
+                              
                                );
             }
             else
@@ -262,9 +262,9 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
                          select new[] { 
                  Convert.ToString(c.Id)
                 ,c.ProductCode+"-"+c.ProductName
-                ,c.TotalQuantity.ToString()
+               
                 ,c.UnitPrice.ToString()
-                ,(c.TotalPrice=c.TotalQuantity+c.UnitPrice).ToString()
+               
                 //,c.TotalReplace.ToString()
                 //,c.TotalReturn.ToString()
                 //,c.TotalSlup.ToString()
@@ -285,8 +285,9 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             
             int Id = Convert.ToInt32(PId.Split('-')[0]);
             int ProductId = Convert.ToInt32(PId.Split('-')[1]);
-            Purchase pur = _repoPurchease.GetSigle(Id).Purchasevm;
-            PurcheaseDetail purd= _repoPurchease.GetSigle(Id).PurcheaseDetails.FirstOrDefault(m => m.ProductId == ProductId);
+            //Purchase pur = _repoPurchease.GetSigle(Id).Purchasevm;
+            Purchase pur = null;
+            PurcheaseDetail purd = _repoPurchease.GetSigle(Id).PurcheaseDetails.FirstOrDefault(m => m.ProductId == ProductId);
       
            vm.Quantity=purd.Quantity;
            vm.UnitePrice = purd.UnitePrice;
@@ -304,7 +305,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");
@@ -332,7 +333,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");
@@ -359,7 +360,7 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
             string mgs;
             try
             {
-                result = _repo.SaveAndEdit(vm);
+                //result = _repo.SaveAndEdit(vm);
                 if (result[0] == "Fail")
                 {
                     throw new ArgumentNullException("The expected data not found For Insert");

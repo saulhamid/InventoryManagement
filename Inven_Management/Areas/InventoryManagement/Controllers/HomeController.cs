@@ -10,11 +10,13 @@ namespace Inven_Management.Areas.InventoryManagement.Controllers
     {
         //
         // GET: /InventoryManagement/Home/
-
         public ActionResult Index()
         {
             return View();
         }
-
+        public ActionResult Index1()
+        {
+            return View();
+        }
     }
 }

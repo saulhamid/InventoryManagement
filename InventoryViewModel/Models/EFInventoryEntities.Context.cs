@@ -40,7 +40,6 @@ namespace InventoryViewModel.Models
         public virtual DbSet<ProductCategory> ProductCategorys { get; set; }
         public virtual DbSet<ProductColor> ProductColors { get; set; }
         public virtual DbSet<ProductDetail> ProductDetails { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductSize> ProductSizes { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
@@ -57,6 +56,7 @@ namespace InventoryViewModel.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ZoneOrArea> ZoneOrAreas { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     
         public virtual ObjectResult<string> AutoProduct(string term)
         {
@@ -401,33 +401,93 @@ namespace InventoryViewModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PucheaseSingle_Result>("SP_PucheaseSingle", idParameter);
         }
     
-        public virtual ObjectResult<SP_PurcheaseDetail_Result> SP_PurcheaseDetail(Nullable<int> purcheaseId, string invoiceNO, Nullable<int> productId, Nullable<int> supplierId, string startDate, string endDate)
+        public virtual ObjectResult<SP_PurcheaseDetail_Result> SP_PurcheaseDetail(Nullable<int> option, Nullable<int> id, Nullable<int> purchaseId, Nullable<int> productId, string productName, string productCode, Nullable<decimal> unitePrice, string date, Nullable<decimal> quantity, Nullable<decimal> discount, Nullable<decimal> slup, Nullable<decimal> totalPrice, string remarks, Nullable<bool> isActive, Nullable<bool> isArchive, string createdAt, string createdFrom, string createdAtBy, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
         {
-            var purcheaseIdParameter = purcheaseId.HasValue ?
-                new ObjectParameter("PurcheaseId", purcheaseId) :
-                new ObjectParameter("PurcheaseId", typeof(int));
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
     
-            var invoiceNOParameter = invoiceNO != null ?
-                new ObjectParameter("InvoiceNO", invoiceNO) :
-                new ObjectParameter("InvoiceNO", typeof(string));
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var purchaseIdParameter = purchaseId.HasValue ?
+                new ObjectParameter("PurchaseId", purchaseId) :
+                new ObjectParameter("PurchaseId", typeof(int));
     
             var productIdParameter = productId.HasValue ?
                 new ObjectParameter("ProductId", productId) :
                 new ObjectParameter("ProductId", typeof(int));
     
-            var supplierIdParameter = supplierId.HasValue ?
-                new ObjectParameter("SupplierId", supplierId) :
-                new ObjectParameter("SupplierId", typeof(int));
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
     
-            var startDateParameter = startDate != null ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(string));
+            var productCodeParameter = productCode != null ?
+                new ObjectParameter("ProductCode", productCode) :
+                new ObjectParameter("ProductCode", typeof(string));
     
-            var endDateParameter = endDate != null ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(string));
+            var unitePriceParameter = unitePrice.HasValue ?
+                new ObjectParameter("UnitePrice", unitePrice) :
+                new ObjectParameter("UnitePrice", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurcheaseDetail_Result>("SP_PurcheaseDetail", purcheaseIdParameter, invoiceNOParameter, productIdParameter, supplierIdParameter, startDateParameter, endDateParameter);
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(decimal));
+    
+            var discountParameter = discount.HasValue ?
+                new ObjectParameter("Discount", discount) :
+                new ObjectParameter("Discount", typeof(decimal));
+    
+            var slupParameter = slup.HasValue ?
+                new ObjectParameter("Slup", slup) :
+                new ObjectParameter("Slup", typeof(decimal));
+    
+            var totalPriceParameter = totalPrice.HasValue ?
+                new ObjectParameter("TotalPrice", totalPrice) :
+                new ObjectParameter("TotalPrice", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isArchiveParameter = isArchive.HasValue ?
+                new ObjectParameter("IsArchive", isArchive) :
+                new ObjectParameter("IsArchive", typeof(bool));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var createdAtByParameter = createdAtBy != null ?
+                new ObjectParameter("CreatedAtBy", createdAtBy) :
+                new ObjectParameter("CreatedAtBy", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurcheaseDetail_Result>("SP_PurcheaseDetail", optionParameter, idParameter, purchaseIdParameter, productIdParameter, productNameParameter, productCodeParameter, unitePriceParameter, dateParameter, quantityParameter, discountParameter, slupParameter, totalPriceParameter, remarksParameter, isActiveParameter, isArchiveParameter, createdAtParameter, createdFromParameter, createdAtByParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
         }
     
         public virtual int sp_purcheaseReturenDetails()
@@ -642,6 +702,1103 @@ namespace InventoryViewModel.Models
                 new ObjectParameter("EndDate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Stocks_Result>("SP_Stocks", stockIdParameter, productIdParameter, productBrandIdParameter, productCatagoriesIdParameter, productColorIdParameter, productTypeIdParameter, productCodeParameter, supplierIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual int SP_InsertProdutDetail(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, string remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertProdutDetail", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual ObjectResult<SP_Product_Result> SP_Product(Nullable<int> id, string code, string name, Nullable<int> uOMId, Nullable<int> productBrandId, Nullable<int> productCatagoriesId, Nullable<int> productColorId, Nullable<int> productSizeId, Nullable<int> productTypeId, Nullable<int> supplierId, Nullable<int> minimumStock, Nullable<decimal> otherCost, Nullable<decimal> discount, Nullable<decimal> unitePrice, Nullable<decimal> quantity, Nullable<decimal> openingQuantity, string remarks, string createdBy, string createdAt, string createdFrom, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom, Nullable<int> option)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var uOMIdParameter = uOMId.HasValue ?
+                new ObjectParameter("UOMId", uOMId) :
+                new ObjectParameter("UOMId", typeof(int));
+    
+            var productBrandIdParameter = productBrandId.HasValue ?
+                new ObjectParameter("ProductBrandId", productBrandId) :
+                new ObjectParameter("ProductBrandId", typeof(int));
+    
+            var productCatagoriesIdParameter = productCatagoriesId.HasValue ?
+                new ObjectParameter("ProductCatagoriesId", productCatagoriesId) :
+                new ObjectParameter("ProductCatagoriesId", typeof(int));
+    
+            var productColorIdParameter = productColorId.HasValue ?
+                new ObjectParameter("ProductColorId", productColorId) :
+                new ObjectParameter("ProductColorId", typeof(int));
+    
+            var productSizeIdParameter = productSizeId.HasValue ?
+                new ObjectParameter("ProductSizeId", productSizeId) :
+                new ObjectParameter("ProductSizeId", typeof(int));
+    
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(int));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var minimumStockParameter = minimumStock.HasValue ?
+                new ObjectParameter("MinimumStock", minimumStock) :
+                new ObjectParameter("MinimumStock", typeof(int));
+    
+            var otherCostParameter = otherCost.HasValue ?
+                new ObjectParameter("OtherCost", otherCost) :
+                new ObjectParameter("OtherCost", typeof(decimal));
+    
+            var discountParameter = discount.HasValue ?
+                new ObjectParameter("Discount", discount) :
+                new ObjectParameter("Discount", typeof(decimal));
+    
+            var unitePriceParameter = unitePrice.HasValue ?
+                new ObjectParameter("UnitePrice", unitePrice) :
+                new ObjectParameter("UnitePrice", typeof(decimal));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(decimal));
+    
+            var openingQuantityParameter = openingQuantity.HasValue ?
+                new ObjectParameter("OpeningQuantity", openingQuantity) :
+                new ObjectParameter("OpeningQuantity", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Product_Result>("SP_Product", idParameter, codeParameter, nameParameter, uOMIdParameter, productBrandIdParameter, productCatagoriesIdParameter, productColorIdParameter, productSizeIdParameter, productTypeIdParameter, supplierIdParameter, minimumStockParameter, otherCostParameter, discountParameter, unitePriceParameter, quantityParameter, openingQuantityParameter, remarksParameter, createdByParameter, createdAtParameter, createdFromParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter, optionParameter);
+        }
+    
+        public virtual int SP_ProductDetailInsert(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ProductDetailInsert", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual ObjectResult<SP_Purchease_Result> SP_Purchease(Nullable<int> option, Nullable<int> id, string invoiecNo, Nullable<int> supplierId, Nullable<int> employeeId, string date, string startDate, string endDate, string remarks, Nullable<bool> isActive, Nullable<bool> isArchive, string createdBy, string createdAt, string createdFrom, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom, ObjectParameter mSG)
+        {
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var invoiecNoParameter = invoiecNo != null ?
+                new ObjectParameter("InvoiecNo", invoiecNo) :
+                new ObjectParameter("InvoiecNo", typeof(string));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var startDateParameter = startDate != null ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(string));
+    
+            var endDateParameter = endDate != null ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(string));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isArchiveParameter = isArchive.HasValue ?
+                new ObjectParameter("IsArchive", isArchive) :
+                new ObjectParameter("IsArchive", typeof(bool));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Purchease_Result>("SP_Purchease", optionParameter, idParameter, invoiecNoParameter, supplierIdParameter, employeeIdParameter, dateParameter, startDateParameter, endDateParameter, remarksParameter, isActiveParameter, isArchiveParameter, createdByParameter, createdAtParameter, createdFromParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter, mSG);
+        }
+    
+        public virtual int SP_PurcheaseDetails(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_PurcheaseDetails", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual int SP_StockDetailInsertl(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom, Nullable<int> option)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_StockDetailInsertl", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter, optionParameter);
+        }
+    
+        public virtual int SP_StockInsert(Nullable<int> id, Nullable<int> productId, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> stockQuantity, Nullable<decimal> totalQuantity, Nullable<decimal> totalPaid, Nullable<decimal> totalPrice, Nullable<decimal> grandTotal, string date, Nullable<decimal> finalUnitPrice, Nullable<decimal> openingQuantity, string remarks, Nullable<bool> stockStutes, Nullable<bool> isActive, Nullable<bool> isArchive, string createdBy, string createdAt, string createdFrom, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom, Nullable<int> option)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var stockQuantityParameter = stockQuantity.HasValue ?
+                new ObjectParameter("StockQuantity", stockQuantity) :
+                new ObjectParameter("StockQuantity", typeof(decimal));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var totalPriceParameter = totalPrice.HasValue ?
+                new ObjectParameter("TotalPrice", totalPrice) :
+                new ObjectParameter("TotalPrice", typeof(decimal));
+    
+            var grandTotalParameter = grandTotal.HasValue ?
+                new ObjectParameter("GrandTotal", grandTotal) :
+                new ObjectParameter("GrandTotal", typeof(decimal));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var openingQuantityParameter = openingQuantity.HasValue ?
+                new ObjectParameter("OpeningQuantity", openingQuantity) :
+                new ObjectParameter("OpeningQuantity", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isArchiveParameter = isArchive.HasValue ?
+                new ObjectParameter("IsArchive", isArchive) :
+                new ObjectParameter("IsArchive", typeof(bool));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_StockInsert", idParameter, productIdParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, stockQuantityParameter, totalQuantityParameter, totalPaidParameter, totalPriceParameter, grandTotalParameter, dateParameter, finalUnitPriceParameter, openingQuantityParameter, remarksParameter, stockStutesParameter, isActiveParameter, isArchiveParameter, createdByParameter, createdAtParameter, createdFromParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter, optionParameter);
+        }
+    
+        public virtual int SP_StockUpdateAdd(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_StockUpdateAdd", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual int SP_StockUpdateAddWithstockdetail(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_StockUpdateAddWithstockdetail", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual int SP_StockUpdateRemove(Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_StockUpdateRemove", productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual ObjectResult<PurcheaseDetail_Result> PurcheaseDetail(Nullable<int> option, Nullable<int> purchaseId, Nullable<int> productId, string productName, string productCode, Nullable<decimal> unitePrice, string date, Nullable<decimal> quantity, Nullable<decimal> discount, Nullable<decimal> slup, Nullable<decimal> totalPrice, string remarks, Nullable<bool> isActive, Nullable<bool> isArchive, string createdAt, string createdFrom, string createdAtBy, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom)
+        {
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            var purchaseIdParameter = purchaseId.HasValue ?
+                new ObjectParameter("PurchaseId", purchaseId) :
+                new ObjectParameter("PurchaseId", typeof(int));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            var productCodeParameter = productCode != null ?
+                new ObjectParameter("ProductCode", productCode) :
+                new ObjectParameter("ProductCode", typeof(string));
+    
+            var unitePriceParameter = unitePrice.HasValue ?
+                new ObjectParameter("UnitePrice", unitePrice) :
+                new ObjectParameter("UnitePrice", typeof(decimal));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(decimal));
+    
+            var discountParameter = discount.HasValue ?
+                new ObjectParameter("Discount", discount) :
+                new ObjectParameter("Discount", typeof(decimal));
+    
+            var slupParameter = slup.HasValue ?
+                new ObjectParameter("Slup", slup) :
+                new ObjectParameter("Slup", typeof(decimal));
+    
+            var totalPriceParameter = totalPrice.HasValue ?
+                new ObjectParameter("TotalPrice", totalPrice) :
+                new ObjectParameter("TotalPrice", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isArchiveParameter = isArchive.HasValue ?
+                new ObjectParameter("IsArchive", isArchive) :
+                new ObjectParameter("IsArchive", typeof(bool));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var createdAtByParameter = createdAtBy != null ?
+                new ObjectParameter("CreatedAtBy", createdAtBy) :
+                new ObjectParameter("CreatedAtBy", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PurcheaseDetail_Result>("PurcheaseDetail", optionParameter, purchaseIdParameter, productIdParameter, productNameParameter, productCodeParameter, unitePriceParameter, dateParameter, quantityParameter, discountParameter, slupParameter, totalPriceParameter, remarksParameter, isActiveParameter, isArchiveParameter, createdAtParameter, createdFromParameter, createdAtByParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter);
+        }
+    
+        public virtual ObjectResult<SP_Stock_Result> SP_Stock(Nullable<int> id, Nullable<int> productId, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> stockQuantity, Nullable<decimal> quantity, Nullable<decimal> totalPaid, Nullable<decimal> totalPrice, Nullable<decimal> grandTotal, string date, Nullable<decimal> finalUnitPrice, Nullable<decimal> openingQuantity, string remarks, Nullable<bool> stockStutes, Nullable<bool> isActive, Nullable<bool> isArchive, string createdBy, string createdAt, string createdFrom, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom, Nullable<int> option)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var stockQuantityParameter = stockQuantity.HasValue ?
+                new ObjectParameter("StockQuantity", stockQuantity) :
+                new ObjectParameter("StockQuantity", typeof(decimal));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var totalPriceParameter = totalPrice.HasValue ?
+                new ObjectParameter("TotalPrice", totalPrice) :
+                new ObjectParameter("TotalPrice", typeof(decimal));
+    
+            var grandTotalParameter = grandTotal.HasValue ?
+                new ObjectParameter("GrandTotal", grandTotal) :
+                new ObjectParameter("GrandTotal", typeof(decimal));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var openingQuantityParameter = openingQuantity.HasValue ?
+                new ObjectParameter("OpeningQuantity", openingQuantity) :
+                new ObjectParameter("OpeningQuantity", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isArchiveParameter = isArchive.HasValue ?
+                new ObjectParameter("IsArchive", isArchive) :
+                new ObjectParameter("IsArchive", typeof(bool));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var createdAtParameter = createdAt != null ?
+                new ObjectParameter("CreatedAt", createdAt) :
+                new ObjectParameter("CreatedAt", typeof(string));
+    
+            var createdFromParameter = createdFrom != null ?
+                new ObjectParameter("CreatedFrom", createdFrom) :
+                new ObjectParameter("CreatedFrom", typeof(string));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Stock_Result>("SP_Stock", idParameter, productIdParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, stockQuantityParameter, quantityParameter, totalPaidParameter, totalPriceParameter, grandTotalParameter, dateParameter, finalUnitPriceParameter, openingQuantityParameter, remarksParameter, stockStutesParameter, isActiveParameter, isArchiveParameter, createdByParameter, createdAtParameter, createdFromParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter, optionParameter);
+        }
+    
+        public virtual int SP_StockDetail(Nullable<int> id, Nullable<int> productId, Nullable<int> purcheaseId, Nullable<int> salesId, Nullable<int> salesReturnId, Nullable<int> purcheaseReturnId, string date, Nullable<decimal> totalQuantity, Nullable<decimal> totalReplace, Nullable<decimal> totalReturn, Nullable<decimal> totalDiscount, Nullable<decimal> totalSlup, Nullable<decimal> finalUnitPrice, Nullable<decimal> totalPaid, Nullable<decimal> remarks, Nullable<bool> stockStutes, string lastUpdateBy, string lastUpdateAt, string lastUpdateFrom, Nullable<int> option)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var purcheaseIdParameter = purcheaseId.HasValue ?
+                new ObjectParameter("PurcheaseId", purcheaseId) :
+                new ObjectParameter("PurcheaseId", typeof(int));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(int));
+    
+            var salesReturnIdParameter = salesReturnId.HasValue ?
+                new ObjectParameter("SalesReturnId", salesReturnId) :
+                new ObjectParameter("SalesReturnId", typeof(int));
+    
+            var purcheaseReturnIdParameter = purcheaseReturnId.HasValue ?
+                new ObjectParameter("PurcheaseReturnId", purcheaseReturnId) :
+                new ObjectParameter("PurcheaseReturnId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var totalQuantityParameter = totalQuantity.HasValue ?
+                new ObjectParameter("TotalQuantity", totalQuantity) :
+                new ObjectParameter("TotalQuantity", typeof(decimal));
+    
+            var totalReplaceParameter = totalReplace.HasValue ?
+                new ObjectParameter("TotalReplace", totalReplace) :
+                new ObjectParameter("TotalReplace", typeof(decimal));
+    
+            var totalReturnParameter = totalReturn.HasValue ?
+                new ObjectParameter("TotalReturn", totalReturn) :
+                new ObjectParameter("TotalReturn", typeof(decimal));
+    
+            var totalDiscountParameter = totalDiscount.HasValue ?
+                new ObjectParameter("TotalDiscount", totalDiscount) :
+                new ObjectParameter("TotalDiscount", typeof(decimal));
+    
+            var totalSlupParameter = totalSlup.HasValue ?
+                new ObjectParameter("TotalSlup", totalSlup) :
+                new ObjectParameter("TotalSlup", typeof(decimal));
+    
+            var finalUnitPriceParameter = finalUnitPrice.HasValue ?
+                new ObjectParameter("FinalUnitPrice", finalUnitPrice) :
+                new ObjectParameter("FinalUnitPrice", typeof(decimal));
+    
+            var totalPaidParameter = totalPaid.HasValue ?
+                new ObjectParameter("TotalPaid", totalPaid) :
+                new ObjectParameter("TotalPaid", typeof(decimal));
+    
+            var remarksParameter = remarks.HasValue ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(decimal));
+    
+            var stockStutesParameter = stockStutes.HasValue ?
+                new ObjectParameter("StockStutes", stockStutes) :
+                new ObjectParameter("StockStutes", typeof(bool));
+    
+            var lastUpdateByParameter = lastUpdateBy != null ?
+                new ObjectParameter("LastUpdateBy", lastUpdateBy) :
+                new ObjectParameter("LastUpdateBy", typeof(string));
+    
+            var lastUpdateAtParameter = lastUpdateAt != null ?
+                new ObjectParameter("LastUpdateAt", lastUpdateAt) :
+                new ObjectParameter("LastUpdateAt", typeof(string));
+    
+            var lastUpdateFromParameter = lastUpdateFrom != null ?
+                new ObjectParameter("LastUpdateFrom", lastUpdateFrom) :
+                new ObjectParameter("LastUpdateFrom", typeof(string));
+    
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("Option", option) :
+                new ObjectParameter("Option", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_StockDetail", idParameter, productIdParameter, purcheaseIdParameter, salesIdParameter, salesReturnIdParameter, purcheaseReturnIdParameter, dateParameter, totalQuantityParameter, totalReplaceParameter, totalReturnParameter, totalDiscountParameter, totalSlupParameter, finalUnitPriceParameter, totalPaidParameter, remarksParameter, stockStutesParameter, lastUpdateByParameter, lastUpdateAtParameter, lastUpdateFromParameter, optionParameter);
         }
     }
 }

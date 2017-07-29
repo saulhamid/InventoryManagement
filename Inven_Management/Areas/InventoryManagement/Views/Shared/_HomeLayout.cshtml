@@ -36,9 +36,16 @@
         .wth {
             width: 15%;
         }
+        .Dropdown  {
+            width:150px;
+        }
     </style>
     <script>
         $(document).ready(function () {
+
+            $(".select2").select2();
+            $(".select2").trigger('change');
+            $(".select2").removeClass('form-control');
             var url = "";
             $(".dialog-alert").dialog({
                 autoOpen: false,

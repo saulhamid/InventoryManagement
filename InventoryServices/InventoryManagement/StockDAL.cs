@@ -36,7 +36,7 @@ namespace InventoryServices.InventoryManagement
         public List<StockVM> GetAllStocks()
         {
             List<StockVM> stock = new List<StockVM>();
-
+            stock = context.Database.SqlQuery<StockVM>("exec [dbo].[SP_Purchease] @Option = {0}", 3).ToList();
             stock = (from stoc in context.Stocks
 
 
@@ -46,83 +46,86 @@ namespace InventoryServices.InventoryManagement
                      {
                          Id = stoc.Id,
                          ProductName = purd.Name,
-                         TotalQuantity = stoc.TotalQuantity,
-                         TotalPrice = stoc.TotalQuantity * purd.UnitePrice,
+                         //TotalQuantity = stoc.TotalQuantity,
+                         //TotalPrice = stoc.TotalQuantity * purd.UnitePrice,
                      }).ToList();
             return stock.ToList();
-
         }
-        public List<PurchaseVM> GETAllPurchases()
-        {
-            List<PurchaseVM> products = new List<PurchaseVM>();
 
-            products = (from pur in context.Purchases
-                        join supp in context.Suppliers on pur.SupplierId equals supp.Id
-                        join emp in context.Employees on pur.EmployeeId equals emp.Id
-                        join purd in context.PurcheaseDetails on pur.Id equals purd.PurchaseId
-                        where pur.IsActive == true && pur.IsArchive == false
-                        select new PurchaseVM()
-                        {
-                            Id = pur.Id,
-                            InvoiecNo = pur.InvoiecNo,
-                            ProductName = purd.ProductName,
-                            Quantity = purd.Quantity,
-                            UnitPrice = purd.UnitePrice,
-                            TotalPrice = purd.Quantity * purd.UnitePrice,
-                            Discount = purd.Discount,
-                            Date = pur.Date,
-                            SupplierName = supp.Name,
-                            EmployeeName = emp.Name
-                        }).ToList();
-            return products.ToList();
-        }
+     
         //public Stock GETStock { get { return context.Stocks.SingleOrDefault(); } }
         #region sigle method
 
         public Stock GetSigle(int Id)
         {
-            var result = context.Stocks.FirstOrDefault(m => m.Id == Id && m.IsArchive == false && m.IsActive == true);
-            return result;
+            var stock = context.Database.SqlQuery<Stock>("exec [dbo].[SP_Purchease] @Option = {0} ,@Id = {1}", 3,Id).Single();
+            return stock;
         }
 
         #endregion sigle method
         #region Save and Edit
-        public string[] SaveAndEditUpdate(StockVM data)
+        public string[] SaveAndEdit(StockVM data)
         {
-            bool check;
             string[] result = new string[6];
-            Stock stock = new Stock();
-            StockDetail stockdetail = new StockDetail();
             try
             {
-
-                context.Database.ExecuteSqlCommand("");
-
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                result[0] = "Fail";
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                var sql = @"exec [dbo].[SP_Purchease] @Option = {0}, @Id = {1}, @ProductId = {2}, @TotalPaid = {2},@FinalUnitPrice = {3}, @Date = {4},
+@CreatedBy = {5},@CreatedAt = {6},@CreatedFrom = {7},@OpeningQuantity = {8},@Remarks = {9},@StockStutes = {10}";
+                if (data.Id > 0)
                 {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation(
-                              "Class: {0}, Property: {1}, Error: {2}",
-                           result[1] = " -- " + validationErrors.Entry.Entity.GetType().FullName,
-                             result[1] += " -- " + validationError.PropertyName,
-                            result[1] += validationError.ErrorMessage);
-                    }
+                    result[1] = context.Database.ExecuteSqlCommand(sql, 1, data.Id, data.ProductId, data.TotalPaid, data.FinalUnitPrice, data.Date, data.CreatedBy,
+                        data.CreatedAt, data.CreatedFrom, data.OpeningQuantity, data.Remarks, data.StockStutes).ToString();
+
+                }
+                else
+                {
+                    result[1] = context.Database.ExecuteSqlCommand(sql, 2, data.Id, data.ProductId, data.TotalPaid, data.FinalUnitPrice, data.Date, data.CreatedBy,
+                       data.CreatedAt, data.CreatedFrom, data.OpeningQuantity, data.Remarks, data.StockStutes).ToString();
+
                 }
 
-                //result[2] = ex.Message.ToString();
-                result[0] = "Fail";
             }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
             return result;
         }
+        public string[] UpdateRemove(StockVM data)
+        {
+            string[] result = new string[6];
+            try
+            {
+                var sql = @"exec [dbo].[SP_Purchease] @Option = {0}, @Id = {1}, @ProductId = {2}, @TotalPaid = {2},@FinalUnitPrice = {3}, @Date = {4},
+@CreatedBy = {5},@CreatedAt = {6},@CreatedFrom = {7},@OpeningQuantity = {8},@Remarks = {9},@StockStutes = {10}";
 
+                result[1] = context.Database.ExecuteSqlCommand(sql, 3, data.Id, data.ProductId, data.TotalPaid, data.FinalUnitPrice, data.Date, data.CreatedBy,
+                    data.CreatedAt, data.CreatedFrom, data.OpeningQuantity, data.Remarks, data.StockStutes).ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        public string[] UpdateAdd(StockVM data)
+        {
+            string[] result = new string[6];
+            try
+            {
+                var sql = @"exec [dbo].[SP_Purchease] @Option = {0}, @Id = {1}, @ProductId = {2}, @TotalPaid = {2},@FinalUnitPrice = {3}, @Date = {4},
+@CreatedBy = {5},@CreatedAt = {6},@CreatedFrom = {7},@OpeningQuantity = {8},@Remarks = {9},@StockStutes = {10}";
 
-
+                result[1] = context.Database.ExecuteSqlCommand(sql, 4, data.Id, data.ProductId, data.TotalPaid, data.FinalUnitPrice, data.Date, data.CreatedBy,
+                    data.CreatedAt, data.CreatedFrom, data.OpeningQuantity, data.Remarks, data.StockStutes).ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
         #endregion Save and Edit
 
         #region Delete
@@ -135,9 +138,9 @@ namespace InventoryServices.InventoryManagement
                 {
                     var data = context.Stocks.Find(Convert.ToInt32(Ids[i]));
                     data.IsArchive = true;
-                    data.LastUpdateBy = Thread.CurrentPrincipal.Identity.Name; //Commons.CurrentUserName.UserName;
-                    data.LastUpdateAt = DateTime.Now.ToString("MM/dd/yy");
-                    data.LastUpdateFrom = Commons.GetIpAddress.GetLocalIPAddress();
+                    //data.LastUpdateBy = Thread.CurrentPrincipal.Identity.Name; //Commons.CurrentUserName.UserName;
+                    //data.LastUpdateAt = DateTime.Now.ToString("MM/dd/yy");
+                    //data.LastUpdateFrom = Commons.GetIpAddress.GetLocalIPAddress();
                     context.SaveChanges();
                 }
                 result[1] = "Stock Data Delete";

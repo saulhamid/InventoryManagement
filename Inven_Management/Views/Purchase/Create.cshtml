@@ -40,7 +40,7 @@
                         @Html.LabelFor(model => model.Purchasevm.SupplierId)
                     </div>
                     <div class="editor-field">
-                        @Html.SimpleDropDownFor(model => model.Purchasevm.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control" })
+                        @Html.SimpleDropDownFor(model => model.Purchasevm.SupplierId, "/Config/DropDown/Supplier", new { @placeholder = " Product Category Name", @class = " form-control select2" })
 
                         @Html.ValidationMessageFor(model => model.Purchasevm.SupplierId)
                     </div>
@@ -202,6 +202,8 @@
 }
 <script>
     $(document).ready(function () {
+        $(".select2").select2();
+        $(".select2").removeClass("form-control");
         $(".code").autocomplete({
             source: '@Url.Action("Product", "Autocomplete", new { area = "Config" })', minLength: 1,
             select: function (event, ui) {
@@ -211,39 +213,8 @@
                 event.preventDefault();
             }
         });
-        //$(".code").on('input', function () {
-        //    var value = $(this).val();
-        //    $(".code").val(value.split('-')[0]);
-        //    $(".Name").val(value.split('-')[1] + "-" + value.split('-')[2]);
-        //});
+       
         $("table").hide();
-        //$('.AddRowIndent:not(.AddRowInited)').on("click", function () {
-
-        //    var code = $(".code").val();
-        //    var Quantity = $("#Quantity").val();
-        //    var UnitePrice = $("#UnitePrice").val();
-        //    var Discount = $("#Discount").val();
-        //    var remarks = $("#Remarks").val();
-        //    var url = "/InventoryManagement/Purchase/ProductDetail?code=" + code + "&Quantity=" + Quantity + "&UnitePrice=" + UnitePrice + "&Discount=" + Discount + "&Remarks=" + remarks;
-        //    $.ajax({
-        //        url: url,
-        //        //type: 'POST',
-        //        cache: false,
-
-        //        success: function (html) {
-        //            $("#" + container).append(html);
-
-        //        }
-        //    });
-        //    //CalculateTotal();
-        //    $('#detail').show();
-        //    $(".IndPro").val("")
-        //    $(".IndQty").val("")
-        //    $(".IndUPrice").val("")
-        //    return false;
-
-        //}).addClass("AddRowInited");
-
         $("#addrow").click(function () {
             var code = $(".code").val();
             var Quantity = $("#Quantity").val();

@@ -23,9 +23,7 @@ namespace InventoryViewModel.ViewModel
         public decimal? Discount { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? UnitPrice { get; set; }
-
         public decimal? GrandTotal { get; set; }
-
         public decimal? TotalDiscount { get; set; }
         public List<PurcheaseDetail> PurcheaseDetails { get; set; }
     }

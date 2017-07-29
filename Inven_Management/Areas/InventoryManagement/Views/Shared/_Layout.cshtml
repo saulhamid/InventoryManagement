@@ -31,10 +31,14 @@
     <link href="~/assets/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch.css" rel="stylesheet" />
 
     <link href="~/Content/customs.css" rel="stylesheet" />
+    <link href="~/assets/stylesheets/select2.css" rel="stylesheet" />
     @RenderSection("head", required: false)
-
+    
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
+            $(".select2").select2();
+            $(".select2").removeClass("form-control");
+
         var url = "";
         $(".dialog-alert").dialog({
             autoOpen: false,
@@ -202,6 +206,7 @@
     @*<script src="~/assets/plugins/DataTables/media/js/DT_bootstrap.js"></script>*@
     @*<script src="~/assets/plugins/DataTables/extras/ColVis/media/js/ColVis.js"></script>*@
     <script src="~/assets/plugins/bootstrap-switch/static/js/bootstrap-switch.js"></script>
+    <script src="~/assets/javascripts/select2.js"></script>
     <script src="~/assets/javascripts/custom1.js"></script>
     <script src="~/Scripts/customs.js"></script>
     <script>

@@ -1,6 +1,7 @@
 ﻿using Inven_Management.Areas.Config.Models;
 using InventoryServices.InventoryManagement;
 using InventoryViewModel.Models;
+using InventoryViewModel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace InventoryRepo.InventoryManagement
         /******************************/
         #region Methods
         public IEnumerable<Product> GETAllProduct { get { return _dal.GETAllProduct; } }
-        public Product GETAllByCode(string Code)
+        public dynamic GETAllByCode(string Code)
         {
             return _dal.GETAllByCode(Code);
         }
-        public IEnumerable<Product> GETAllProducts()
+        public IEnumerable<ProductVM> GETAllProducts()
         {
             return _dal.GETAllProducts();
         }

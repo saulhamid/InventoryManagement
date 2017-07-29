@@ -29,10 +29,10 @@ namespace InventoryRepo.InventoryManagement
         //{
         //    return _dal.GETbySearch(Id, name, code);
         //}
-        public string[] SaveAndEdit(SalesVM data)
-        {
-            return _dal.SaveAndEdit(data);
-        }
+        //public string[] SaveAndEdit(SalesVM data)
+        //{
+        //    return _dal.SaveAndEdit(data);
+        //}
         public List<RPTVM> rptSales()
        {
            return _dal.rptSales();

@@ -112,5 +112,34 @@ namespace InventoryServices.InventoryManagement
 
            return result;
        }
+
+        public string[] SaveAndEdit(StockDetail data)
+        {
+            string[] result = new string[6];
+            try
+            {
+                var sql = @"exec [dbo].[SP_StockDetail] @Option = {0},  @PurcheaseId = {1},@SalesId = {2}, @PurcheaseReturnId = {3},@Date = {5},@TotalQuantity = {6},@TotalReplace = {7},@TotalReturn = {8},
+@TotalDiscount= {9},@TotalSlup= {10},,@Remarks = {11},@StockStutes = {12},@LastUpdateBy = {13},@LastUpdateAt = {14},@LastUpdateFrom = {15}";
+                if (data.Id > 0)
+                {
+                    result[1] = _context.Database.ExecuteSqlCommand(sql, 2, data.PurcheaseId, data.SalesId, data.PurcheaseReturnId, data.Date, data.TotalQuantity, data.TotalReplace, data.TotalReturn,
+                         data.TotalDiscount, data.TotalSlup, data.Remarks,
+                         data.StockStutes, data.LastUpdateBy, data.LastUpdateAt, data.LastUpdateFrom).ToString();
+                }
+                else
+                {
+                    result[1] = _context.Database.ExecuteSqlCommand(sql, 1, data.PurcheaseId, data.SalesId, data.PurcheaseReturnId, data.Date, data.TotalQuantity, data.TotalReplace, data.TotalReturn,
+                       data.TotalDiscount, data.TotalSlup, data.Remarks,
+                       data.StockStutes, data.LastUpdateBy, data.LastUpdateAt, data.LastUpdateFrom).ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return result;
+        }
     }
 }

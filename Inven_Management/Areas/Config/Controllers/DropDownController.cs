@@ -23,7 +23,7 @@ namespace Inven_Management.Areas.Config.Controllers
         }
         public JsonResult ProductwithCode()
         {
-            return Json(new SelectList(new ProductRepo().DropdownWithCode(), "Name"), JsonRequestBehavior.AllowGet);
+            return Json(new SelectList(new ProductRepo().DropdownWithCode(), "Id", "Name"), JsonRequestBehavior.AllowGet);
         }
         public JsonResult ProductBrand()
         {
